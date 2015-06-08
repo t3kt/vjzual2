@@ -1,0 +1,10 @@
+renderw_low	1280
+renderh_low	720
+renderw_high	1920
+renderh_high	1080
+paramtbl	/_/local/paramtbl
+editableparamtbl	/_/local/paramtbl_in
+comps	/_/components
+simpleinit	/_/components/simple_init
+outwindow	/_/mainoutwindow
+mainout	/_/mainout
