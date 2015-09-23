@@ -1,10 +1,10 @@
 renderw	1280
 renderh	720
-paramtbl	/_/local/paramtbl
-editableparamtbl	/_/local/paramtbl_in
 comps	/_/components
 simpleinit	/_/components/simple_init
 outwindow	/_/mainoutwindow
 mainout	/_/mainout
 modulebuttoncolors	/_/local/modulebuttoncolors
-modheaderh	14
+modheaderh	20
+modshell	/_/components/module/shell
+modoverlay	/_/components/module/overlay
