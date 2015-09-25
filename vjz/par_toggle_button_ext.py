@@ -9,5 +9,6 @@ class ParToggleButton(ParControl):
 		ParControl.Initialize(self)
 		self._comp.par.top = './bg'
 		page = self.GetParControlPage()
-		page.appendStr('Pbtnofftext', label='Button Off Text')
-		page.appendStr('Pbtnoffhelptext', label='Button Off Help Text')
+		page.appendStr('Pctlontext', label='Button On Text')
+		page.appendStr('Pctlofftext', label='Button Off Text')
+		page.appendStr('Pctloffhelptext', label='Button Off Help Text')
