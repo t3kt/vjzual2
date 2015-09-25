@@ -8,3 +8,4 @@ modulebuttoncolors	/_/local/modulebuttoncolors
 modheaderh	20
 modshell	/_/components/module/shell
 modoverlay	/_/components/module/overlay
+modlocal	/_/components/module/local
