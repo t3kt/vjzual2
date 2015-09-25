@@ -33,3 +33,15 @@ class ParControl:
 		pname = self._comp.par.Pctlpar.eval()
 		if target and hasattr(target.par, pname):
 			return getattr(target.par, pname)
+
+	def _PullIntoPanelValue(self, name):
+		p = self.TargetPar
+		print('ParControl pulling value', self, 'targetpar=', p, 'into', name)
+		if p is not None:
+			setattr(self._comp.panel, name, p.eval())
+
+	def PushValue(self, value):
+		p = self.TargetPar
+		print('ParControl pulling value', self, 'targetpar=', p)
+		if p is not None:
+			p.val = value

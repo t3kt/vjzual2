@@ -12,3 +12,6 @@ class ParToggleButton(ParControl):
 		page.appendStr('Pctlontext', label='Button On Text')
 		page.appendStr('Pctlofftext', label='Button Off Text')
 		page.appendStr('Pctloffhelptext', label='Button Off Help Text')
+
+	def PullValue(self):
+		self._PullIntoPanelValue('state')

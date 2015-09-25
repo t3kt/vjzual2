@@ -7,5 +7,7 @@ class ParFloatSlider(ParControl):
 
 	def Initialize(self):
 		ParControl.Initialize(self)
-		page = self.GetParControlPage()
 		self._comp.par.top = './bg'
+
+	def PullValue(self):
+		self._PullIntoPanelValue('u')

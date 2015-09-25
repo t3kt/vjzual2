@@ -19,3 +19,8 @@ class ParDropMenu(ParControl):
 						  displaylabel=0,
 						  font_size="`par(opparent($gadget, 0) + '/Pctlfontsize')`",
 						  listitems="`par(opparent($gadget, 0) + '/Pctllistsize')`")
+
+	def PullValue(self):
+		p = self.TargetPar
+		if p is not None:
+			self._comp.op('droplist/set').run(p.menuIndex)
