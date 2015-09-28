@@ -53,3 +53,9 @@ def fillParamsExportTable(exports, pars, sourcePath="", targetPath="", find=None
 		if find:
 			name = name.replace(find, replace)
 		exports.appendRow([targetPath, name, "`par('" + sourcePath + "/" + p.name + "')`"])
+
+def fillParamMenuOptionsTable(tbl, p):
+	tbl = argToOp(tbl)
+	tbl.clear()
+	for i in range(len(p.menuNames)):
+		tbl.appendRow([p.menuNames[i], p.menuLabels[i]])

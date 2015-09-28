@@ -7,7 +7,6 @@ class ParDropMenu(ParControl):
 	
 	def Initialize(self):
 		ParControl.Initialize(self)
-		self._comp.par.top = './bg'
 		page = self.GetParControlPage()
 		util.setattrs(page.appendInt('Pctllistsize', label='List Items')[0],
 					  min=1,
@@ -15,10 +14,15 @@ class ParDropMenu(ParControl):
 					  clampMin=1,
 					  normMax=10,
 					  default=5)
+		page.appendToggle('Pctlhidebtn', label='Hide Button')
 		util.overrideRows(self._comp.op('droplist/define'),
 						  displaylabel=0,
 						  font_size="`par(opparent($gadget, 0) + '/Pctlfontsize')`",
-						  listitems="`par(opparent($gadget, 0) + '/Pctllistsize')`")
+						  listitems="`par(opparent($gadget, 0) + '/Pctllistsize')`",
+						  hidebtn="`par(opparent($gadget, 0) + '/Pctlhidebtn')`")
+		p = self.TargetPar
+		if p is not None:
+			util.fillParamMenuOptionsTable(self._comp.op('menu_options'), p)
 
 	def PullValue(self):
 		p = self.TargetPar
