@@ -19,12 +19,14 @@ class ClipTimeSource:
 		                  label="rate", channelname="rate",
 		                  upper_range="`par($vjztimectl + '/Timectlmaxrate')`")
 
+	def Reverse(self):
+		state = self._comp.par.Timectlstate
+		if state == 'forward':
+			state.val = 'backward'
+		elif state == 'backward':
+			state.val = 'forward'
+		# if 'paused' don't do anything
+
 	def HandleTimerCycleEnd(self):
-		print('HandleTimerCycleEnd', self._comp.par.Timectlloopmode.eval(), self._comp.par.Timectlloopmode)
 		if self._comp.par.Timectlloopmode == 'zigzag':
-			state = self._comp.par.Timectlstate
-			if state == 'forward':
-				state.val = 'backward'
-			elif state == 'backward':
-				state.val = 'forward'
-			# if 'paused' don't do anything
+			self.Reverse()
