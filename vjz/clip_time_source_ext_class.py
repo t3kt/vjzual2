@@ -30,3 +30,10 @@ class ClipTimeSource:
 	def HandleTimerCycleEnd(self):
 		if self._comp.par.Timectlloopmode == 'zigzag':
 			self.Reverse()
+
+	def GoTo(self, fraction):
+		if self._comp.par.Timectlstate == 'backward':
+			fraction = 1.0 - float(fraction)
+		else:
+			fraction = float(fraction)
+		self._comp.op('timer').goTo(fraction=fraction)
