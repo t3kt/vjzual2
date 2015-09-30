@@ -14,3 +14,7 @@ class MenuParam(VjzParam):
 					  clampMin=1,
 					  normMax=10,
 					  default=5)
+		menu = self._comp.op('menu')
+		self.ApplyBaseProxyExprs(menu)
+		util.ApplyPythonProxyExprs(menu, 'ext.vjzpar.par.',
+		                          Pctllistsize='Parlistsize')

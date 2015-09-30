@@ -7,3 +7,5 @@ class FloatParam(VjzParam):
 
 	def Initialize(self):
 		VjzParam.Initialize(self)
+		slider = self._comp.op('slider')
+		self.ApplyBaseProxyExprs(slider)

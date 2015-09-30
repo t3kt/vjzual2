@@ -9,5 +9,6 @@ class ParFloatSlider(ParControl):
 		ParControl.Initialize(self)
 		self._comp.par.top = './bg'
 		self._comp.par.chop = './inputval'
+
 	def PullValue(self):
 		self._PullIntoPanelValue('u')

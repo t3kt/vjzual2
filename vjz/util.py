@@ -59,3 +59,9 @@ def fillParamMenuOptionsTable(tbl, p):
 	tbl.clear()
 	for i in range(len(p.menuNames)):
 		tbl.appendRow([p.menuNames[i], p.menuLabels[i]])
+
+def ApplyPythonProxyExprs(targetComp, exprPrefix, **mappings):
+	cpar = targetComp.par
+	for destName in mappings.keys():
+		setexpr(getattr(cpar, destName),
+		        exprPrefix + mappings[destName])

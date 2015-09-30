@@ -64,3 +64,12 @@ class VjzParam:
 		page.appendStr('Parhelptext', label='Help Text')
 		util.setattrs(page.appendInt('Parfontsize', label='Font Size')[0],
 					  default=12, min=1, normMin=1, normMax=30, clampMin=True)
+
+	def ApplyBaseProxyExprs(self, ctrlComp):
+		util.ApplyPythonProxyExprs(ctrlComp, 'ext.vjzpar.par.',
+		                     Pctlop='Parop',
+		                     Pctlpar='Parpar',
+		                     Pctllabel='Parlabel',
+		                     Pctlchan='Parchan',
+		                     Pctlhelptext='Parhelptext',
+		                     Pctlfontsize='Parfontsize')

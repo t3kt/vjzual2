@@ -10,3 +10,9 @@ class BoolParam(VjzParam):
 		page = self.GetParamPage()
 		page.appendStr('Parofftext', label='Button Off Text')
 		page.appendStr('Paroffhelptext', label='Button Off Help Text')
+		toggle = self._comp.op('toggle')
+		self.ApplyBaseProxyExprs(toggle)
+		util.ApplyPythonProxyExprs(toggle, 'ext.vjzpar.par.',
+		                          Pctlofftext='Parofftext',
+		                          Pctloffhelptext='Paroffhelptext')
+
