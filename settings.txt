@@ -12,3 +12,4 @@ modlocal	/_/components/module/local
 blank	/_/components/blank
 silent	/_/components/silent
 nothing	/_/components/nothing
+datanodes	/_/local/data_nodes
