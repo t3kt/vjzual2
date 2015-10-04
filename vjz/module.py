@@ -49,3 +49,37 @@ class VjzModule:
 		util.setattrs(page.appendMenu('Modparuimode', label='Parameter UI Mode')[0],
 		              menuNames=['ctrl', 'midiedit'],
 		              menuLabels=['Controls', 'Edit MIDI'])
+
+	@property
+	def PresetsTable(self):
+		return self._comp.op('local/preset_values')
+
+	def GetValuesForPreset(self):
+		return {}
+
+	def SetValuesFromPreset(self, values):
+		pass
+
+	def LoadPreset(self, index):
+		values = {}
+		presets = self.PresetsTable
+		if not presets or not values or index >= presets.numRows:
+			return
+		for name in presets.col(0):
+			values[name.val] = str(presets[name, index])
+		self.SetValuesFromPreset(values)
+
+	def SavePreset(self, index):
+		values = self.GetValuesForPreset()
+		presets = self.PresetsTable
+		if not presets or not values:
+			return
+		if index >= presets.numCols:
+			presets.setSize(presets.numRows, index + 1)
+		allNames = {x.val for x in presets.col(0)}
+		allNames = allNames.union(set(values.keys()))
+		for name in allNames:
+			if name in values:
+				presets[index, name] = ''
+			else:
+				presets[index, name] = values[name]
