@@ -59,11 +59,15 @@ class VjzParam:
 		page = self.GetParamPage()
 		page.appendOP('Parop', label='Target Operator')
 		page.appendStr('Parpar', label='Target Parameter')
+		page.appendStr('Parid', label='Parameter Unique ID')
 		page.appendStr('Parlabel', label='UI Label')
 		page.appendStr('Parchan', label='Output Channel')
 		page.appendStr('Parhelptext', label='Help Text')
 		util.setattrs(page.appendInt('Parfontsize', label='Font Size')[0],
 					  default=12, min=1, normMin=1, normMax=30, clampMin=True)
+		util.setattrs(page.appendMenu('Paruimode', label='UI Mode')[0],
+		              menuNames=['ctrl', 'midiedit'],
+		              menuLabels=['Controls', 'Edit MIDI'])
 
 	def ApplyBaseProxyExprs(self, ctrlComp):
 		util.ApplyPythonProxyExprs(ctrlComp, 'ext.vjzpar.par.',

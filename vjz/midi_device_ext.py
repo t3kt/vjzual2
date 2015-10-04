@@ -72,27 +72,27 @@ class MidiDevice:
 	def GroupsTable(self):
 		return self._comp.op('set_groups')
 
-	def UpdateGroup(self, group, inpath, outpath):
-		grouptbl = self.GroupsTable
-		if not inpath and not outpath:
-			grouptbl.removeRow(group)
-		else:
-			updateTableRow(grouptbl,
-			               group,
-			               { "inpath": inpath, "outpath": outpath },
-			               addMissing=True)
-
-	def UpdateMapping(self, group, chan, ctrl):
-		mappingtbl = self.MappingsTable
-		row = getMappingRow(mappingtbl, group, chan)
-		if not ctrl:
-			if row is not None:
-				mappingtbl.deleteRow(row)
-		else:
-			if row is not None:
-				mappingtbl[row, 'ctrl'] = ctrl
-			else:
-				mappingtbl.appendRow([group, chan, ctrl])
+	# def UpdateGroup(self, group, inpath, outpath):
+	# 	grouptbl = self.GroupsTable
+	# 	if not inpath and not outpath:
+	# 		grouptbl.removeRow(group)
+	# 	else:
+	# 		updateTableRow(grouptbl,
+	# 		               group,
+	# 		               { "inpath": inpath, "outpath": outpath },
+	# 		               addMissing=True)
+	#
+	# def UpdateMapping(self, group, chan, ctrl):
+	# 	mappingtbl = self.MappingsTable
+	# 	row = getMappingRow(mappingtbl, group, chan)
+	# 	if not ctrl:
+	# 		if row is not None:
+	# 			mappingtbl.deleteRow(row)
+	# 	else:
+	# 		if row is not None:
+	# 			mappingtbl[row, 'ctrl'] = ctrl
+	# 		else:
+	# 			mappingtbl.appendRow([group, chan, ctrl])
 
 def getMappingRow(mappings, group, chan):
 	for i in range(1, mappings.numRows):

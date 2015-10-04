@@ -46,6 +46,6 @@ class VjzModule:
 		page.appendToggle('Modhasadvanced', label='Has Advanced Params')
 		page.appendToggle('Modhasviewers', label='Has Viewers')
 		setexpr(self._comp.par.h, 'op("./shell/mod_height")[0, 0]')
-
-	def GetSourceNodes(self):
-		pass
+		util.setattrs(page.appendMenu('Modparuimode', label='Parameter UI Mode')[0],
+		              menuNames=['ctrl', 'midiedit'],
+		              menuLabels=['Controls', 'Edit MIDI'])
