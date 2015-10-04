@@ -35,6 +35,21 @@ def overrideRows(tbl, **overrides):
 	for key in overrides:
 		tbl[key, 1] = overrides[key]
 
+def updateTableRow(tbl, rowKey, vals, addMissing=False, ignoreMissingCols=False):
+	tbl = argToOp(tbl)
+	if not tbl:
+		return
+	if not tbl[rowKey, 0]:
+		if not addMissing:
+			raise Exception('row ' + rowKey + ' not found in table ' + tbl)
+		else:
+			tbl.appendRow([rowKey])
+	for colKey in vals:
+		v = vals[colKey]
+		if ignoreMissingCols and tbl[rowKey, colKey] is None:
+			continue
+		tbl[rowKey, colKey] = v if v is not None else ''
+
 def fillParamsTable(tbl, pars, find=None, replace=None):
 	tbl = argToOp(tbl)
 	tbl.clear()

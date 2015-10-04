@@ -13,3 +13,5 @@ blank	/_/components/blank
 silent	/_/components/silent
 nothing	/_/components/nothing
 datanodes	/_/local/data_nodes
+mididevices	/_/local/midi_devices
+midictrls	/_/local/midi_ctrls
