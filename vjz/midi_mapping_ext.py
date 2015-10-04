@@ -50,13 +50,13 @@ class MidiMapping:
 	@property
 	def MappedDev(self):
 		info = self._comp.op('selected_ctrl')
-		if info.numRows < 2:
+		if info and info.numRows < 2:
 			return None
 		return info[1, 'dev']
 
 	@property
 	def MappedCtrl(self):
 		info = self._comp.op('selected_ctrl')
-		if info.numRows < 2:
+		if info and info.numRows < 2:
 			return None
 		return info[1, 'ctrl']
