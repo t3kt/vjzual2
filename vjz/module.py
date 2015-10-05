@@ -55,18 +55,20 @@ class VjzModule:
 		return self._comp.op('local/preset_values')
 
 	def GetValuesForPreset(self):
-		return {}
+		return {p.name: p.eval() for p in self._comp.pars('Mpar*')}
 
 	def SetValuesFromPreset(self, values):
-		pass
+		setattrs(self._comp.par, **values)
 
 	def LoadPreset(self, index):
 		values = {}
 		presets = self.PresetsTable
-		if not presets or not values or index >= presets.numRows:
-			return
 		for name in presets.col(0):
 			values[name.val] = str(presets[name, index])
+		if not presets or not values or index >= presets.numCols:
+			print('LoadPreset', index, 'index out of range')
+			return
+		print('LoadPreset', index, 'values:', values)
 		self.SetValuesFromPreset(values)
 
 	def SavePreset(self, index):
@@ -76,10 +78,27 @@ class VjzModule:
 			return
 		if index >= presets.numCols:
 			presets.setSize(presets.numRows, index + 1)
-		allNames = {x.val for x in presets.col(0)}
-		allNames = allNames.union(set(values.keys()))
+		existingNames = {x.val for x in presets.col(0) if x.val}
+		valueNames = set(values.keys())
+		print('SavePreset', index, 'existing:', existingNames, 'values:', valueNames)
+		allNames = existingNames.union(valueNames)
 		for name in allNames:
+			if not name:
+				continue
+			if not presets.row(name):
+				presets.appendRow([name])
 			if name in values:
-				presets[index, name] = ''
+				presets[name, index] = values[name]
 			else:
-				presets[index, name] = values[name]
+				presets[name, index] = ''
+		if presets[0, 0] == '':
+			presets.deleteRow(0)
+
+	def DoesPresetExist(self, index):
+		presets = self.PresetsTable
+		if not presets or presets.numRows == 0 or index >= presets.numCols:
+			return False
+		for row in range(presets.numRows):
+			if presets[row, index] != '':
+				return True
+		return False

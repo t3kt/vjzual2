@@ -80,3 +80,6 @@ def ApplyPythonProxyExprs(targetComp, exprPrefix, **mappings):
 	for destName in mappings.keys():
 		setexpr(getattr(cpar, destName),
 		        exprPrefix + mappings[destName])
+
+def GetParamDict(op, *paramNames):
+	return {pname: getattr(op.par, pname).eval() for pname in paramNames}
