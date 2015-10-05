@@ -58,7 +58,7 @@ class VjzModule:
 		return {p.name: p.eval() for p in self._comp.pars('Mpar*')}
 
 	def SetValuesFromPreset(self, values):
-		setattrs(self._comp.par, **values)
+		util.setPars(self._comp, **values)
 
 	def LoadPreset(self, index):
 		values = {}

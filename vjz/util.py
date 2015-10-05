@@ -28,6 +28,30 @@ def setexpr(p, expr):
 	p.mode = ParMode.EXPRESSION
 	p.expr = expr
 
+def coerceBool(val):
+	return val is True or val == 1 or val == '1' or val == 'True'
+
+def setParValue(par, val):
+	if par.isToggle:
+		par.val = coerceBool(val)
+	elif par.isFloat:
+		par.val = float(val)
+	elif par.isInt:
+		par.val = int(val)
+	elif par.isMenu:
+		if isinstance(val, (int, float)):
+			par.menuIndex = int(val)
+		else:
+			par.val = val
+	# elif par.isString:
+	else:
+		par.val = val
+	par.mode = ParMode.CONSTANT
+
+def setPars(op, **parValues):
+	for name in parValues:
+		setParValue(getattr(op.par, name), parValues[name])
+
 def overrideRows(tbl, **overrides):
 	tbl = argToOp(tbl)
 	if not tbl:
