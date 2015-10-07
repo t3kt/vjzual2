@@ -35,20 +35,17 @@ class ParControl:
 
 	def _PullIntoPanelValue(self, name):
 		p = self.TargetPar
-		#print('ParControl pulling value', self, 'targetpar=', p, 'into', name)
 		if p is not None:
 			setattr(self._comp.panel, name, p.eval())
 
 	def PushValue(self, value):
 		p = self.TargetPar
-		#print('ParControl pulling value', self, 'targetpar=', p)
 		if p is not None:
 			p.val = value
 
 class VjzParam:
 	def __init__(self, comp):
 		self._comp = comp
-		self.Initialize()
 
 	def GetParamPage(self):
 		return self._comp.appendCustomPage('VjzParam')
