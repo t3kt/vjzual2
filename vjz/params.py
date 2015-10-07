@@ -8,7 +8,6 @@ else:
 class ParControl:
 	def __init__(self, comp):
 		self._comp = comp
-		self.Initialize()
 
 	def GetParControlPage(self):
 		return self._comp.appendCustomPage('ParCtrl')
