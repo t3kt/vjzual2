@@ -21,8 +21,12 @@ def argToPath(arg):
 	return arg
 
 def setattrs(obj, **attrs):
-	for key in attrs:
-		setattr(obj, key, attrs[key])
+	if isinstance(obj, (tuple,list)):
+		for o in obj:
+			setattrs(o, **attrs)
+	else:
+		for key in attrs:
+			setattr(obj, key, attrs[key])
 
 def setexpr(p, expr):
 	p.mode = ParMode.EXPRESSION
