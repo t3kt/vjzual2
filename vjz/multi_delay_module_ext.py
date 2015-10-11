@@ -26,6 +26,9 @@ class MultiDelayModule(VjzModule):
 			min=1,
 			clampMin=True,
 			default=32)
+		setattrs(page.appendMenu('Mparoperand', label='Composite Operator')[0],
+			menuNames = op('tap_composite').par.operand.menuNames,
+			menuLabels = op('tap_composite').par.operand.menuLabels)
 
 		setattrs(page.appendFloat('Mparlength', label='Master Length')[0],
 			default=1)
