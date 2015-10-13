@@ -28,9 +28,13 @@ def setattrs(obj, **attrs):
 		for key in attrs:
 			setattr(obj, key, attrs[key])
 
-def setexpr(p, expr):
-	p.mode = ParMode.EXPRESSION
-	p.expr = expr
+def setexpr(par, expr):
+	if isinstance(par, (tuple, list)):
+		for p in par:
+			setexpr(p, expr)
+	else:
+		par.mode = ParMode.EXPRESSION
+		par.expr = expr
 
 def coerceBool(val):
 	return val is True or val == 1 or val == '1' or val == 'True'
