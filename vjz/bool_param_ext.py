@@ -16,3 +16,9 @@ class BoolParam(VjzParam):
 		                          Pctlofftext='Parofftext',
 		                          Pctloffhelptext='Paroffhelptext')
 
+	def GetValue(self):
+		return self._comp.op('toggle').GetValue()
+
+	def SetValue(self, value):
+		return self._comp.op('toggle').PushValue(value)
+

@@ -23,6 +23,7 @@ class ParDropMenu(ParControl):
 		p = self.TargetPar
 		if p is not None:
 			util.fillParamMenuOptionsTable(self._comp.op('menu_options'), p)
+		self._comp.op('droplist/script').text = ''
 
 	def PullValue(self):
 		p = self.TargetPar

@@ -9,3 +9,9 @@ class FloatParam(VjzParam):
 		VjzParam.Initialize(self)
 		slider = self._comp.op('slider')
 		self.ApplyBaseProxyExprs(slider)
+
+	def GetValue(self):
+		return self._comp.op('slider').GetValue()
+
+	def SetValue(self, value):
+		return self._comp.op('slider').PushValue(value)

@@ -43,6 +43,11 @@ class ParControl:
 		if p is not None:
 			p.val = value
 
+	def GetValue(self):
+		p = self.TargetPar
+		if p is not None:
+			return p.eval()
+
 	def ResetToDefault(self):
 		p = self.TargetPar
 		if p is not None:
@@ -78,3 +83,9 @@ class VjzParam:
 		                     Pctlchan='Parchan',
 		                     Pctlhelptext='Parhelptext',
 		                     Pctlfontsize='Parfontsize')
+
+	def GetValue(self):
+		raise NotImplementedError()
+
+	def SetValue(self, value):
+		raise NotImplementedError()

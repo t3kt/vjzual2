@@ -18,3 +18,9 @@ class MenuParam(VjzParam):
 		self.ApplyBaseProxyExprs(menu)
 		util.ApplyPythonProxyExprs(menu, 'ext.vjzpar.par.',
 		                          Pctllistsize='Parlistsize')
+
+	def GetValue(self):
+		return self._comp.op('menu').GetValue()
+
+	def SetValue(self, value):
+		return self._comp.op('menu').PushValue(value)
