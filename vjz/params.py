@@ -43,6 +43,11 @@ class ParControl:
 		if p is not None:
 			p.val = value
 
+	def ResetToDefault(self):
+		p = self.TargetPar
+		if p is not None:
+			p.val = p.default
+
 class VjzParam:
 	def __init__(self, comp):
 		self._comp = comp
