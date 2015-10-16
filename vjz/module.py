@@ -28,7 +28,7 @@ class VjzModule:
 		page.appendToggle('Modshowviewers', label='Show Viewers')
 		page.appendToggle('Modcollapsed', label='Collapse')
 		page.appendToggle('Modshowadvanced', label='Show Advanced')
-		minheight = int(var('modcollapsedheight'))
+		minheight = int(float(var('modcollapsedheight')))
 		fullheight = page.appendInt('Modfullheight', label='Full Height')[0]
 		setattrs(fullheight,
 			default= 200,

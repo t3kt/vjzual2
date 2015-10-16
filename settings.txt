@@ -5,7 +5,7 @@ simpleinit	/_/components/simple_init
 outwindow	/_/mainoutwindow
 mainout	/_/mainout
 modulebuttoncolors	/_/local/modulebuttoncolors
-modheaderh	20
+modheaderh	40
 modshell	/_/components/module/shell
 modoverlay	/_/components/module/overlay
 modlocal	/_/components/module/local
