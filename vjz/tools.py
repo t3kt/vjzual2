@@ -24,6 +24,13 @@ def getSelected():
 def logSelected():
 	getSelected() # it already has a print statement
 
+def initSelected():
+	selected = getSelected()
+	for o in selected:
+		init = o.op('init')
+		if init:
+			init.run()
+
 def deletePars(o, *parNames):
 	pars = o.pars(*parNames)
 	for p in pars:
