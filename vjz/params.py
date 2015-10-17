@@ -1,5 +1,7 @@
 __author__ = 'tekt'
 
+print('params.py initializing')
+
 if False:
 	import vjz.util as util
 else:
@@ -56,6 +58,7 @@ class ParControl:
 class VjzParam:
 	def __init__(self, comp):
 		self._comp = comp
+		comp.tags.add('vjzpar')
 
 	def GetParamPage(self):
 		return self._comp.appendCustomPage('VjzParam')
@@ -65,6 +68,7 @@ class VjzParam:
 		page = self.GetParamPage()
 		page.appendOP('Parop', label='Target Operator')
 		page.appendStr('Parpar', label='Target Parameter')
+		page.appendStr('Parlocalname', label='Local Name')
 		page.appendStr('Parid', label='Parameter Unique ID')
 		page.appendStr('Parlabel', label='UI Label')
 		page.appendStr('Parchan', label='Output Channel')
@@ -74,6 +78,8 @@ class VjzParam:
 		util.setattrs(page.appendMenu('Paruimode', label='UI Mode')[0],
 		              menuNames=['ctrl', 'midiedit'],
 		              menuLabels=['Controls', 'Edit MIDI'])
+		if hasattr(self._comp.ext, 'vjzmod'):
+			util.setexpr(self._comp.par.Parid, 'ext.vjzmod.par.Modname + ":" + me.par.Parlocalname')
 
 	def ApplyBaseProxyExprs(self, ctrlComp):
 		util.ApplyPythonProxyExprs(ctrlComp, 'ext.vjzpar.par.',

@@ -1,5 +1,6 @@
 __author__ = 'tekt'
 
+print('util.py initializing')
 
 def argToOp(arg):
 	if not arg:

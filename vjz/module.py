@@ -1,5 +1,7 @@
 __author__ = 'tekt'
 
+print('module.py initializing')
+
 if False:
 	import vjz.util as util
 else:
@@ -11,6 +13,7 @@ setexpr = util.setexpr
 class VjzModule:
 	def __init__(self, comp):
 		self._comp = comp
+		comp.tags.add('vjzmod')
 
 	def GetModulePage(self):
 		return self._comp.appendCustomPage('VjzModule')

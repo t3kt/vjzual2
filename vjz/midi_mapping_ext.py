@@ -32,8 +32,6 @@ class MidiMapping:
 		         Pctlhidebtn=True)
 		page.sort('Mapid', 'Mapchan', 'Mapctrl', 'Mapenabled')
 
-		m.tags.add('midimapping')
-
 		self.UpdateCtrlMenu()
 
 		for init in m.ops('ctrl_menu/init', 'enabled_button/init'):

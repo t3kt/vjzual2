@@ -57,3 +57,7 @@ def setAlignOrderByX():
 
 def setAlignOrderByY():
 	setAlignOrderBy('nodeY')
+
+def reloadPython():
+	for name in ['vjz_util', 'vjz_params', 'vjz_module', 'vjz']:
+		op('/local/modules/' + name).par.reload.pulse(1)
