@@ -3,14 +3,26 @@ from numpy import interp
 setattrs = mod.vjz_util.setattrs
 setexpr = mod.vjz_util.setexpr
 
-def getSelected():
+def getTargetPane():
 	pane = ui.panes.current
 	if pane.type == PaneType.NETWORKEDITOR:
-		selected= pane.owner.selectedChildren
-	else:
-		selected = []
+		return pane
+	for pane in ui.panes:
+		if pane.type == PaneType.NETWORKEDITOR:
+			return pane
+
+def getSelected():
+	pane = getTargetPane()
+	if not pane:
+		return
+	selected= pane.owner.selectedChildren
+	if not selected:
+		selected = [pane.owner.currentChild]
 	print('tools.getSelected()', selected, 'pane', pane, 'type', pane.type, 'owner', pane.owner)
 	return selected
+
+def logSelected():
+	getSelected() # it already has a print statement
 
 def deletePars(o, *parNames):
 	pars = o.pars(*parNames)
@@ -61,3 +73,13 @@ def setAlignOrderByY():
 def reloadPython():
 	for name in ['vjz_util', 'vjz_params', 'vjz_module', 'vjz']:
 		op('/local/modules/' + name).par.reload.pulse(1)
+
+def destroyPars():
+	parnames = op('par_names_field/string')[0,0].val.split(' ')
+	selected = getSelected()
+	print('destroyPars', parnames, selected)
+	for o in selected:
+		oPars = o.pars(*parnames)
+		for p in oPars:
+			if p.isCustom:
+				p.destroy()
