@@ -90,3 +90,26 @@ def destroyPars():
 		for p in oPars:
 			if p.isCustom:
 				p.destroy()
+
+def saveTox(comp):
+	if not comp.isCOMP:
+		return False
+	toxfile = comp.par.externaltox.eval()
+	if not toxfile:
+		return False
+	comp.save(toxfile)
+	ui.status = 'Saved TOX %s to %s' % (comp.path, toxfile)
+	return True
+
+def saveSelectedTox():
+	selected = getSelected()
+	for comp in selected:
+		saveTox(comp)
+
+def saveActiveTox():
+	pane = getTargetPane()
+	comp = pane.owner
+	while comp:
+		if saveTox(comp):
+			return
+		comp = comp.parent()
