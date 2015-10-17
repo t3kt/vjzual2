@@ -19,6 +19,9 @@ class MenuParam(VjzParam):
 		util.ApplyPythonProxyExprs(menu, 'ext.vjzpar.par.',
 		                          Pctllistsize='Parlistsize')
 		util.setexpr(self._comp.par.Partype, '"menu"')
+		util.setParExprs(menu,
+		                 w='op("rootpanel").par.w - (0 if parent().par.Parhidelabel else op("label").par.w)',
+		                 h='op("rootpanel").par.h')
 
 	def GetValue(self):
 		return self._comp.op('menu').GetValue()

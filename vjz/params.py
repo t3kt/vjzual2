@@ -82,6 +82,12 @@ class VjzParam:
 		              menuLabels=['Controls', 'Edit MIDI'])
 		if hasattr(self._comp.ext, 'vjzmod'):
 			util.setexpr(self._comp.par.Parid, 'ext.vjzmod.par.Modname + ":" + me.par.Parlocalname')
+		label = self._comp.op('label')
+		label.par.top = './bg'
+		util.setParExprs(label,
+		                 w='op("rootpanel").par.w / 3',
+		                 h='op("rootpanel").par.h',
+		                 display='not parent().par.Parhidelabel')
 
 	def ApplyBaseProxyExprs(self, ctrlComp):
 		util.ApplyPythonProxyExprs(ctrlComp, 'ext.vjzpar.par.',

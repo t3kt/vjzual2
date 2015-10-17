@@ -37,6 +37,14 @@ def setexpr(par, expr):
 		par.mode = ParMode.EXPRESSION
 		par.expr = expr
 
+def setParExprs(obj, **exprs):
+	if isinstance(obj, (tuple, list)):
+		for o in obj:
+			setParExprs(o, **exprs)
+	else:
+		for key in exprs:
+			setexpr(getattr(obj.par, key), exprs[key])
+
 def coerceBool(val):
 	return val is True or val == 1 or val == '1' or val == 'True'
 
@@ -58,8 +66,12 @@ def setParValue(par, val):
 	par.mode = ParMode.CONSTANT
 
 def setPars(op, **parValues):
-	for name in parValues:
-		setParValue(getattr(op.par, name), parValues[name])
+	if isinstance(op, (tuple, list)):
+		for o in op:
+			setPars(o, **parValues)
+	else:
+		for name in parValues:
+			setParValue(getattr(op.par, name), parValues[name])
 
 def overrideRows(tbl, **overrides):
 	tbl = argToOp(tbl)

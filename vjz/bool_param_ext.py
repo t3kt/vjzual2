@@ -16,6 +16,9 @@ class BoolParam(VjzParam):
 		                          Pctlofftext='Parofftext',
 		                          Pctloffhelptext='Paroffhelptext')
 		util.setexpr(self._comp.par.Partype, '"bool"')
+		util.setParExprs(toggle,
+		                 w='op("rootpanel").par.w - (0 if parent().par.Parhidelabel else op("label").par.w)',
+		                 h='op("rootpanel").par.h')
 
 	def GetValue(self):
 		return self._comp.op('toggle').GetValue()
