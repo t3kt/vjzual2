@@ -15,6 +15,7 @@ class BoolParam(VjzParam):
 		util.ApplyPythonProxyExprs(toggle, 'ext.vjzpar.par.',
 		                          Pctlofftext='Parofftext',
 		                          Pctloffhelptext='Paroffhelptext')
+		util.setexpr(self._comp.par.Partype, '"bool"')
 
 	def GetValue(self):
 		return self._comp.op('toggle').GetValue()

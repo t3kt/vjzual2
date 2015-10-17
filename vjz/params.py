@@ -70,6 +70,7 @@ class VjzParam:
 		page.appendStr('Parpar', label='Target Parameter')
 		page.appendStr('Parlocalname', label='Local Name')
 		page.appendStr('Parid', label='Parameter Unique ID')
+		page.appendStr('Partype', label='Parameter Type')
 		page.appendStr('Parlabel', label='UI Label')
 		page.appendStr('Parchan', label='Output Channel')
 		page.appendStr('Parhelptext', label='Help Text')
