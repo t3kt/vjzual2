@@ -74,6 +74,7 @@ class VjzParam:
 		page.appendStr('Parlabel', label='UI Label')
 		page.appendStr('Parchan', label='Output Channel')
 		page.appendStr('Parhelptext', label='Help Text')
+		page.appendToggle('Parhidelabel', label='Hide Label')
 		util.setattrs(page.appendInt('Parfontsize', label='Font Size')[0],
 					  default=12, min=1, normMin=1, normMax=30, clampMin=True)
 		util.setattrs(page.appendMenu('Paruimode', label='UI Mode')[0],
