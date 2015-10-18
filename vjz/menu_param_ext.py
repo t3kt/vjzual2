@@ -18,10 +18,17 @@ class MenuParam(VjzParam):
 		self.ApplyBaseProxyExprs(menu)
 		util.ApplyPythonProxyExprs(menu, 'ext.vjzpar.par.',
 		                          Pctllistsize='Parlistsize')
+		util.setattrs(page.appendInt('Parnumoptions', label='Number of Options')[0],
+		              min=1,
+		              clampMin=True,
+		              default=1)
 		util.setexpr(self._comp.par.Partype, '"menu"')
 		util.setParExprs(menu,
 		                 w='op("rootpanel").par.w - (0 if parent().par.Parhidelabel else op("label").par.w)',
 		                 h='op("rootpanel").par.h')
+		par = self.TargetPar
+		if par is not None:
+			self._comp.par.Parnumoptions = len(par.menuNames)
 
 	@property
 	def TargetPar(self):
