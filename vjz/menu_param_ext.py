@@ -23,6 +23,10 @@ class MenuParam(VjzParam):
 		                 w='op("rootpanel").par.w - (0 if parent().par.Parhidelabel else op("label").par.w)',
 		                 h='op("rootpanel").par.h')
 
+	@property
+	def TargetPar(self):
+		return self._comp.op('menu').TargetPar
+
 	def GetValue(self):
 		return self._comp.op('menu').GetValue()
 

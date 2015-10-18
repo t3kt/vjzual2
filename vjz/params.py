@@ -102,7 +102,7 @@ class VjzParam:
 		                     Pctlop='Parop',
 		                     Pctlpar='Parpar',
 		                     Pctllabel='Parlabel',
-		                     Pctlchan='Parlocalname',
+		                     Pctlchan='Parid',
 		                     Pctlhelptext='Parhelptext',
 		                     Pctlfontsize='Parfontsize')
 
