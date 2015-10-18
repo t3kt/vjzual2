@@ -113,3 +113,35 @@ def saveActiveTox():
 		if saveTox(comp):
 			return
 		comp = comp.parent()
+
+def alignLeft():
+	selected = getSelected()
+	x = min([o.nodeX for o in selected])
+	for o in selected:
+		o.nodeX = x
+
+def _getMiddle(vals):
+	low, high = min(vals), max(vals)
+	return low + (high-low)/2
+
+_alignDirs = {
+	'top': {'attr': 'nodeY', 'calc': max},
+    'bottom': {'attr': 'nodeY', 'calc': min},
+    'left': {'attr': 'nodeX', 'calc': min},
+    'right': {'attr': 'nodeX', 'calc': max},
+    'middle': {'attr': 'nodeY', 'calc': _getMiddle},
+    'center': {'attr': 'nodeX', 'calc': _getMiddle}
+}
+
+def align(dirName):
+	selected = getSelected()
+	if len(selected) < 2:
+		return
+	alignment = _alignDirs[dirName]
+	attr = alignment['attr']
+	calc = alignment['calc']
+	vals = [getattr(o, attr) for o in selected]
+	newval = calc(vals)
+	for o in selected:
+		setattr(o, attr, newval)
+

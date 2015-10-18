@@ -72,7 +72,6 @@ class VjzParam:
 		page.appendStr('Parid', label='Parameter Unique ID')
 		page.appendStr('Partype', label='Parameter Type')
 		page.appendStr('Parlabel', label='UI Label')
-		page.appendStr('Parchan', label='Output Channel')
 		page.appendStr('Parhelptext', label='Help Text')
 		page.appendToggle('Parhidelabel', label='Hide Label')
 		util.setattrs(page.appendInt('Parfontsize', label='Font Size')[0],
@@ -88,13 +87,22 @@ class VjzParam:
 		                 w='op("rootpanel").par.w / 3',
 		                 h='op("rootpanel").par.h',
 		                 display='not parent().par.Parhidelabel')
+		# TODO: remove this
+		if hasattr(self._comp.par, 'Parchan'):
+			self._comp.par.Parchan.destroy()
+
+		mapping = self._comp.op('midi_mapping')
+		if mapping:
+			util.setParExprs(mapping,
+			                 Mapid='parent().par.Parid',
+			                 Mapchan='parent().par.Parlocalname')
 
 	def ApplyBaseProxyExprs(self, ctrlComp):
 		util.ApplyPythonProxyExprs(ctrlComp, 'ext.vjzpar.par.',
 		                     Pctlop='Parop',
 		                     Pctlpar='Parpar',
 		                     Pctllabel='Parlabel',
-		                     Pctlchan='Parchan',
+		                     Pctlchan='Parlocalname',
 		                     Pctlhelptext='Parhelptext',
 		                     Pctlfontsize='Parfontsize')
 
