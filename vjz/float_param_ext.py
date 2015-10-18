@@ -9,8 +9,6 @@ class FloatParam(VjzParam):
 		VjzParam.Initialize(self)
 		comp = self._comp
 		page = self.GetParamPage()
-		for p in comp.pars('Parclamp*'):
-			p.destroy()
 		page.appendFloat('Parnormrange', label='Normalized Range', size=2)
 		page.appendFloat('Parrange', label='Range', size=2)
 		page.appendToggle('Parclampmin', label='Clamp Min')
