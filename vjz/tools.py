@@ -63,19 +63,21 @@ def setModParamEditModeExprs():
 # 		val = calcVal(i, n)
 # 		setAttr(obj, val)
 
-def setAlignOrderBy(sortAttrName):
+def setAlignOrderBy(sortAttrName, reverseDir):
 	selected = getSelected()
 	n = len(selected)
 	selected = sorted(selected, key=lambda o: getattr(o, sortAttrName))
+	if reverseDir:
+		selected = list(reversed(selected))
 	for i in range(n):
 		val = interp(float(i), [0, n-1], [0.0, 1.0])
 		selected[i].par.order = val
 
 def setAlignOrderByX():
-	setAlignOrderBy('nodeX')
+	setAlignOrderBy('nodeX', False)
 
 def setAlignOrderByY():
-	setAlignOrderBy('nodeY')
+	setAlignOrderBy('nodeY', True)
 
 def reloadPython():
 	for name in ['vjz_util', 'vjz_params', 'vjz_module', 'vjz']:
@@ -91,7 +93,7 @@ def destroyPars():
 			if p.isCustom:
 				p.destroy()
 
-def saveTox(comp):
+def _saveTox(comp):
 	if not comp.isCOMP:
 		return False
 	toxfile = comp.par.externaltox.eval()
@@ -104,21 +106,15 @@ def saveTox(comp):
 def saveSelectedTox():
 	selected = getSelected()
 	for comp in selected:
-		saveTox(comp)
+		_saveTox(comp)
 
 def saveActiveTox():
 	pane = getTargetPane()
 	comp = pane.owner
 	while comp:
-		if saveTox(comp):
+		if _saveTox(comp):
 			return
 		comp = comp.parent()
-
-def alignLeft():
-	selected = getSelected()
-	x = min([o.nodeX for o in selected])
-	for o in selected:
-		o.nodeX = x
 
 def _getMiddle(vals):
 	low, high = min(vals), max(vals)
