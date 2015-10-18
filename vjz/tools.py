@@ -66,9 +66,9 @@ def setModParamEditModeExprs():
 def setAlignOrderBy(sortAttrName, reverseDir):
 	selected = getSelected()
 	n = len(selected)
-	selected = sorted(selected, key=lambda o: getattr(o, sortAttrName))
-	if reverseDir:
-		selected = list(reversed(selected))
+	selected = sorted(selected,
+	                  key=lambda o: getattr(o, sortAttrName),
+	                  reverse=reverseDir)
 	for i in range(n):
 		val = interp(float(i), [0, n-1], [0.0, 1.0])
 		selected[i].par.order = val
@@ -140,4 +140,21 @@ def align(dirName):
 	newval = calc(vals)
 	for o in selected:
 		setattr(o, attr, newval)
+
+def distribute(axis):
+	if axis == 'x':
+		attr = 'nodeX'
+	else:
+		attr = 'nodeY'
+	selected = getSelected()
+	n = len(selected)
+	if n < 3:
+		return
+	vals = [getattr(o, attr) for o in selected]
+	minVal, maxVal = min(vals), max(vals)
+	selected = sorted(selected,
+	                  key=lambda o: getattr(o, attr))
+	for i in range(n):
+		val = interp(float(i), [0, n-1], [minVal, maxVal])
+		setattr(selected[i], attr, round(val))
 
