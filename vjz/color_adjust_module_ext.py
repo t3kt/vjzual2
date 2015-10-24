@@ -22,6 +22,7 @@ class ColorAdjModule(VjzModule):
 			default=0.5)
 		setattrs(page.appendFloat('Mparcontrast', label='Contrast')[0],
 			default=0.5)
+		page.appendToggle('Mparinvert', label='Invert')
 		for init in self._comp.ops('shell/init', 'overlay/init', '*_param/init'):
 			init.run()
 
