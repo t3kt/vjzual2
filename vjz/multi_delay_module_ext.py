@@ -113,6 +113,7 @@ class MultiDelayTap:
 		page = t.appendCustomPage('Delay Tap')
 
 		page.appendTOP('Cache', label='Cache TOP')
+		page.appendCHOP('Audioop', label='Audio CHOP')
 
 		setattrs(page.appendFloat('Length', label='Tap Length')[0],
 			min=0, #redundant but helpful
@@ -130,6 +131,10 @@ class MultiDelayTap:
 			normMax=1)
 		page.appendFloat('Filtersat', label='Color Filter Amount')
 		page.appendToggle('Filteron', label='Color Filter Enabled')
+		page.appendFloat('Audiomaxdelay', label='Max Audio Delay')
+		page.appendFloat('Audiodelay', label='Audio Delay')
+		page.appendFloat('Audiolevel', label='Audio Level')
+
 		setattrs(page.appendToggle('Active', label='Active')[0],
 			default=True)
 
