@@ -18,3 +18,4 @@ midictrls	/_/local/midi_ctrls
 midimappings	/_/local/midi_mappings
 moduletbl	/_/local/moduletbl
 paramtbl	/_/local/paramtbl
+compositemenuopts	/_/components/composite_menu_options
