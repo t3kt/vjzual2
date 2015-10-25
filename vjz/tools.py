@@ -29,7 +29,10 @@ def initSelected():
 	for o in selected:
 		init = o.op('init')
 		if init:
-			init.run()
+			try:
+				init.run()
+			except e:
+				print('INIT error', e)
 
 def deletePars(o, *parNames):
 	pars = o.pars(*parNames)
