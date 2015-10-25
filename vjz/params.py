@@ -97,6 +97,29 @@ class VjzParam:
 			                 Mapid='parent().par.Parid',
 			                 Mapchan='parent().par.Parlocalname')
 
+		page.appendMenu('Parmapctrl', label='Control')
+		util.setattrs(page.appendToggle('Parmapenabled', label='Mapping Enabled')[0],
+		              default=True)
+		self.UpdateCtrlMenu()
+
+	def UpdateCtrlMenu(self):
+		m = self._comp
+		ctrls = m.op(m.var('midictrls'))
+		ctrlIds = [x.val for x in ctrls.col('id')[1:]]
+		util.setattrs(m.par.Parmapctrl,
+		              menuNames=['none'] + ctrlIds,
+		              menuLabels=['--'] + ctrlIds)
+
+	def ApplyMappingProxyExprs(self, mapping):
+		if not mapping:
+			return
+		util.setexpr(mapping.par.Mapop, 'ext.vjzpar')
+		util.ApplyPythonProxyExprs(mapping, 'ext.vjzpar.par.',
+		                           Mapid='Parid',
+		                           Mapchan='Parlocalname',
+		                           Mapctrl='Parmapctrl',
+		                           Mapenabled='Parmapenabled')
+
 	def ApplyBaseProxyExprs(self, ctrlComp):
 		util.ApplyPythonProxyExprs(ctrlComp, 'ext.vjzpar.par.',
 		                     Pctlop='Parop',

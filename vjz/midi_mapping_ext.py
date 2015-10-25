@@ -9,6 +9,7 @@ class MidiMapping:
 	def Initialize(self):
 		m = self._comp
 		page = m.appendCustomPage('MIDI Mapping')
+		page.appendCOMP('Mapop', label='Operator')
 		page.appendStr('Mapid', label='Mapping ID')
 		page.appendStr('Mapchan', label='Channel Name')
 		page.appendMenu('Mapctrl', label='Control')
@@ -17,16 +18,16 @@ class MidiMapping:
 
 		m.tags.add('midimapping')
 
-		setexpr(m.op('enabled_button').par.Pctlop, 'me.parent()')
+		setexpr(m.op('enabled_button').par.Pctlop, 'me.parent().par.Mapop')
 		setattrs(m.op('enabled_button').par,
-		         Pctlpar='Mapenabled',
+		         Pctlpar='Parmapenabled',
 		         Pctlchan='enabled',
 		         Pctlhelptext='disable mapping',
 		         Pctloffhelptext='enable mapping')
 
-		setexpr(m.op('ctrl_menu').par.Pctlop, 'me.parent()')
+		setexpr(m.op('ctrl_menu').par.Pctlop, 'me.parent().par.Mapop')
 		setattrs(m.op('ctrl_menu').par,
-		         Pctlpar='Mapctrl',
+		         Pctlpar='Parmapctrl',
 		         Pctlhelptext='control mapping',
 		         Pctllistsize=15,
 		         Pctlhidebtn=True)
