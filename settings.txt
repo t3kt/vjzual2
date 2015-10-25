@@ -14,7 +14,7 @@ silent	/_/components/silent
 nothing	/_/components/nothing
 datanodes	/_/local/data_nodes
 mididevices	/_/local/midi_devices
-midictrls	/_/local/midi_ctrls
+midictrls	/_/midi/midi_ctrls
 midimappings	/_/local/midi_mappings
 moduletbl	/_/local/moduletbl
 paramtbl	/_/local/paramtbl

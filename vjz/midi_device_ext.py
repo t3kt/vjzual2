@@ -16,30 +16,8 @@ class MidiDevice:
 		         default='/local/midi/device')
 		if d.par.Devtable == '':
 			d.par.Devtable = d.par.Devtable.default
-		initIOTemplate(d.op('input_template'))
-		initIOTemplate(d.op('output_template'))
-		d.op('input_replicator').par.recreateall.pulse()
-		d.op('output_replicator').par.recreateall.pulse()
-		self.AttachAllInputs()
-
-	def AttachAllInputs(self):
-		for attach in self._comp.ops('input_[1-9]*/attach_to_target'):
-			attach.run()
-
-	def AddToCtrlTable(self, tbl):
-		devname = self._comp.par.Devname
-		devpath = self._comp.path
-		for ctrl in self._comp.op('cc_table').col('ctrl')[1:]:
-			key = devname + ':' + ctrl
-			updateTableRow(tbl,
-			               key,
-			               {
-			                "dev": devname,
-			                "ctrl": ctrl,
-			                "devpath": devpath
-			               },
-			               addMissing=True)
-		pass
+		setattrs(page.appendToggle('Devenabled', label='Device Enabled')[0],
+		         default=True)
 
 	@property
 	def MappingsTable(self):
@@ -49,33 +27,3 @@ class MidiDevice:
 	def GroupsTable(self):
 		return self._comp.op('set_groups')
 
-	# def UpdateGroup(self, group, inpath, outpath):
-	# 	grouptbl = self.GroupsTable
-	# 	if not inpath and not outpath:
-	# 		grouptbl.removeRow(group)
-	# 	else:
-	# 		updateTableRow(grouptbl,
-	# 		               group,
-	# 		               { "inpath": inpath, "outpath": outpath },
-	# 		               addMissing=True)
-	#
-	# def UpdateMapping(self, group, chan, ctrl):
-	# 	mappingtbl = self.MappingsTable
-	# 	row = getMappingRow(mappingtbl, group, chan)
-	# 	if not ctrl:
-	# 		if row is not None:
-	# 			mappingtbl.deleteRow(row)
-	# 	else:
-	# 		if row is not None:
-	# 			mappingtbl[row, 'ctrl'] = ctrl
-	# 		else:
-	# 			mappingtbl.appendRow([group, chan, ctrl])
-
-def getMappingRow(mappings, group, chan):
-	for i in range(1, mappings.numRows):
-		if mappings[i, 'group'] == group and mappings[i, 'chan'] == chan:
-			return i
-
-def initIOTemplate(comp):
-	page = comp.appendCustomPage('Midi IO')
-	page.appendCHOP('Tgtop', label='Target CHOP')

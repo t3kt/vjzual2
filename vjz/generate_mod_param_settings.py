@@ -13,6 +13,7 @@ def cook(dat):
 	dat.clear()
 	dat.appendRow(['path', 'parameter', 'value'])
 	dat.appendRow(['*_param', 'Parop', 'ext.vjzmod'])
+	#dat.appendRow(['*_param', 'Paruimode', 'ext.vjzmod.par.Modparuimode'])
 	if dat.par.Setfontsize.eval():
 		dat.appendRow(['*_param', 'Parfontsize', dat.par.Fontsize.eval()])
 	m = dat.par.Modop.eval()
