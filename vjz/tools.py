@@ -1,8 +1,5 @@
 from numpy import interp
 
-setattrs = mod.vjz_util.setattrs
-setexpr = mod.vjz_util.setexpr
-
 def getTargetPane():
 	pane = ui.panes.current
 	if pane.type == PaneType.NETWORKEDITOR:
@@ -18,21 +15,42 @@ def getSelected():
 	selected= pane.owner.selectedChildren
 	if not selected:
 		selected = [pane.owner.currentChild]
-	print('tools.getSelected()', selected, 'pane', pane, 'type', pane.type, 'owner', pane.owner)
 	return selected
 
-def logSelected():
-	getSelected() # it already has a print statement
-
-def initSelected():
-	selected = getSelected()
-	for o in selected:
+def _tryInit(o):
+	if not o:
+		return False
+	if o.isDAT and o.name == 'init':
+		init = o
+	elif o.isCOMP:
 		init = o.op('init')
-		if init:
-			try:
-				init.run()
-			except e:
-				print('INIT error', e)
+	else:
+		init = None
+	if not init or not init.isDAT:
+		return False
+	try:
+		ui.status = 'running initializer ' + init.path
+		init.run()
+	except Exception as e:
+		print('INIT error [' + init.path + ']: ' + str(e))
+	return True
+
+def initSelectedOrContext():
+	_doOnSelectedOrContext(_tryInit)
+
+def _doOnSelectedOrContext(action):
+	selected = getSelected()
+	initedAny = False
+	for o in selected:
+		if action(o):
+			initedAny = True
+	if not initedAny:
+		pane = getTargetPane()
+		comp = pane.owner
+		while comp:
+			if action(comp):
+				return
+			comp = comp.parent()
 
 def deletePars(o, *parNames):
 	pars = o.pars(*parNames)
@@ -45,7 +63,8 @@ def setModParamEditModeExprs():
 		if not hasattr(p.par, 'Paruimode'):
 			print('setModParamEditModeExprs skipping', p)
 			continue
-		setexpr(p.par.Paruimode, 'ext.vjzmod.par.Modparuimode')
+		p.par.Paruimode.mode = ParMode.EXPRESSION
+		p.par.Paruimode.expr = 'ext.vjzmod.par.Modparuimode'
 
 # def _createRangeValGetter(startVal, endVal):
 # 	return lambda i, n: interp(float(i), [0.0, float(n)-1.0], [startVal, endVal])
@@ -97,7 +116,7 @@ def destroyPars():
 				p.destroy()
 
 def _saveTox(comp):
-	if not comp.isCOMP:
+	if not comp or not comp.isCOMP:
 		return False
 	toxfile = comp.par.externaltox.eval()
 	if not toxfile:
@@ -106,18 +125,8 @@ def _saveTox(comp):
 	ui.status = 'Saved TOX %s to %s' % (comp.path, toxfile)
 	return True
 
-def saveSelectedTox():
-	selected = getSelected()
-	for comp in selected:
-		_saveTox(comp)
-
-def saveActiveTox():
-	pane = getTargetPane()
-	comp = pane.owner
-	while comp:
-		if _saveTox(comp):
-			return
-		comp = comp.parent()
+def saveToxSelectedOrContext():
+	_doOnSelectedOrContext(_saveTox)
 
 def _getMiddle(vals):
 	low, high = min(vals), max(vals)
