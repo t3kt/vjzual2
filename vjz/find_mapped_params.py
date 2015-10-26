@@ -2,7 +2,6 @@ def getColumnNames(dat):
 	return ['name', 'mapctrl', 'device', 'ctrl']
 
 def getRowValues(dat, param, row):
-	print('hi')
 	if not param.par.Parmapenabled.eval():
 		return ['', '', '', '']
 	mapctrl = param.par.Parmapctrl.eval()
