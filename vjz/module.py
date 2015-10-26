@@ -9,6 +9,8 @@ else:
 
 setattrs = util.setattrs
 setexpr = util.setexpr
+setParExprs = util.setParExprs
+setParValues = util.setParValues
 
 class VjzModule:
 	def __init__(self, comp):
@@ -105,3 +107,91 @@ class VjzModule:
 			if presets[row, index] != '':
 				return True
 		return False
+
+class ModuleShell:
+	def __init__(self, shell):
+		self.shell = shell
+
+	def Initialize(self):
+		shell = self.shell
+		page = shell.appendCustomPage('Module Shell')
+		setattrs(page.appendToggle('Showcollapsebtn', label='Show Collapse Button')[0],
+		         default=True)
+		setattrs(page.appendToggle('Showsolobtn', label='Show Solo Button')[0],
+		         default=True)
+		setattrs(page.appendToggle('Showbypassbtn', label='Show Bypass Button')[0],
+		         default=True)
+		setattrs(page.appendToggle('Showpresetsbtn', label='Show Presets Button')[0],
+		         default=True)
+		setattrs(page.appendToggle('Showadvancedbtn', label='Show Advanced Button')[0],
+		         default=True)
+		setattrs(page.appendToggle('Showviewersbtn', label='Show Viewers Button')[0],
+		         default=True)
+		setattrs(page.appendToggle('Showparuimode', label='Show Par UI Mode Menu')[0],
+		         default=True)
+		setParExprs(shell.op('presets_button'),
+		            display='parent().par.Showpresetsbtn')
+		setParExprs(shell.ops('collapsed_button',
+		                      'bypass_button',
+		                      'solo_button',
+		                      'viewers_button',
+		                      'advanced_button',
+		                      'par_ui_mode_menu'),
+		            Pctlop='ext.vjzmod')
+		setParValues(shell.op('collapsed_button'),
+		             Pctlpar='Modcollapsed',
+		             Pctlchan='collapsed',
+		             Pctlhelptext='expand',
+		             Pctloffhelptext='collapse',
+		             Pctlontext='+',
+		             Pctlofftext='-')
+		setParExprs(shell.op('collapsed_button'),
+		            display='parent().par.Showcollapsebtn')
+		setParValues(shell.op('bypass_button'),
+		             Pctlpar='Modbypass',
+		             Pctlchan='bypass',
+		             Pctlhelptext='bypass',
+		             Pctloffhelptext='bypass',
+		             Pctlontext='B',
+		             Pctlofftext='B')
+		setParExprs(shell.op('bypass_button'),
+		            display='parent().par.Showbypassbtn')
+		setParValues(shell.op('solo_button'),
+		             Pctlpar='Modsolo',
+		             Pctlchan='solo',
+		             Pctlhelptext='solo',
+		             Pctloffhelptext='solo',
+		             Pctlontext='S',
+		             Pctlofftext='S')
+		setParExprs(shell.op('solo_button'),
+		            display='parent().par.Showsolobtn')
+		setParValues(shell.op('viewers_button'),
+		             Pctlpar='Modshowviewers',
+		             Pctlchan='showviewers',
+		             Pctlhelptext='hide viewers',
+		             Pctloffhelptext='show viewers',
+		             Pctlontext='V',
+		             Pctlofftext='V')
+		setParExprs(shell.op('viewers_button'),
+		            display='parent().par.Showviewersbtn')
+		setParValues(shell.op('advanced_button'),
+		             Pctlpar='Modshowadvanced',
+		             Pctlchan='showadvanced',
+		             Pctlhelptext='hide advanced params',
+		             Pctloffhelptext='show advanced params',
+		             Pctlontext='A',
+		             Pctlofftext='A')
+		setParExprs(shell.op('advanced_button'),
+		            display='parent().par.Showadvancedbtn')
+		setParValues(shell.op('par_ui_mode_menu'),
+		             Pctlpar='Modparuimode',
+		             Pctlchan='paruimode',
+		             Pctlfontsize=7,
+		             Pctllistsize=2,
+		             Pctlhidebtn=True)
+		setParExprs(shell.op('par_ui_mode_menu'),
+		            display='parent().par.Showparuimode')
+		setexpr(shell.op('presets').par.Presetmodule, "ext.vjzmod")
+		shell.parent().par.crop = 'on'
+		for init in shell.ops('*/init'):
+			init.run()

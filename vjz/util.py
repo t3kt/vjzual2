@@ -45,6 +45,14 @@ def setParExprs(obj, **exprs):
 		for key in exprs:
 			setexpr(getattr(obj.par, key), exprs[key])
 
+def setParValues(obj, **values):
+	if isinstance(obj, (tuple, list)):
+		for o in obj:
+			setParValues(o, **values)
+	else:
+		for key in values:
+			setParValue(getattr(obj.par, key), values[key])
+
 def coerceBool(val):
 	return val is True or val == 1 or val == '1' or val == 'True'
 
