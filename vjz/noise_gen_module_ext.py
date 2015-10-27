@@ -16,7 +16,7 @@ class NoiseGenModule(VjzModule):
 		m = self._comp
 		page = m.GetModParamsPage()
 		setattrs(page.appendFloat('Mparperiod', label='Period')[0],
-		         min=0, clampMin=True, normMax=4, default=1)
+		         min=0, clampMin=True, normMax=8, default=1)
 		setattrs(page.appendFloat('Mpargain', label='Harmonic Gain')[0],
 		         min=0, clampMin=True, normMax=2, default=1)
 		page.appendXYZ('Mparrate', label='Rate')
