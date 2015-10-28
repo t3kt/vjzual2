@@ -18,11 +18,10 @@ class TransformModule(VjzModule):
 
 		page.appendFloat('Mparlevel', label='Level')
 
-		transform = m.op('transform')
-
+		extendOpts= m.op('/_/components/top_transform_extend_menu_options')
 		setattrs(page.appendMenu('Mparextend', label='Extend')[0],
-			menuNames=transform.par.extend.menuNames,
-			menuLabels=transform.par.extend.menuLabels,
+			menuNames=extendOpts.col('name')[1:],
+			menuLabels=extendOpts.col('label')[1:],
 			default='mirror')
 
 		setattrs(page.appendXY('Mpars', label='Scale'),
@@ -42,10 +41,11 @@ class TransformModule(VjzModule):
 			normMax=360,
 			default=0)
 
+		xordOpts = m.op('/_/components/top_transform_xord_menu_options')
 		setattrs(page.appendMenu('Mparorder', label='Transform Order')[0],
-			menuNames=transform.par.xord.menuNames,
-			menuLabels=transform.par.xord.menuLabels,
-			default=transform.par.xord.default)
+			menuNames=xordOpts.col('name')[1:],
+			menuLabels=xordOpts.col('label')[1:],
+			default='srt')
 
 		setattrs(m.par,
 		         Modfullheight=192,
