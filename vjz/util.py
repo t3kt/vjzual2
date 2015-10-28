@@ -136,3 +136,10 @@ def ApplyPythonProxyExprs(targetComp, exprPrefix, **mappings):
 
 def GetParamDict(op, *paramNames):
 	return {pname: getattr(op.par, pname).eval() for pname in paramNames}
+
+def GetClonedAncestor(op):
+	while op:
+		if hasattr(op.par, 'clone') and op.par.clone.eval():
+			return op
+		op = op.parent()
+	return None
