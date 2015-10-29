@@ -132,26 +132,44 @@ def _getMiddle(vals):
 	low, high = min(vals), max(vals)
 	return low + (high-low)/2
 
-_alignDirs = {
-	'top': {'attr': 'nodeY', 'calc': max},
-    'bottom': {'attr': 'nodeY', 'calc': min},
-    'left': {'attr': 'nodeX', 'calc': min},
-    'right': {'attr': 'nodeX', 'calc': max},
-    'middle': {'attr': 'nodeY', 'calc': _getMiddle},
-    'center': {'attr': 'nodeX', 'calc': _getMiddle}
+class NodeEdge:
+	def __init__(self, attrName, calc):
+		self.attrName = attrName
+		self.calc = calc
+	def get(self, op):
+		return getattr(op, self.attrName)
+	def set(self, op, val):
+		setattr(op, self.attrName, val)
+	def align(self, ops):
+		vals = [self.get(o) for o in ops]
+		newval = self.calc(vals)
+		for o in ops:
+			self.set(o, newval)
+
+class DerivedNodeEdge(NodeEdge):
+	def __init__(self, baseAttr, sizeAttr, calc):
+		NodeEdge.__init__(self, baseAttr, calc)
+		self.sizeAttr = sizeAttr
+	def get(self, op):
+		return getattr(op, self.attrName) + getattr(op, self.sizeAttr)
+	def set(self, op, val):
+		setattr(op, self.attrName, val - getattr(op, self.sizeAttr))
+
+nodeEdges = {
+	'left': NodeEdge('nodeX', min),
+    'top': NodeEdge('nodeY', min),
+    'center': NodeEdge('nodeCenterX', _getMiddle),
+    'middle': NodeEdge('nodeCenterY', _getMiddle),
+    'right': DerivedNodeEdge('nodeX', 'nodeWidth', max),
+    'bottom': DerivedNodeEdge('nodeY', 'nodeHeight', max)
 }
 
 def align(dirName):
 	selected = getSelected()
 	if len(selected) < 2:
 		return
-	alignment = _alignDirs[dirName]
-	attr = alignment['attr']
-	calc = alignment['calc']
-	vals = [getattr(o, attr) for o in selected]
-	newval = calc(vals)
-	for o in selected:
-		setattr(o, attr, newval)
+	edge = nodeEdges[dirName]
+	edge.align(selected)
 
 def distribute(axis):
 	if axis == 'x':
