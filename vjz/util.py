@@ -57,6 +57,8 @@ def coerceBool(val):
 	return val is True or val == 1 or val == '1' or val == 'True'
 
 def setParValue(par, val):
+	if val == '':
+		return
 	if par.isToggle:
 		par.val = coerceBool(val)
 	elif par.isFloat:
