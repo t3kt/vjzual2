@@ -2,6 +2,25 @@ __author__ = 'tekt'
 
 print('util.py initializing')
 
+def dumpObject(obj, underscores=False, methods=False):
+	print('Dump ' + repr(obj) + ' type:' + repr(type(obj)))
+	for key in dir(obj):
+		if key.startswith('_') and not underscores:
+			continue
+		val = getattr(obj, key)
+		if callable(val) and not methods:
+			continue
+		print('  ' + key + ': ' + repr(val))
+
+def dumpMethodHelps(obj, underscores=False):
+	print('Methods of ' + repr(obj) + ' type:' + repr(type(obj)))
+	for key in dir(obj):
+		if key.startswith('_') and not underscores:
+			continue
+		val = getattr(obj, key)
+		if callable(val):
+			print(help(getattr(obj, key)))
+
 def argToOp(arg):
 	if not arg:
 		return None
