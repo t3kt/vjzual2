@@ -54,6 +54,7 @@ class VjzModule:
 		util.setattrs(page.appendMenu('Modparuimode', label='Parameter UI Mode')[0],
 		              menuNames=['ctrl', 'midiedit'],
 		              menuLabels=['Controls', 'Edit MIDI'])
+		page.appendToggle('Modhidden', label='Hide Module')
 
 	@property
 	def PresetsTable(self):
