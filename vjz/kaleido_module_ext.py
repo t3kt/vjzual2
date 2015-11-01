@@ -22,8 +22,8 @@ class KaleidoModule(VjzModule):
 
 		page.appendFloat('Mparlevel', label='Level')
 		setattrs(page.appendFloat('Mparpreoffset', label='Pre Offset'),
-		         normMin=-4,
-		         normMax=4,
+		         normMin=-1.5,
+		         normMax=1.5,
 		         default=0)
 		setattrs(page.appendFloat('Mparpostoffset', label='Post Offset'),
 		         normMin=-4,
@@ -42,6 +42,12 @@ class KaleidoModule(VjzModule):
 		         menuNames=extendModes.col('name')[1:],
 		         menuLabels=extendModes.col('label')[1:],
 		         default='mirror')
+		compopts = op(var('compositemenuopts'))
+		setattrs(page.appendMenu('Mparoperand', label='Composite Operator')[0],
+		         menuNames=compopts.col('name')[1:],
+		         menuLabels=compopts.col('label')[1:],
+		         default='maximum')
+		page.appendToggle('Mparmulti', label='Use Multiple Cores')
 
 		for init in m.ops('*/init'):
 			init.run()
