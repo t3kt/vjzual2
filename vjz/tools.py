@@ -105,8 +105,7 @@ def reloadPython():
 	for name in ['vjz_util', 'vjz_params', 'vjz_module', 'vjz']:
 		op('/local/modules/' + name).par.reload.pulse(1)
 
-def destroyPars():
-	parnames = op('par_names_field/string')[0,0].val.split(' ')
+def destroyPars(parnames):
 	selected = getSelected()
 	print('destroyPars', parnames, selected)
 	for o in selected:
@@ -114,6 +113,26 @@ def destroyPars():
 		for p in oPars:
 			if p.isCustom:
 				p.destroy()
+
+def addTags(tags):
+	tags = set(tags)
+	selected = getSelected()
+	print('addTags', tags, selected)
+	for o in selected:
+		o.tags |= tags
+
+def removeTags(tags):
+	if len(tags) == 1 and tags[0] == '*':
+		tags = None
+	else:
+		tags = set(tags)
+	selected = getSelected()
+	print('removeTags', tags if tags else '*', selected)
+	for o in selected:
+		if tags:
+			o.tags -= tags
+		else:
+			o.tags.clear()
 
 def _saveTox(comp):
 	if not comp or not comp.isCOMP:
