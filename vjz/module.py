@@ -56,6 +56,19 @@ class VjzModule:
 		              menuLabels=['Controls', 'Edit MIDI'])
 		page.appendToggle('Modhidden', label='Hide Module')
 
+	def UpdateSolo(self):
+		selfmod = self._comp
+		solo = selfmod.par.Modsolo.eval()
+		if solo:
+			for mpath in op(var('moduletbl')).col('path')[1:]:
+				othermod = op(mpath)
+				if othermod is not selfmod:
+					othermod.par.Modsolo = False
+			node = selfmod.op('./out_node').path
+		else:
+			node = var('masteroutnode')
+		op(var('mainoutselector')).par.Selnode = node
+
 	@property
 	def PresetsTable(self):
 		return self._comp.op('local/preset_values')
