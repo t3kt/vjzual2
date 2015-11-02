@@ -3,9 +3,12 @@ try:
 except ImportError:
 	from vjz.module import VjzModule
 
-import vjz_util as util
+try:
+	import vjz_util as util
+except ImportError:
+	import vjz.util as util
+
 setattrs = util.setattrs
-setexpr = util.setexpr
 
 class NoiseGenModule(VjzModule):
 	def __init__(self, comp):
@@ -19,12 +22,24 @@ class NoiseGenModule(VjzModule):
 		         min=0, clampMin=True, normMax=8, default=1)
 		setattrs(page.appendFloat('Mpargain', label='Harmonic Gain')[0],
 		         min=0, clampMin=True, normMax=2, default=1)
-		page.appendXYZ('Mparrate', label='Rate')
+		setattrs(page.appendXYZ('Mparrate', label='Rate'),
+		         normMin=-1.5,
+		         normMax=1.5,
+		         default=0)
 		setattrs(page.appendMenu('Mparalphamode', label='Alpha Mode')[0],
 		         menuNames=['zero', 'one', 'random'],
 		         menuLabels=['Zero', 'One', 'Noise'])
 		setattrs(page.appendToggle('Mparmono', label='Monochrome')[0],
 		         default=True)
+		setattrs(page.appendFloat('Mparexponent', label='Exponent')[0],
+		         normMin=0,
+		         normMax=1.5,
+		         default=0.5)
+		noise = m.op('noise')
+		setattrs(page.appendMenu('Mparnoisetype', label='Noise Type')[0],
+		         menuNames=noise.par.type.menuNames,
+		         menuLabels=noise.par.type.menuLabels,
+		         default='simplex4d')
 
 		for init in m.ops('*/init'):
 			init.run()
