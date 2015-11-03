@@ -64,10 +64,11 @@ class VjzModule:
 				othermod = op(mpath)
 				if othermod is not selfmod:
 					othermod.par.Modsolo = False
-			node = selfmod.op('./out_node').path
+			nodeId = selfmod.op('./out_node').par.Nodeid.eval()
 		else:
-			node = var('masteroutnode')
-		op(var('mainoutselector')).par.Selnode = node
+			nodeId = op(var('masteroutnode')).par.Nodeid.eval()
+		print('updating master output to node id: ' + nodeId)
+		op(var('mainoutselector')).SetSelectedNode(nodeId)
 
 	@property
 	def PresetsTable(self):
