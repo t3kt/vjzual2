@@ -29,9 +29,9 @@ class IterateModule(VjzModule):
 		setattrs(page.appendFloat('Mparstartscale', label='Start Uniform Scale'),
 		         normMin=0, normMax=10, default=1)
 		setattrs(page.appendXYZ('Mparstarts', label='Start Scale'),
-		         normMin=-1, normMax=3, default=1)
+		         normMin=-4, normMax=4, default=1)
 		setattrs(page.appendXYZ('Mparstartt', label='Start Translate'),
-		         normMin=-4, normMax=4, default=0)
+		         normMin=-8, normMax=8, default=0)
 		setattrs(page.appendXYZ('Mparstartr', label='Start Rotate'),
 		         normMin=-180, normMax=180, default=0)
 		setattrs(page.appendFloat('Mparstartalpha', label='Start Alpha'),
@@ -40,9 +40,9 @@ class IterateModule(VjzModule):
 		setattrs(page.appendFloat('Mparendscale', label='End Uniform Scale'),
 		         normMin=0, normMax=10, default=1)
 		setattrs(page.appendXYZ('Mparends', label='End Scale'),
-		         normMin=-1, normMax=3, default=1)
+		         normMin=-4, normMax=4, default=1)
 		setattrs(page.appendXYZ('Mparendt', label='End Translate'),
-		         normMin=-4, normMax=4, default=0)
+		         normMin=-8, normMax=8, default=0)
 		setattrs(page.appendXYZ('Mparendr', label='End Rotate'),
 		         normMin=-180, normMax=180, default=0)
 		setattrs(page.appendFloat('Mparendalpha', label='End Alpha'),
