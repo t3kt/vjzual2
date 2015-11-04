@@ -24,7 +24,6 @@ Each module has:
 * a standard shell UI which includes a header with toggles for module settings, and other generic UI elements, as well as common infrastructure for bypassing the module
 * a standard overlay UI which provides dimming/highlighting for bypassed/soloed modules (ideally this would be part of the shell, but it can't be due to UI layering)
 * a set of UI components bound to the module's custom parameters
-*
 
 ...
 
@@ -34,8 +33,14 @@ Each module has:
 ### Data Nodes and Selectors
 Data nodes are components which expose video, audio, and/or control data. By default, each module has a data node that exposes the module's outputs. The system scans for these nodes and maintains a centralized list of their locations and properties.
 
-Data Selectors are components which select data from data nodes, and include a UI with a drop down list of available nodes as well as previewing of the selected data.
-...
+Data selectors are components which select data from data nodes, and include a UI with a drop down list of available nodes as well as previewing of the selected data.
+
+Data nodes/selectors are the main routing mechanism through which modules communicate with each other (aside from hard-wired input/output connections).
+
+Example uses:
+* warping module selects a video stream from another module to use for distorting its input video stream
+* mixer module blends a video stream from another module with its input video stream
+* soloing/previewing a module means pointing the main output selector to that module's output node
 
 ## UI
 ...
