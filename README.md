@@ -9,12 +9,38 @@ vjzual2 is a modular video processing and VJ performance system built in [TouchD
 * Awesome - yep.
 
 ## Structure
-...
+The system is structured as tree of modules, with modules nested within other modules.
 
 ### Modules
+Modules are the main structural element in the system. A module is a COMP (Container COMP) with standardized contents and interfaces.
+
+Each module has:
+* main Container COMP that holds all contents of the module
+* (promoted) extension class of either VjzModule or a sub-class of VjzModule
+* standard custom parameters which are set up by the extension class (Modname, Modbypass, Modshowviewers, etc)
+* module-specific custom parameters (Mparscale, Mparrotate, etc)
+* (optional) video/audio/control inputs - these are In TOPs/CHOPs in the main COMP
+* (optional) video/audio/control outputs - these are Out TOPs/CHOPs in the main COMP
+* a standard shell UI which includes a header with toggles for module settings, and other generic UI elements, as well as common infrastructure for bypassing the module
+* a standard overlay UI which provides dimming/highlighting for bypassed/soloed modules (ideally this would be part of the shell, but it can't be due to UI layering)
+* a set of UI components bound to the module's custom parameters
+*
+
 ...
 
 ### Parameters
+...
+
+### Data Nodes and Selectors
+Data nodes are components which expose video, audio, and/or control data. By default, each module has a data node that exposes the module's outputs. The system scans for these nodes and maintains a centralized list of their locations and properties.
+
+Data Selectors are components which select data from data nodes, and include a UI with a drop down list of available nodes as well as previewing of the selected data.
+...
+
+## UI
+...
+
+## Initialization
 ...
 
 ## Development Process
