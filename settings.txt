@@ -1,5 +1,5 @@
-renderw	1280
-renderh	720
+renderw	1920
+renderh	1080
 comps	/_/components
 simpleinit	/_/components/simple_init
 outwindow	/_/mainoutwindow
