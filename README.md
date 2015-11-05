@@ -47,9 +47,12 @@ Parameter | Description
 #### Module Parameters
 Each `Module`'s behavior is defined by a set of `Parameters` that are specific to each type of module. They have names that start with "`Mpar`". For example, a transform module would have parameters like `Mparscale`, `Mparrotate`, `Mparsx` (X scale), `Mparsy` (Y scale), etc.
 
+A module `Parameter` is a TD custom parameter on the module, which may be bound to a param component that provides a UI and MIDI/control mapping support. The parameters can be of any type, but not all types are fully supported.
+
+
 ...
 
-### Data Nodes and Selectors
+## Data Nodes and Selectors
 Data nodes are components which expose video, audio, and/or control data. By default, each module has a data node that exposes the module's outputs. The system scans for these nodes and maintains a centralized list of their locations and properties.
 
 Data selectors are components which select data from data nodes, and include a UI with a drop down list of available nodes as well as previewing of the selected data.
