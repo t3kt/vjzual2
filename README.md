@@ -65,9 +65,32 @@ Example uses:
 * soloing/previewing a module means pointing the main output selector to that module's output node
 
 ## UI
-...
+The root of the control UI is at `/_/uipanel`. It contains the top level module panels (e.g. layer1, layer2, master, global), which in turn contain other module panels.
+
+Each module panel has a header which includes common controls. Clicking on the header expands/collapses the module panel (via `Modcollapsed`). When a module is bypassed (via `Modbypass`), a gray overlay is shown over the module's inner UI components, but it does not disable them. This makes it possible to bypass a module, modify some settings, and then switch it back on. The parameter UI mode dropdown in the module header switches the parameters in that module between UI modes that show the controls (sliders/toggle buttons/drop-downs), or to edit MIDI mappings, etc.
 
 ## Initialization
+The parameters of various components need to have been set via scripting. While many of these things persist after closing and reopening `vjzual2`, there are some that do not (such as parameter slider ranges and menu options). This is a bug and should hopefully be fixed at some point. Until then, it is sometimes necessary to re-run the initialization code for a component and its descendants. Any component that needs such initialization (which includes all modules and parameter components) will have a `Text DAT` named `init`, which can be run to handle initialization. Most init scripts call the init scripts of sub-components as follows:
+```python
+for init in ops('*/init'):
+  init.run()
+```
+Note that init scripts are executable scripts and are not just function definitions (though they may delegate the work to functions). Most components that use extension classes have a method named `Initialize()` which handles the bulk of the initialization work. In order to deal with potential issues related to COMP cloning, init scripts often include setup for the related extension classes as follows:
+```python
+m = me.parent()
+m.python = True
+m.par.extension1 = 'mod("...").FooComponent(me)'
+m.par.promoteextension1 = True
+m.initializeExtensions()
+
+# this calls the Initialize method of the extension class,
+# which may not be available until after the extensions
+# have been reinitialized
+m.Initialize()
+```
+The editor tools panel (typically shown on the side of the main network editor) includes an `Initialize` button which runs init scripts for either the selected COMPs, or the context COMP of the main network editor panel.
+
+## Editor tools
 ...
 
 ## Development Process
