@@ -1,5 +1,7 @@
 __author__ = 'tekt'
 
+from numpy import interp
+
 print('util.py initializing')
 
 def dumpObject(obj, underscores=False, methods=False):
@@ -101,6 +103,22 @@ def setPars(op, **parValues):
 	else:
 		for name in parValues:
 			setParValue(getattr(op.par, name), parValues[name])
+
+def evalPars(pars):
+	return [p.eval() for p in pars]
+
+def interpLists(ratio, start, end):
+	result = []
+	inrange = [0, 1]
+	for i in range(len(start)):
+		result.append(
+			interp(ratio,
+			       inrange,
+			       [start[i], end[i]]))
+	return result
+
+def clamp(val, low, high):
+	return max(low, min(val, high))
 
 def overrideRows(tbl, **overrides):
 	tbl = argToOp(tbl)
