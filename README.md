@@ -11,6 +11,12 @@ vjzual2 is a modular video processing and VJ performance system built in [TouchD
 ## Structure
 The system is structured as tree of modules, with modules nested within other modules.
 
+* `/local/modules` - core python scripts. The scripts are here instead of `/_/local/modules` because it makes them more easily accessible from the console.
+* `/_` - the root of the `vjzual2` system (`_` is used rather than `project1` or `vjzual2` because it's compatible with all of my other projects)
+* `/_/local` - core settings, variables, and centralized tables (data nodes, modules, etc)
+* `/_/components` - shared components and scripts. These items are not used directly, but are generally cloned or referenced from elsewhere. The `Text DAT`s that hold scripts for extension classes for shared modules that are cloned are kept outside of the related COMPs in order to avoid having multiple instances of the `Text DAT`s that are bound to the same file.
+* `/_/routing` - centralized infrastructure related to MIDI I/O and other control routing
+
 ### Modules
 Modules are the main structural element in the system. A module is a `Container COMP` with standardized contents and interfaces.
 
