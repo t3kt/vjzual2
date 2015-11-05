@@ -94,10 +94,10 @@ m.initializeExtensions()
 # have been reinitialized
 m.Initialize()
 ```
-The editor tools panel (typically shown on the side of the main network editor) includes an `Initialize` button which runs init scripts for either the selected COMPs, or the context COMP of the main network editor panel.
+The editor tools (see below) includes an `Initialize` button which runs init scripts for either the selected COMPs, or the context COMP of the main network editor panel.
 
 ## Editor tools
-...
+The editor tools panel (typically shown on the side of the main network editor) provides tools for editing components. Many of these are not specific to `vjzual2`, and will at some point be moved out into a separate repository. Most tools currently only work in the context of the main network editor panel (secondary windows don't work, and opening the editor tools panel as a separate window doesn't work). Tools that are intended for COMPs (save .tox file, initialize) first try to operate on whatever is selected in the editor. If nothing applicable is selected, it looks at the context COMP of the editor, and then walks up through its parents until it finds something that can be processed.
 
 ## Development Process
 ...
