@@ -28,7 +28,7 @@ class RampGenModule(VjzModule):
 		         normMin=-1,
 		         normMax=1)
 		setattrs(page.appendFloat('Mparperiod', label='Period'),
-		         normMax=8,
+		         normMax=3,
 		         default=1)
 		setattrs(page.appendMenu('Mparextendleft', label='Extend Left'),
 		         menuNames=ramp.par.extendleft.menuNames,
