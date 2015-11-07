@@ -78,6 +78,13 @@ class RampGenModule(VjzModule):
 		         normMin=0,
 		         normMax=0.5,
 		         default=0.05)
+		page.appendToggle('Mparphaselfoon', label='Phase LFO On')
+		setattrs(page.appendMenu('Mparphaselfowavetype', label='Phase LFO Type'),
+		         menuNames=['sin', 'normal', 'tri', 'ramp', 'square', 'pulse'],
+		         menuLabels=['Sine', 'Gaussian', 'Triangle', 'Ramp', 'Square', 'Pulse'],
+		         default='sin')
+		setattrs(page.appendFloat('Mparphaselfofreq', label='Phase LFO Frequency'),
+		         normMin=-3, normMax=3, default=0.2)
 
 		for init in m.ops('*/init'):
 			init.run()
