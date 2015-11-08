@@ -8,32 +8,34 @@ else:
 	import vjz_util as util
 from numpy import interp
 
+setattrs = util.setattrs
+
 class ParFloatSlider(ParControl):
 	def __init__(self, comp):
 		ParControl.__init__(self, comp)
-		self.ParNormMin = tdu.Dependency(0)
-		self.ParNormMax = tdu.Dependency(1)
-		self.ParDefault = tdu.Dependency(0)
 
 	def Initialize(self):
 		ParControl.Initialize(self)
-		self._comp.par.top = './bg'
-		self._comp.par.chop = './inputval'
-		self.UpdateParSettings()
-
-	def UpdateParSettings(self):
-		p = self.TargetPar
-		if p is not None:
-			self.ParNormMin.val = p.normMin
-			self.ParNormMax.val = p.normMax
-			self.ParDefault.val = p.default
+		ctl = self._comp
+		ctl.par.top = './bg'
+		ctl.par.chop = './inputval'
+		page = self.GetParControlPage()
+		page.appendFloat('Pctlnormrange', label='Normalized Range', size=2)
+		ctl.par.Pctlnormrange1.default = 0
+		ctl.par.Pctlnormrange2.default = 1
+		page.appendFloat('Pctlrange', label='Range', size=2)
+		ctl.par.Pctlrange1.default = 0
+		ctl.par.Pctlrange2.default = 1
+		page.appendToggle('Pctlclampmin', label='Clamp Min')
+		page.appendToggle('Pctlclampmax', label='Clamp Max')
 
 	def PullValue(self):
 		p = self.TargetPar
+		ctl = self._comp
 		if p is not None:
 			if p.mode == ParMode.CONSTANT:
-				self._comp.panel.u = p.normVal
+				ctl.panel.u = p.normVal
 			else:
 				raw = p.eval()
-				scaled = interp(raw, [p.normMin, p.normMax], [0.0, 1.0])
-				self._comp.panel.u = scaled
+				scaled = interp(raw, [ctl.par.Pctlnormrange1, ctl.par.Pctlnormrange2], [0.0, 1.0])
+				ctl.panel.u = scaled

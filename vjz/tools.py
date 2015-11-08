@@ -207,3 +207,24 @@ def distribute(axis):
 		val = interp(float(i), [0, n-1], [minVal, maxVal])
 		setattr(selected[i], attr, round(val))
 
+def updateParSettings():
+	params = getSelected()
+	for p in params:
+		if not p.isCOMP or not hasattr(p.par, 'Parnormrange1'):
+			continue
+		par = p.TargetPar
+		if par is None:
+			print('unable to get target par for path', p.path)
+			continue
+		p.par.Parnormrange1.expr = ''
+		p.par.Parnormrange1.val = par.normMin
+		p.par.Parnormrange2.expr = ''
+		p.par.Parnormrange2.val = par.normMax
+		p.par.Parrange1.expr = ''
+		p.par.Parrange1.val = par.min
+		p.par.Parrange2.expr = ''
+		p.par.Parrange2.val = par.max
+		p.par.Parclampmin.expr = ''
+		p.par.Parclampmin.val = par.clampMin
+		p.par.Parclampmax.expr = ''
+		p.par.Parclampmax.val = par.clampMax

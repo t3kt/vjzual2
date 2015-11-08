@@ -1,5 +1,11 @@
-from vjz_params import VjzParam
-import vjz_util as util
+if False:
+	from vjz.params import VjzParam
+else:
+	from vjz_params import VjzParam
+if False:
+	import vjz.util as util
+else:
+	import vjz_util as util
 
 class FloatParam(VjzParam):
 	def __init__(self, comp):
@@ -9,26 +15,19 @@ class FloatParam(VjzParam):
 		VjzParam.Initialize(self)
 		comp = self._comp
 		page = self.GetParamPage()
-		for p in comp.pars('Parclamp*'):
-			p.destroy()
 		page.appendFloat('Parnormrange', label='Normalized Range', size=2)
 		page.appendFloat('Parrange', label='Range', size=2)
 		page.appendToggle('Parclampmin', label='Clamp Min')
 		page.appendToggle('Parclampmax', label='Clamp Max')
-		par = self.TargetPar
-		if par is not None:
-			util.setParExprs(comp,
-			                 Parnormrange1='me.TargetPar.normMin',
-			                 Parnormrange2='me.TargetPar.normMax',
-			                 Parrange1='me.TargetPar.min',
-			                 Parrange2='me.TargetPar.max',
-			                 Parclampmin='me.TargetPar.clampMin',
-			                 Parclampmax='me.TargetPar.clampMax')
-		else:
-			print('target par not available on init for ', comp.path)
-
 		slider = comp.op('slider')
 		self.ApplyBaseProxyExprs(slider)
+		util.ApplyPythonProxyExprs(slider, 'ext.vjzpar.par.',
+		                           Pctlnormrange1='Parnormrange1',
+		                           Pctlnormrange2='Parnormrange2',
+		                           Pctlrange1='Parrange1',
+		                           Pctlrange2='Parrange2',
+		                           Pctlclampmin='Parclampmin',
+		                           Pctlclampmax='Parclampmax')
 		util.setexpr(comp.par.Partype, '"float"')
 		util.setParExprs(slider,
 		                 w='op("rootpanel").par.w - (0 if parent().par.Parhidelabel else op("label").par.w)',
