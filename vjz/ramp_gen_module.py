@@ -88,29 +88,3 @@ class RampGenModule(VjzModule):
 
 		for init in m.ops('*/init'):
 			init.run()
-
-	def FillKeyTable(self, dat):
-		dat.clear()
-		m = self._comp
-		dat.appendRow(['pos', 'r', 'g', 'b', 'a'])
-		startcolor = evalPars(m.pars('Mparstartcolor[rgba]'))
-		endcolor = evalPars(m.pars('Mparendcolor[rgba]'))
-		keymode = m.par.Mparkeymode.eval()
-		dat.appendRow([0] + startcolor)
-		if keymode in ['midpoint', 'midbar']:
-			if m.par.Mparmidowncolor:
-				middlecolor = evalPars(m.pars('Mparmidcolor[rgba]'))
-			else:
-				ratio = m.par.Mparmidcolorratio.eval()
-				middlecolor = util.interpLists(ratio, startcolor, endcolor)
-			midpos = m.par.Mparmidpos.eval()
-			if keymode == 'midpoint':
-				dat.appendRow([midpos] + middlecolor)
-			elif keymode == 'midbar':
-				halfwidth = m.par.Mparmidwidth.eval() / 2
-				fade = max(m.par.Mparmidfadewidth.eval(), 0.00001)
-				dat.appendRow([util.clamp(midpos - halfwidth - fade, 0, 1)] + startcolor)
-				dat.appendRow([util.clamp(midpos - halfwidth, 0, 1)] + middlecolor)
-				dat.appendRow([util.clamp(midpos + halfwidth, 0, 1)] + middlecolor)
-				dat.appendRow([util.clamp(midpos + halfwidth + fade, 0, 1)] + endcolor)
-		dat.appendRow([1] + endcolor)
