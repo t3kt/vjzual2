@@ -35,6 +35,8 @@ class Smoother:
 		         normMin=0,
 		         normMax=1,
 		         default=0)
+		setattrs(page.appendToggle('Persample', label='Per-Sample'),
+		         default=False)
 
 		for init in self.comp.ops('*/init'):
 			init.run()

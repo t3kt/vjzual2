@@ -73,7 +73,7 @@ class IterateModule(VjzModule):
 		setattrs(page.appendFloat('Mparvertigo', label='Vertigo'),
 		         normMin=0, normMax=1, default=0)
 
-		m.par.Modfullheight = 410
+		m.par.Modfullheight = 430
 		m.par.Modcompactheight = 290
 		m.par.Modhasadvanced = True
 
