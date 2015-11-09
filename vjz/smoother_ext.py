@@ -21,7 +21,7 @@ class Smoother:
 		         default='gauss')
 		setattrs(page.appendFloat('Filterwidth', label='Filter Width'),
 		         normMin=0,
-		         normMax=2,
+		         normMax=4,
 		         default=1)
 		setattrs(page.appendFloat('Filtereffect', label='Filter Effect'),
 		         normMin=0,
@@ -29,11 +29,11 @@ class Smoother:
 		         default=1)
 		setattrs(page.appendFloat('Lag', label='Lag Amount'),
 		         normMin=0,
-		         normMax=1.5,
+		         normMax=4,
 		         default=0.3)
 		setattrs(page.appendFloat('Overshoot', label='Overshoot'),
 		         normMin=0,
-		         normMax=1,
+		         normMax=3,
 		         default=0)
 		setattrs(page.appendToggle('Persample', label='Per-Sample'),
 		         default=False)
