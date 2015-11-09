@@ -26,6 +26,17 @@ class IterateModule(VjzModule):
 		         default=4)
 		setattrs(page.appendFloat('Mparalpha', label='Alpha'),
 		         normMin=0, normMax=1, default=1)
+		setattrs(page.appendInt('Mparcachesize', label='Cache Size'),
+		         normMin=1,
+		         normMax=128,
+		         min=1,
+		         clampMin=True,
+		         default=32)
+		page.appendToggle('Mpartimeoffseton', label='Enable Time Offset')
+		setattrs(page.appendFloat('Mpartimeoffset', label='Time Offset'),
+		         normMin=0, min=0, clampMin=True,
+		         normMax=1, max=1, clampMax=True,
+		         default=1)
 		setattrs(page.appendFloat('Mparstartscale', label='Start Uniform Scale'),
 		         normMin=0, normMax=10, default=1)
 		setattrs(page.appendXYZ('Mparstarts', label='Start Scale'),
@@ -36,6 +47,10 @@ class IterateModule(VjzModule):
 		         normMin=-180, normMax=180, default=0)
 		setattrs(page.appendFloat('Mparstartalpha', label='Start Alpha'),
 		         normMin=0, normMax=1, default=1)
+		setattrs(page.appendFloat('Mparstarttimeoffset', label='Start Time Offset'),
+		         normMin=0, min=0, clampMin=True,
+		         normMax=1, max=1, clampMax=True,
+		         default=0)
 
 		setattrs(page.appendFloat('Mparendscale', label='End Uniform Scale'),
 		         normMin=0, normMax=10, default=1)
@@ -47,9 +62,13 @@ class IterateModule(VjzModule):
 		         normMin=-180, normMax=180, default=0)
 		setattrs(page.appendFloat('Mparendalpha', label='End Alpha'),
 		         normMin=0, normMax=1, default=1)
+		setattrs(page.appendFloat('Mparendtimeoffset', label='End Time Offset'),
+		         normMin=0, min=0, clampMin=True,
+		         normMax=1, max=1, clampMax=True,
+		         default=1)
 
-		m.par.Modfullheight = 310
-		m.par.Modcompactheight = 210
+		m.par.Modfullheight = 370
+		m.par.Modcompactheight = 250
 		m.par.Modhasadvanced = True
 
 		for init in m.ops('*/init'):
