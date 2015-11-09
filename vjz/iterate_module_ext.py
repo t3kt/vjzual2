@@ -37,6 +37,9 @@ class IterateModule(VjzModule):
 		         normMin=0, min=0, clampMin=True,
 		         normMax=1, max=1, clampMax=True,
 		         default=1)
+		setattrs(page.appendXYZ('Mparr', label='Global Rotate'),
+		         normMin=-180, normMax=180, default=0)
+
 		setattrs(page.appendFloat('Mparstartscale', label='Start Uniform Scale'),
 		         normMin=0, normMax=10, default=1)
 		setattrs(page.appendXYZ('Mparstarts', label='Start Scale'),
@@ -70,8 +73,8 @@ class IterateModule(VjzModule):
 		setattrs(page.appendFloat('Mparvertigo', label='Vertigo'),
 		         normMin=0, normMax=1, default=0)
 
-		m.par.Modfullheight = 390
-		m.par.Modcompactheight = 270
+		m.par.Modfullheight = 410
+		m.par.Modcompactheight = 290
 		m.par.Modhasadvanced = True
 
 		for init in m.ops('*/init'):
