@@ -33,7 +33,7 @@ class WarpModule(VjzModule):
 		setattrs(page.appendXY('Mpardisplaceweight', label='Displace Weight'),
 		         normMin=-2, normMax=2, default=0)
 		setattrs(page.appendFloat('Mpardisplaceweightscale', label='Displace Weight Scale'),
-		         normMin=-2, normMax=2, default=0)
+		         normMin=0, normMax=2, default=0)
 		setattrs(page.appendFloat('Mparuvweight', label='UV Weight'),
 		         normMin=-5, normMax=5, default=1)
 		setattrs(page.appendMenu('Mparextend', label='Extend'),
