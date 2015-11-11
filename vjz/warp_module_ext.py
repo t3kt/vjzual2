@@ -41,9 +41,6 @@ class WarpModule(VjzModule):
 		         menuLabels=displacePars.extend.menuLabels,
 		         default='mirror')
 
-		setParExprs(m,
-		            Modfullheight='280 if me.par.Modshowviewers else 180',
-		            Modcompactheight='240 if me.par.Modshowviewers else 140')
 		m.par.Modhasadvanced = True
 		m.par.Modhasviewers = True
 

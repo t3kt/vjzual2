@@ -40,8 +40,6 @@ class RemoteOutputModule(VjzModule):
 		         menuLabels=['Uncompressed', 'HAP Q'],
 		         default='hapq')
 
-		m.par.Modfullheight = 60
-		m.par.Modcompactheight = 60
 		m.par.Modhasadvanced = False
 
 		for init in m.ops('*/init'):

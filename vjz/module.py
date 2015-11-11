@@ -24,7 +24,8 @@ class VjzModule:
 		return self._comp.appendCustomPage('Modparams')
 
 	def Initialize(self):
-		self._comp.par.inshortcut = 'vjzmod'
+		m = self._comp
+		m.par.inshortcut = 'vjzmod'
 		page = self.GetModulePage()
 		page.appendStr('Modname', label='Module Name')
 		page.appendStr('Moduilabel', label='UI Label')
@@ -33,42 +34,66 @@ class VjzModule:
 		page.appendToggle('Modshowviewers', label='Show Viewers')
 		page.appendToggle('Modcollapsed', label='Collapse')
 		page.appendToggle('Modshowadvanced', label='Show Advanced')
-		minheight = int(float(var('modcollapsedheight')))
-		fullheight = page.appendInt('Modfullheight', label='Full Height')[0]
-		setattrs(fullheight,
-			default= 200,
-			min=minheight,
-			normMin=minheight,
-			clampMin=True,
-			normMax=600)
-		compactheight = page.appendInt('Modcompactheight', label='Compact Height')[0]
-		setattrs(compactheight,
-			default= 200,
-			min= minheight,
-			normMin= minheight,
-			clampMin= True,
-			normMax= 600)
+		for p in m.pars('Modfullheight', 'Modcompactheight'):
+			p.destroy()
+		setattrs(page.appendToggle('Modautoheight', label='Auto Height'),
+		         default=True)
 		page.appendToggle('Modhasadvanced', label='Has Advanced Params')
 		page.appendToggle('Modhasviewers', label='Has Viewers')
-		setexpr(self._comp.par.h, 'op("./shell/mod_height")[0, 0]')
 		util.setattrs(page.appendMenu('Modparuimode', label='Parameter UI Mode')[0],
 		              menuNames=['ctrl', 'midiedit'],
 		              menuLabels=['Controls', 'Edit MIDI'])
 		page.appendToggle('Modhidden', label='Hide Module')
+		self.UpdateHeight()
+
+	@property
+	def HeaderHeight(self):
+		m = self._comp
+		if m.par.Modcollapsed:
+			return 20
+		return 40
+
+	@property
+	def BodyHeight(self):
+		m = self._comp
+		if m.par.Modcollapsed:
+			return 0
+		bodypanel = m.op('bodypanel')
+		if not bodypanel:
+			return 60
+		return VjzModule.GetVisibleCOMPsHeight(
+			[c.owner for c in bodypanel.outputCOMPConnectors[0].connections])
+
+	@staticmethod
+	def GetVisibleCOMPsHeight(ops):
+		h = 0
+		for o in ops:
+			if not o.isPanel or not o.par.display:
+				continue
+			h += o.par.h
+		return h
+
+	def UpdateHeight(self):
+		m = self._comp
+		if not m.par.Modautoheight:
+			return
+		bodyheight = self.BodyHeight
+		m.op('bodypanel').par.h = bodyheight
+		m.par.h = self.HeaderHeight + bodyheight
 
 	def UpdateSolo(self):
-		selfmod = self._comp
-		solo = selfmod.par.Modsolo.eval()
+		m = self._comp
+		solo = m.par.Modsolo.eval()
 		if solo:
-			for mpath in op(var('moduletbl')).col('path')[1:]:
-				othermod = op(mpath)
-				if othermod is not selfmod:
+			for mpath in m.op(m.var('moduletbl')).col('path')[1:]:
+				othermod = m.op(mpath)
+				if othermod is not m:
 					othermod.par.Modsolo = False
-			nodeId = selfmod.op('./out_node').par.Nodeid.eval()
+			nodeId = m.op('./out_node').par.Nodeid.eval()
 		else:
-			nodeId = op(var('masteroutnode')).par.Nodeid.eval()
+			nodeId = m.op(m.var('masteroutnode')).par.Nodeid.eval()
 		print('updating master output to node id: ' + nodeId)
-		op(var('mainoutselector')).SetSelectedNode(nodeId)
+		m.op(m.var('mainoutselector')).SetSelectedNode(nodeId)
 
 	@property
 	def PresetsTable(self):
