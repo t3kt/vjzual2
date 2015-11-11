@@ -31,9 +31,9 @@ class WarpModule(VjzModule):
 		         menuLabels=displacePars.vertsource.menuLabels,
 		         default='blue')
 		setattrs(page.appendXY('Mpardisplaceweight', label='Displace Weight'),
-		         normMin=-4, normMax=4, default=0.5)
+		         normMin=-2, normMax=2, default=0)
 		setattrs(page.appendFloat('Mpardisplaceweightscale', label='Displace Weight Scale'),
-		         normMin=-4, normMax=4, default=1)
+		         normMin=-2, normMax=2, default=0)
 		setattrs(page.appendFloat('Mparuvweight', label='UV Weight'),
 		         normMin=-5, normMax=5, default=1)
 		setattrs(page.appendMenu('Mparextend', label='Extend'),
