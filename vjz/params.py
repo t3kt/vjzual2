@@ -57,6 +57,7 @@ class ParControl:
 
 class VjzParam:
 	def __init__(self, comp):
+		util.DBGLOG('%s\tParam constructor\t%r' % (comp.path, type(self)))
 		self._comp = comp
 		comp.tags.add('vjzpar')
 
@@ -64,6 +65,7 @@ class VjzParam:
 		return self._comp.appendCustomPage('VjzParam')
 
 	def Initialize(self):
+		util.DBGLOG('%s\tParam Initialize\t%r' % (self._comp.path, type(self)))
 		self._comp.par.inshortcut = 'vjzpar'
 		page = self.GetParamPage()
 		page.appendOP('Parop', label='Target Operator')

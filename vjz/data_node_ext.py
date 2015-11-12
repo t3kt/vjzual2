@@ -85,8 +85,6 @@ class DataSelector:
 		          'Selincludeid', 'Selexcludeid', 'Selincludepath', 'Selexcludepath',
 		          'Selpreview', 'Selpreviewon', 'Selpreviewheight')
 
-		setexpr(s.par.h, '20 + (me.par.Selpreviewheight if me.par.Selpreviewon else 0)')
-
 		nodeList = s.op('node_drop_list')
 		overrideRows(nodeList.op('define'),
 		             displaylabel=0,
@@ -103,6 +101,8 @@ class DataSelector:
 		         Pctllistsize=3,
 		         Pctlhidebtn=True)
 
+		self.UpdateHeight()
+
 		for init in s.ops('*/init'):
 			init.run()
 
@@ -111,6 +111,15 @@ class DataSelector:
 	def UpdateFromList(self):
 		i = int(self.comp.op('node_drop_list/out1')[0, 1])
 		self.SetSelectedNodeIndex(i)
+
+	def UpdateHeight(self):
+		s = self.comp
+		h = 20
+		if s.par.Selpreviewon.eval():
+			h += s.par.Selpreviewheight
+		s.par.h.expr = ''
+		s.par.h.val = h
+		s.par.h.mode = ParMode.CONSTANT
 
 	def SetSelectedNodeIndex(self, i):
 		filteredNodes = self.comp.op('filtered_nodes')

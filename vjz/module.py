@@ -14,6 +14,7 @@ setParValues = util.setParValues
 
 class VjzModule:
 	def __init__(self, comp):
+		util.DBGLOG('%s\tModule constructor\t%r' % (comp.path, type(self)))
 		self._comp = comp
 		comp.tags.add('vjzmod')
 
@@ -24,6 +25,7 @@ class VjzModule:
 		return self._comp.appendCustomPage('Modparams')
 
 	def Initialize(self):
+		util.DBGLOG('%s\tModule Initialize\t%r' % (self._comp.path, type(self)))
 		m = self._comp
 		m.par.inshortcut = 'vjzmod'
 		page = self.GetModulePage()

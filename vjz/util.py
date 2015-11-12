@@ -2,7 +2,33 @@ __author__ = 'tekt'
 
 from numpy import interp
 
+import time
+import os
+
 print('util.py initializing')
+
+_dbglog = None
+
+def _DBGLOG_full(msg):
+	# global _dbglog
+	# if _dbglog is None:
+	# 	_dbglog = open('DEBUGLOG.txt', 'w')
+	# 	_dbglog.write('----BEGIN DEBUG LOG [%r]----\n' % time.time())
+	formatted = '%r\t%s\n' % (time.time(), msg)
+	_dbglog.write(formatted)
+	print(formatted)
+	_dbglog.flush()
+
+def _DBGLOG_basic(msg):
+	formatted = '%r\t%s\n' % (time.time(), msg)
+	print(formatted)
+
+if os.environ['VJZDEBUG'] == '1':
+	_dbglog = open('DEBUGLOG.txt', 'w')
+	_dbglog.write('----BEGIN DEBUG LOG [%r]----\n' % time.time())
+	DBGLOG = _DBGLOG_full
+else:
+	DBGLOG = _DBGLOG_basic
 
 def dumpObject(obj, underscores=False, methods=False):
 	print('Dump ' + repr(obj) + ' type:' + repr(type(obj)))

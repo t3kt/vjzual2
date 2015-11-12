@@ -2,3 +2,4 @@
 *.dmp
 *-output-*.*
 CrashAutoSave.toe
+DEBUGLOG.txt

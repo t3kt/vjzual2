@@ -30,6 +30,7 @@ def _tryInit(o):
 		return False
 	try:
 		ui.status = 'running initializer ' + init.path
+		mod.vjz_util.DBGLOG('%s\tRUNNING INITIALIZER' % init.path)
 		init.run()
 	except Exception as e:
 		print('INIT error [' + init.path + ']: ' + str(e))
