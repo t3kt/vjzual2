@@ -21,7 +21,7 @@ class FloatParam(VjzParam):
 		page.appendToggle('Parclampmax', label='Clamp Max')
 		slider = comp.op('slider')
 		self.ApplyBaseProxyExprs(slider)
-		util.ApplyPythonProxyExprs(slider, 'ext.vjzpar.par.',
+		util.ApplyPythonProxyExprs(slider, 'parent().par.',
 		                           Pctlnormrange1='Parnormrange1',
 		                           Pctlnormrange2='Parnormrange2',
 		                           Pctlrange1='Parrange1',

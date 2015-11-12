@@ -113,15 +113,15 @@ class VjzParam:
 	def ApplyMappingProxyExprs(self, mapping):
 		if not mapping:
 			return
-		util.setexpr(mapping.par.Mapop, 'ext.vjzpar')
-		util.ApplyPythonProxyExprs(mapping, 'ext.vjzpar.par.',
+		util.setexpr(mapping.par.Mapop, 'parent()')
+		util.ApplyPythonProxyExprs(mapping, 'parent().par.',
 		                           Mapid='Parid',
 		                           Mapchan='Parlocalname',
 		                           Mapctrl='Parmapctrl',
 		                           Mapenabled='Parmapenabled')
 
 	def ApplyBaseProxyExprs(self, ctrlComp):
-		util.ApplyPythonProxyExprs(ctrlComp, 'ext.vjzpar.par.',
+		util.ApplyPythonProxyExprs(ctrlComp, 'parent().par.',
 		                     Pctlop='Parop',
 		                     Pctlpar='Parpar',
 		                     Pctllabel='Parlabel',

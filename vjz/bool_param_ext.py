@@ -13,8 +13,8 @@ class BoolParam(VjzParam):
 		page.appendStr('Paroffhelptext', label='Button Off Help Text')
 		toggle = self._comp.op('toggle')
 		self.ApplyBaseProxyExprs(toggle)
-		util.ApplyPythonProxyExprs(toggle, 'ext.vjzpar.par.',
-		                           Pctlontext= 'Parontext',
+		util.ApplyPythonProxyExprs(toggle, 'parent().par.',
+		                           Pctlontext='Parontext',
 		                           Pctlofftext='Parofftext',
 		                           Pctloffhelptext='Paroffhelptext')
 		util.setexpr(self._comp.par.Partype, '"bool"')
@@ -32,4 +32,3 @@ class BoolParam(VjzParam):
 
 	def SetValue(self, value):
 		return self._comp.op('toggle').PushValue(value)
-

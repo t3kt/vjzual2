@@ -16,8 +16,8 @@ class MenuParam(VjzParam):
 					  default=5)
 		menu = self._comp.op('menu')
 		self.ApplyBaseProxyExprs(menu)
-		util.ApplyPythonProxyExprs(menu, 'ext.vjzpar.par.',
-		                          Pctllistsize='Parlistsize')
+		util.ApplyPythonProxyExprs(menu, 'parent().par.',
+		                           Pctllistsize='Parlistsize')
 		util.setattrs(page.appendInt('Parnumoptions', label='Number of Options')[0],
 		              min=1,
 		              clampMin=True,
