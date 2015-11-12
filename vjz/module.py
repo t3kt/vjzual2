@@ -34,8 +34,6 @@ class VjzModule:
 		page.appendToggle('Modshowviewers', label='Show Viewers')
 		page.appendToggle('Modcollapsed', label='Collapse')
 		page.appendToggle('Modshowadvanced', label='Show Advanced')
-		for p in m.pars('Modfullheight', 'Modcompactheight'):
-			p.destroy()
 		setattrs(page.appendToggle('Modautoheight', label='Auto Height'),
 		         default=True)
 		page.appendToggle('Modhasadvanced', label='Has Advanced Params')

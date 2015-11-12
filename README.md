@@ -32,7 +32,7 @@ Each module has:
 * a set of UI components bound to the module's custom parameters
 
 #### Module Settings and State Parameters
-Every module has a set of standard custom parameters that are common to all modules. Some of these act as settings for the module (e.g. `Modname`, `Modfullheight`). Others control the state of the module (e.g. `Modcollapsed`, `Modbypass`). These parameters have names that start with "`Mod`".
+Every module has a set of standard custom parameters that are common to all modules. Some of these act as settings for the module (e.g. `Modname`, `Moduilabel`). Others control the state of the module (e.g. `Modcollapsed`, `Modbypass`). These parameters have names that start with "`Mod`".
 
 Parameter | Description
 --------- | -----------
@@ -43,8 +43,6 @@ Parameter | Description
 `Modshowviewers` | Show/hide video/etc preview panels in the module's UI
 `Modcollapsed` | Expand/collapse the module's UI panel
 `Modshowadvanced` | Show/hide advanced parameters in the module's UI
-`Modfullheight` | The height of the module UI panel when advanced parameters are shown
-`Modcompactheight` | The height of the module UI panel when advanced parameters are hidden
 `Modhasadvanced` | Indicates whether the module has any advanced parameters (see `Modshowadvanced`). This controls whether the show/hide advanced toggle is enabled in the module's header.
 `Modhasviewers` | Indicates whether the module has any viewer panels (see `Modshowviewers`). This controls whether the show/hide `viewers` toggle is enabled in the module's header.
 `Modparuimode` | UI mode for the module's parameters (see below)
