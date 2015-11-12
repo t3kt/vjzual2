@@ -99,3 +99,7 @@ The editor tools panel (typically shown on the side of the main network editor) 
 
 ## Development Process
 ...
+
+
+[![Bitdeli Badge](https://d2weczhvl823v0.cloudfront.net/t3kt/vjzual2/trend.png)](https://bitdeli.com/free "Bitdeli Badge")
+
