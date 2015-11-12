@@ -148,6 +148,39 @@ class VjzModule:
 				return True
 		return False
 
+	# def GetSelectors(self):
+	# 	m = self._comp
+	# 	return [s for s in m.ops('*_selector') if hasattr(s.par, 'Selnodeid')]
+	#
+	# def GetSelectorValues(self):
+	# 	vals = {}
+	# 	for s in self.GetSelectors():
+	# 		vals[s.name] = s.par.Selnodeid.eval()
+
+	# def SetSelectorValues(self, values):
+	# 	for selecto
+
+	def GetStateDict(self):
+		m = self._comp
+		state = {
+			'name': m.par.Modname.eval(),
+			'path': m.path,
+		}
+		if m.par.Modbypass.eval():
+			state['bypass'] = True
+		params = self.GetValuesForPreset()
+		if params:
+			state['params'] = params
+		return state
+
+	def LoadStateDict(self, state):
+		m = self._comp
+		print('%s loading state dict %r' % (m.path, state))
+		m.par.Modbypass = state.get('bypass', False)
+		params = state.get('params', None)
+		if params:
+			self.SetValuesFromPreset(params)
+
 class ModuleShell:
 	def __init__(self, shell):
 		self.shell = shell

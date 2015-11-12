@@ -103,7 +103,7 @@ def setAlignOrderByY():
 	setAlignOrderBy('nodeY', True)
 
 def reloadPython():
-	for name in ['vjz_util', 'vjz_params', 'vjz_module', 'vjz']:
+	for name in ['vjz_util', 'vjz_params', 'vjz_module', 'vjz', 'vjz_core']:
 		op('/local/modules/' + name).par.reload.pulse(1)
 
 def destroyPars(parnames):

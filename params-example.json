@@ -1,0 +1,14 @@
+{
+	"modules": [
+		{
+			"name": "flip1",
+			"bypass": false,
+			"params": {
+				"level": 0.7,
+				"flipx": true,
+				"flipy": false,
+				"operand": "negate"
+			}
+		}
+	]
+}
