@@ -9,12 +9,6 @@ setParValues = util.setParValues
 setParExprs = util.setParExprs
 overrideRows = util.overrideRows
 
-_nodeParMap = {
-	"Nodehasvideo": "Nodevideo",
-	"Nodehasaudio": "Nodeaudio",
-	"Nodehasctrl": "Nodectrl"
-}
-
 class DataNode:
 	def __init__(self, comp):
 		self.comp = comp
@@ -36,22 +30,23 @@ class DataNode:
 		setattrs(page.appendToggle('Nodehasctrl', label='Has Control')[0],
 		         default=False)
 		page.appendCHOP('Nodectrl', label='Control')
+		page.appendStr('Nodectrlchans', label='Control Channels')
 		page.appendToggle('Nodehidden', label='Hidden')
 
 		page.sort('Nodeid', 'Nodelabel',
 		          'Nodehasvideo', 'Nodevideo',
 		          'Nodehasaudio', 'Nodeaudio',
-		          'Nodehasctrl', 'Nodectrl',
+		          'Nodehasctrl', 'Nodectrl', 'Nodectrlchans',
 		          'Nodehidden')
 
 		self.UpdateDataParStates()
 
 	def UpdateDataParStates(self):
 		n = self.comp
-		for switchParName in _nodeParMap:
-			switchPar = getattr(n.par, switchParName)
-			sourcePar = getattr(n.par, _nodeParMap[switchParName])
-			sourcePar.enable = switchPar.eval()
+		n.par.Nodevideo.enable = n.par.Nodehasvideo
+		n.par.Nodeaudio.enable = n.par.Nodehasaudio
+		n.par.Nodectrl.enable = n.par.Nodehasctrl
+		n.par.Nodectrlchans.enable = n.par.Nodehasctrl
 
 class DataSelector:
 	def __init__(self, comp):
