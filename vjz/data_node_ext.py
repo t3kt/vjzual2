@@ -79,6 +79,7 @@ class DataSelector:
 		         normMin=10,
 		         normMax=200,
 		         default=100)
+		page.appendToggle('Selhidepreviewmode', label='Hide Preview Mode Menu')
 
 		page.sort('Selnodeid',
 		          'Selreqvideo', 'Selreqaudio', 'Selreqctrl',
