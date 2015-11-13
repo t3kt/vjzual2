@@ -45,6 +45,19 @@ class VjzModule:
 		              menuLabels=['Controls', 'Edit MIDI'])
 		page.appendToggle('Modhidden', label='Hide Module')
 		self.UpdateHeight()
+		outnode = m.op('out_node')
+		if outnode is not None:
+			setParExprs(outnode,
+			            Nodeid="ext.vjzmod.par.Modname + ':wet'",
+			            Nodelabel="ext.vjzmod.par.Moduilabel + ' (wet)'",
+			            Nodehidden="ext.vjzmod.path.startswith('/_/components/')")
+			setattrs(outnode.par,
+			         Nodehasaudio=m.op('wet_audio') is not None,
+			         Nodehasvideo=m.op('wet_video') is not None,
+			         Nodehasctrl=False)
+			setattrs(outnode.par,
+			         Nodevideo='wet_video' if m.op('wet_video') else '',
+			         Nodeaudio='wet_audio' if m.op('wet_audio') else '')
 
 	@property
 	def HeaderHeight(self):
@@ -84,7 +97,7 @@ class VjzModule:
 	def UpdateSolo(self):
 		m = self._comp
 		solo = m.par.Modsolo.eval()
-		if solo:
+		if solo and m.op('./out_node'):
 			for mpath in m.op(m.var('moduletbl')).col('path')[1:]:
 				othermod = m.op(mpath)
 				if othermod is not m:
