@@ -9,12 +9,14 @@ else:
 
 class ParControl:
 	def __init__(self, comp):
+		util.DBGLOG('%s\tParControl constructor\t%r' % (comp.path, type(self)))
 		self._comp = comp
 
 	def GetParControlPage(self):
 		return self._comp.appendCustomPage('ParCtrl')
 
 	def Initialize(self):
+		util.DBGLOG('%s\tParControl Initialize\t%r' % (self._comp.path, type(self)))
 		page = self.GetParControlPage()
 		page.appendOP('Pctlop', label='Target Operator')
 		page.appendStr('Pctlpar', label='Target Parameter')
