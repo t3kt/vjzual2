@@ -44,6 +44,7 @@ class VjzModule:
 		              menuNames=['ctrl', 'midiedit'],
 		              menuLabels=['Controls', 'Edit MIDI'])
 		page.appendToggle('Modhidden', label='Hide Module')
+		page.appendToggle('Modhighlight', label='Highlight Module')
 		self.UpdateHeight()
 		outnode = m.op('out_node')
 		if outnode is not None:
