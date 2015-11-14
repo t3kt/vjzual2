@@ -13,7 +13,7 @@ def readState(fname):
 
 def writeState(fname, state):
 	with open(fname, 'w') as f:
-		json.dump(state, f, indent=2)
+		json.dump(state, f, indent=2, sort_keys=True)
 
 class VjzSystem:
 	def __init__(self, root):

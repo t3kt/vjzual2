@@ -1,203 +1,219 @@
 {
+  "meta": {}, 
   "modules": [
     {
       "name": "global", 
       "path": "/_/global"
     }, 
     {
-      "params": {
-        "Mparsaturation": 0.0, 
-        "Mparcontrast": 0.0, 
-        "Mparinvert": false, 
-        "Mparhue": 0.0, 
-        "Mparbrightness": 0.0
-      }, 
       "name": "layer1", 
+      "params": {
+        "Mparbrightness": 0.0, 
+        "Mparcontrast": 0.0, 
+        "Mparhue": 0.0, 
+        "Mparinvert": false, 
+        "Mparsaturation": 0.0
+      }, 
       "path": "/_/layer1"
     }, 
     {
+      "name": "edge1", 
       "params": {
-        "Mparselect": "luminance", 
+        "Mparcompinput": false, 
+        "Mparlevel": 1.0, 
+        "Mparmaskon": true, 
         "Mparoffset1": 1.0, 
         "Mparoffset2": 1.0, 
-        "Mparlevel": 1.0, 
         "Mparoperand": "maximum", 
-        "Mparstrength": 1.0, 
-        "Mparmaskon": true, 
-        "Mparcompinput": false
+        "Mparselect": "luminance", 
+        "Mparstrength": 10.0
       }, 
-      "name": "edge1", 
       "path": "/_/layer1/edge1"
     }, 
     {
-      "params": {
-        "Mparoperand": "difference", 
-        "Mparflipx": true, 
-        "Mparlevel": 0.921687, 
-        "Mparflipy": true
-      }, 
       "name": "flip1", 
+      "params": {
+        "Mparflipx": true, 
+        "Mparflipy": false, 
+        "Mparlevel": 0.921687, 
+        "Mparoperand": "difference"
+      }, 
       "path": "/_/layer1/flip1"
     }, 
     {
       "bypass": true, 
-      "params": {
-        "Mparoperand": "difference", 
-        "Mparflipx": false, 
-        "Mparlevel": 1.0, 
-        "Mparflipy": true
-      }, 
       "name": "tiles", 
+      "params": {
+        "Mparflipx": false, 
+        "Mparflipy": true, 
+        "Mparlevel": 1.0, 
+        "Mparoperand": "difference"
+      }, 
       "path": "/_/layer1/tiles"
     }, 
     {
-      "params": {
-        "Mparwhiteoffset": 0.0, 
-        "Mparlevel": 0.9819279909133911, 
-        "Mparcachesize": 32, 
-        "Mparblackoffset": 0.36746999621391296
-      }, 
       "name": "tima1", 
+      "params": {
+        "Mparblackoffset": 0.174603, 
+        "Mparcachesize": 32, 
+        "Mparlevel": 1.0, 
+        "Mparwhiteoffset": 0.0
+      }, 
       "path": "/_/layer1/tima1"
     }, 
     {
       "bypass": true, 
+      "name": "redux1", 
       "params": {
-        "Mparresredux1": 0.9457830190658569, 
-        "Mparrotate1": 67.22889709472656, 
-        "Mparrotate2": 7.590360164642334, 
-        "Mparlevel": 0.8614460229873657, 
+        "Mparlevel": 0.861446, 
+        "Mparmasksoften": 0.089, 
+        "Mparmaskthreshold": 0.306878, 
+        "Mparpasscompop": "maximum", 
         "Mparresfilter": "nearest", 
         "Mparreson": true, 
-        "Mparresredux2": 0.3313249945640564, 
-        "Mparmasksoften": 0.08900000154972076, 
-        "Mparmaskthreshold": 0.24096399545669556, 
-        "Mparpasscompop": "maximum"
+        "Mparresredux1": 0.52381, 
+        "Mparresredux2": 0.645503, 
+        "Mparrotate1": -3.33333, 
+        "Mparrotate2": -27.1429
       }, 
-      "name": "redux1", 
       "path": "/_/layer1/redux1"
     }, 
     {
       "bypass": true, 
-      "params": {
-        "Mparlevel": 0.710843026638031
-      }, 
       "name": "remap1", 
+      "params": {
+        "Mparlevel": 0.710843
+      }, 
       "path": "/_/layer1/remap1"
     }, 
     {
-      "bypass": true, 
-      "params": {
-        "Mparsaturation": 0.5, 
-        "Mparcontrast": 0.5, 
-        "Mparinvert": false, 
-        "Mparhue": 0.5, 
-        "Mparbrightness": 0.5
-      }, 
       "name": "coloradj1", 
-      "path": "/_/layer1/coloradj1"
+      "params": {
+        "Mparbrightness": 0.542169, 
+        "Mparcontrast": 0.801205, 
+        "Mparhue": 0.5, 
+        "Mparinvert": false, 
+        "Mparsaturation": 0.0
+      }, 
+      "path": "/_/layer1/coloradj1", 
+      "presets": {
+        "1": {
+          "Mparbrightness": 0.5421686768531799, 
+          "Mparcontrast": 0.5, 
+          "Mparhue": 0.5, 
+          "Mparinvert": false, 
+          "Mparsaturation": 0.5361445546150208
+        }, 
+        "2": {
+          "Mparbrightness": 0.5421686768531799, 
+          "Mparcontrast": 0.8012048006057739, 
+          "Mparhue": 0.5, 
+          "Mparinvert": false, 
+          "Mparsaturation": 0.0
+        }
+      }
     }, 
     {
-      "params": {
-        "Mpartx": 0.0, 
-        "Mparty": 0.0, 
-        "Mparrotatecompop": "maximum", 
-        "Mpardelaylen": 0.0, 
-        "Mpardelaymix": 0.8494619727134705, 
-        "Mparrotatereverse": true, 
-        "Mpardelayon": false, 
-        "Mparrotate": 0.0, 
-        "Mparlevel": 0.927711009979248, 
-        "Mparsy": 0.0, 
-        "Mparsx": 0.0, 
-        "Mparmaskon": false, 
-        "Mpardisplaceamount": 0.46385499835014343, 
-        "Mparscale": 1.0, 
-        "Mpardisplacelevel": 1.0, 
-        "Mparmaskmix": 0.1451610028743744
-      }, 
       "name": "feedback", 
+      "params": {
+        "Mpardelaylen": 0.179894, 
+        "Mpardelaymix": 0.347594, 
+        "Mpardelayon": false, 
+        "Mpardisplaceamount": 0.30687829852104187, 
+        "Mpardisplacelevel": 1.0, 
+        "Mparlevel": 0.714286, 
+        "Mparmaskmix": 0.322751, 
+        "Mparmaskon": false, 
+        "Mparrotate": 0.0, 
+        "Mparrotatecompop": "maximum", 
+        "Mparrotatereverse": true, 
+        "Mparscale": 1.0, 
+        "Mparsx": 0.0, 
+        "Mparsy": 0.0, 
+        "Mpartx": 0.0, 
+        "Mparty": 0.0
+      }, 
       "path": "/_/layer1/feedback1"
     }, 
     {
       "bypass": true, 
-      "params": {
-        "Mpartx": 0.0, 
-        "Mparty": 0.0, 
-        "Mparlevel": 1.0, 
-        "Mparsy": 1.0, 
-        "Mparsx": 1.4727299999999999, 
-        "Mparrotate": -151.807, 
-        "Mparextend": "mirror", 
-        "Mparscale": 0.542169, 
-        "Mparorder": "trs"
-      }, 
       "name": "transform1", 
+      "params": {
+        "Mparextend": "mirror", 
+        "Mparlevel": 1.0, 
+        "Mparorder": "trs", 
+        "Mparrotate": -151.807, 
+        "Mparscale": 0.542169, 
+        "Mparsx": 1.4727299999999999, 
+        "Mparsy": 1.0, 
+        "Mpartx": 0.0, 
+        "Mparty": 0.0
+      }, 
       "path": "/_/layer1/transform1"
     }, 
     {
       "bypass": true, 
-      "params": {
-        "Mpartap4filteron": false, 
-        "Mpartap7filtersat": 0.0, 
-        "Mpartap8active": true, 
-        "Mpartap7filteron": false, 
-        "Mpartap2alpha": 0.7979999780654907, 
-        "Mpartap3filteron": false, 
-        "Mpartap7length": 0.0, 
-        "Mpartap3active": true, 
-        "Mpartap5alpha": 0.0, 
-        "Mpartap5filteron": false, 
-        "Mpartap6filterhue": 0.0, 
-        "Mpartap2filtersat": 1.0, 
-        "Mpartap7filterhue": 0.0, 
-        "Mpartap1filterhue": 0.4449999928474426, 
-        "Mpartap8alpha": 0.0, 
-        "Mparalphamode": "linear", 
-        "Mpartap8filterhue": 1.0, 
-        "Mpartap1filtersat": 0.20200000703334808, 
-        "Mparalpharange2": 1.0, 
-        "Mparalpharange1": 0.699999988079071, 
-        "Mpartap4alpha": 0.0, 
-        "Mparcachesize": 128, 
-        "Mpartap8filteron": false, 
-        "Mpartap5filterhue": 0.0, 
-        "Mpartap6length": 0.0, 
-        "Mpartap8filtersat": 1.0, 
-        "Mpartap1alpha": 1.0, 
-        "Mpartap6filtersat": 0.0, 
-        "Mparlength": 0.21084299683570862, 
-        "Mparlengthmode": "linear", 
-        "Mparlengthrange2": 1.0, 
-        "Mpartap3alpha": 0.0, 
-        "Mparlevel": 0.5, 
-        "Mpartap2filterhue": 0.375, 
-        "Mpartap3filterhue": 0.21699999272823334, 
-        "Mpartap3filtersat": 1.0, 
-        "Mpartap7active": false, 
-        "Mpartap1active": true, 
-        "Mpartap1length": 0.7590000033378601, 
-        "Mpartap4length": 0.0, 
-        "Mpartap3length": 0.0, 
-        "Mparoperand": "maximum", 
-        "Mpartap1filteron": false, 
-        "Mpartap4filtersat": 0.0, 
-        "Mpartap2filteron": false, 
-        "Mpartap5active": true, 
-        "Mpartap4active": true, 
-        "Mpartap5length": 0.0, 
-        "Mpartap8length": 0.6449999809265137, 
-        "Mpartap4filterhue": 0.0, 
-        "Mpartap7alpha": 0.0, 
-        "Mpartap6active": true, 
-        "Mpartap2length": 0.5540000200271606, 
-        "Mpartap6filteron": false, 
-        "Mpartap2active": true, 
-        "Mparlengthrange1": 0.0, 
-        "Mpartap6alpha": 1.0, 
-        "Mpartap5filtersat": 0.0
-      }, 
       "name": "multidelay1", 
+      "params": {
+        "Mparalphamode": "linear", 
+        "Mparalpharange1": 0.7, 
+        "Mparalpharange2": 1.0, 
+        "Mparcachesize": 128, 
+        "Mparlength": 0.708995, 
+        "Mparlengthmode": "linear", 
+        "Mparlengthrange1": 0.0, 
+        "Mparlengthrange2": 1.0, 
+        "Mparlevel": 0.37037, 
+        "Mparoperand": "maximum", 
+        "Mpartap1active": true, 
+        "Mpartap1alpha": 1.0, 
+        "Mpartap1filterhue": 0.445, 
+        "Mpartap1filteron": false, 
+        "Mpartap1filtersat": 0.202, 
+        "Mpartap1length": 0.759, 
+        "Mpartap2active": true, 
+        "Mpartap2alpha": 0.798, 
+        "Mpartap2filterhue": 0.375, 
+        "Mpartap2filteron": false, 
+        "Mpartap2filtersat": 1.0, 
+        "Mpartap2length": 0.554, 
+        "Mpartap3active": true, 
+        "Mpartap3alpha": 0.0, 
+        "Mpartap3filterhue": 0.217, 
+        "Mpartap3filteron": false, 
+        "Mpartap3filtersat": 1.0, 
+        "Mpartap3length": 0.0, 
+        "Mpartap4active": true, 
+        "Mpartap4alpha": 0.0, 
+        "Mpartap4filterhue": 0.0, 
+        "Mpartap4filteron": false, 
+        "Mpartap4filtersat": 0.0, 
+        "Mpartap4length": 0.0, 
+        "Mpartap5active": true, 
+        "Mpartap5alpha": 0.0, 
+        "Mpartap5filterhue": 0.0, 
+        "Mpartap5filteron": false, 
+        "Mpartap5filtersat": 0.0, 
+        "Mpartap5length": 0.0, 
+        "Mpartap6active": true, 
+        "Mpartap6alpha": 1.0, 
+        "Mpartap6filterhue": 0.0, 
+        "Mpartap6filteron": false, 
+        "Mpartap6filtersat": 0.0, 
+        "Mpartap6length": 0.0, 
+        "Mpartap7active": false, 
+        "Mpartap7alpha": 0.0, 
+        "Mpartap7filterhue": 0.0, 
+        "Mpartap7filteron": false, 
+        "Mpartap7filtersat": 0.0, 
+        "Mpartap7length": 0.0, 
+        "Mpartap8active": true, 
+        "Mpartap8alpha": 0.0, 
+        "Mpartap8filterhue": 1.0, 
+        "Mpartap8filteron": false, 
+        "Mpartap8filtersat": 1.0, 
+        "Mpartap8length": 0.645
+      }, 
       "path": "/_/layer1/multidelay1"
     }, 
     {
@@ -206,115 +222,118 @@
     }, 
     {
       "bypass": true, 
+      "name": "tint1", 
       "params": {
+        "Mparbrightness": 1.0, 
+        "Mparhue": 0.144578, 
         "Mparinvert": false, 
         "Mparlevel": 0.39759, 
-        "Mparhue": 0.144578, 
-        "Mparsaturation": 0.656627, 
-        "Mparbrightness": 1.0, 
-        "Mparmonorgb": "luminance"
+        "Mparmonorgb": "luminance", 
+        "Mparsaturation": 0.656627
       }, 
-      "name": "tint1", 
       "path": "/_/layer2/tint1"
     }, 
     {
       "bypass": true, 
+      "name": "redux2", 
       "params": {
-        "Mparresredux1": 0.7650600075721741, 
-        "Mparrotate1": -16290.0, 
-        "Mparrotate2": -16290.0, 
-        "Mparlevel": 0.8493980169296265, 
+        "Mparlevel": 0.849398, 
+        "Mparmasksoften": 0.089, 
+        "Mparmaskthreshold": 0.554217, 
+        "Mparpasscompop": "maximum", 
         "Mparresfilter": "nearest", 
         "Mparreson": true, 
-        "Mparresredux2": 0.24096399545669556, 
-        "Mparmasksoften": 0.08900000154972076, 
-        "Mparmaskthreshold": 0.5542169809341431, 
-        "Mparpasscompop": "maximum"
+        "Mparresredux1": 0.76506, 
+        "Mparresredux2": 0.240964, 
+        "Mparrotate1": -16290.0, 
+        "Mparrotate2": -16290.0
       }, 
-      "name": "redux2", 
       "path": "/_/layer2/redux2"
     }, 
     {
+      "bypass": true, 
+      "name": "iterate1", 
       "params": {
-        "Mparvertigo": 0.704819, 
-        "Mparrx": 0.0, 
-        "Mparendscale": 6.86747, 
-        "Mparstartalpha": 0.831325, 
-        "Mparendrx": 35.122, 
-        "Mparry": 0.0, 
-        "Mparstartry": -74.6341, 
-        "Mparstartrx": 30.7317, 
-        "Mparstartscale": 3.19277, 
-        "Mparstartrz": 79.0244, 
+        "Mparalpha": 0.554217, 
+        "Mparcachesize": 32, 
         "Mparcount": 27, 
-        "Mparstarttz": -2.34146, 
-        "Mparstartty": 0.0, 
-        "Mparstarttx": -1.56098, 
-        "Mparendalpha": 0.722892, 
-        "Mparstartsz": 1.0, 
-        "Mparstartsx": 1.01818, 
-        "Mparstartsy": 1.07317, 
-        "Mparstarttimeoffset": 0.0, 
-        "Mparendsy": 1.0, 
+        "Mparendalpha": 0.325301, 
+        "Mparendrx": 48.29268264770508, 
+        "Mparendry": 105.366, 
+        "Mparendrz": -61.46341323852539, 
+        "Mparendscale": 4.81928, 
         "Mparendsx": 1.16364, 
-        "Mparendtz": -5.65854, 
+        "Mparendsy": 1.0, 
+        "Mparendsz": 1.0, 
+        "Mparendtimeoffset": 1.0, 
         "Mparendtx": 4.4878, 
         "Mparendty": -2.34146, 
-        "Mparendtimeoffset": 1.0, 
-        "Mparendsz": 1.0, 
-        "Mpartimeoffset": 1.0, 
-        "Mparcachesize": 32, 
-        "Mparendry": -4.39024, 
-        "Mparendrz": -149.268, 
-        "Mpartimeoffseton": true, 
-        "Mparalpha": 0.53012, 
+        "Mparendtz": -5.65854, 
+        "Mparlevel": 1.0, 
+        "Mparrx": 0.0, 
+        "Mparry": 0.0, 
         "Mparrz": 0.0, 
-        "Mparlevel": 1.0
+        "Mparstartalpha": 1.0, 
+        "Mparstartrx": -26.3415, 
+        "Mparstartry": -48.2927, 
+        "Mparstartrz": 79.0244, 
+        "Mparstartscale": 3.19277, 
+        "Mparstartsx": 1.01818, 
+        "Mparstartsy": 1.07317, 
+        "Mparstartsz": 1.0, 
+        "Mparstarttimeoffset": 0.0, 
+        "Mparstarttx": -1.56098, 
+        "Mparstartty": 0.0, 
+        "Mparstarttz": -2.34146, 
+        "Mpartimeoffset": 1.0, 
+        "Mpartimeoffseton": true, 
+        "Mparvertigo": 0.704819
       }, 
-      "name": "iterate1", 
       "path": "/_/layer2/iterate1"
     }, 
     {
-      "params": {
-        "Mparsaturation": 0.5519999861717224, 
-        "Mparcontrast": 0.5662649869918823, 
-        "Mparinvert": false, 
-        "Mparhue": 0.5, 
-        "Mparbrightness": 0.5
-      }, 
+      "bypass": true, 
       "name": "coloradj3", 
+      "params": {
+        "Mparbrightness": 0.5, 
+        "Mparcontrast": 0.566265, 
+        "Mparhue": 0.5, 
+        "Mparinvert": false, 
+        "Mparsaturation": 0.552
+      }, 
       "path": "/_/layer2/coloradj3"
     }, 
     {
-      "params": {
-        "Mparlevel": 0.8253009915351868
-      }, 
+      "bypass": true, 
       "name": "feedback2", 
+      "params": {
+        "Mparlevel": 0.8554216623306274
+      }, 
       "path": "/_/layer2/feedback2"
     }, 
     {
       "bypass": true, 
-      "params": {
-        "Mparlength": 0.418301, 
-        "Mparlevel": 1.0, 
-        "Mparcachesize": 32
-      }, 
       "name": "feedback2_delay", 
+      "params": {
+        "Mparcachesize": 32, 
+        "Mparlength": 0.359477, 
+        "Mparlevel": 1.0
+      }, 
       "path": "/_/layer2/feedback2/delay"
     }, 
     {
-      "params": {
-        "Mpartx": 0.0, 
-        "Mparty": 0.0, 
-        "Mparlevel": 1.0, 
-        "Mparsy": 1.0, 
-        "Mparsx": 1.0, 
-        "Mparrotate": 40.0, 
-        "Mparextend": "mirror", 
-        "Mparscale": 0.673203, 
-        "Mparorder": "rts"
-      }, 
       "name": "feedback2_transform", 
+      "params": {
+        "Mparextend": "mirror", 
+        "Mparlevel": 1.0, 
+        "Mparorder": "srt", 
+        "Mparrotate": 49.411766052246094, 
+        "Mparscale": 1.1437908411026, 
+        "Mparsx": 1.0, 
+        "Mparsy": 0.813333, 
+        "Mpartx": 0.0, 
+        "Mparty": 0.0
+      }, 
       "path": "/_/layer2/feedback2/transform"
     }, 
     {
@@ -323,118 +342,120 @@
     }, 
     {
       "bypass": true, 
+      "name": "masterblend", 
       "params": {
-        "Mparshowinput": true, 
         "Mparcross": -1.0, 
         "Mparmodinput": true, 
         "Mparoperand": "maximum", 
+        "Mparshowinput": true, 
         "Mparswap": true
       }, 
-      "name": "masterblend", 
       "path": "/_/master/blend"
     }, 
     {
       "bypass": true, 
-      "params": {
-        "Mparlength": 0.246988, 
-        "Mparlevel": 0.433735, 
-        "Mparcachesize": 32
-      }, 
       "name": "master_delay", 
+      "params": {
+        "Mparcachesize": 32, 
+        "Mparlength": 0.246988, 
+        "Mparlevel": 0.433735
+      }, 
       "path": "/_/master/delay"
     }, 
     {
       "bypass": true, 
-      "params": {
-        "Mparsteps": 2, 
-        "Mparlevel": 1.0, 
-        "Mparinneralpha": 0.4620000123977661, 
-        "Mparmethod": "horzandvert", 
-        "Mparextend": "hold", 
-        "Mparinnersize": 8, 
-        "Mparoutersize": 10, 
-        "Mparblurtype": "catmull", 
-        "Mparstepcompop": "add", 
-        "Mparouteralpha": 0.07699999958276749
-      }, 
       "name": "bloom1", 
+      "params": {
+        "Mparblurtype": "catmull", 
+        "Mparextend": "hold", 
+        "Mparinneralpha": 0.462, 
+        "Mparinnersize": 8, 
+        "Mparlevel": 1.0, 
+        "Mparmethod": "horzandvert", 
+        "Mparouteralpha": 0.077, 
+        "Mparoutersize": 10, 
+        "Mparstepcompop": "add", 
+        "Mparsteps": 2
+      }, 
       "path": "/_/master/bloom1"
     }, 
     {
-      "params": {
-        "Mpartx": 0.0, 
-        "Mparlevel": 1.0, 
-        "Mparpostoffset": 0.0, 
-        "Mparoperand": "maximum", 
-        "Mparty": 0.0, 
-        "Mparsegments": 4.445779800415039, 
-        "Mparpreoffset": 0.0, 
-        "Mparextend": "mirror", 
-        "Mparmulti": false
-      }, 
+      "bypass": true, 
       "name": "kaleido1", 
+      "params": {
+        "Mparextend": "mirror", 
+        "Mparlevel": 1.0, 
+        "Mparmulti": false, 
+        "Mparoperand": "maximum", 
+        "Mparpostoffset": 0.0, 
+        "Mparpreoffset": 0.4337349534034729, 
+        "Mparsegments": 3.963855504989624, 
+        "Mpartx": 0.0, 
+        "Mparty": 0.0
+      }, 
       "path": "/_/master/kaleido"
     }, 
     {
       "bypass": true, 
-      "params": {
-        "Mparlevel": 0.7168670296669006, 
-        "Mparplayback": false, 
-        "Mparrecord": true, 
-        "Mparlength": 0.34337401390075684, 
-        "Mparcachesize": 64, 
-        "Mparplayrate": 0.8072289824485779
-      }, 
       "name": "stutter1", 
+      "params": {
+        "Mparcachesize": 64, 
+        "Mparlength": 0.343374, 
+        "Mparlevel": 0.716867, 
+        "Mparplayback": false, 
+        "Mparplayrate": 0.807229, 
+        "Mparrecord": true
+      }, 
       "path": "/_/master/stutter1"
     }, 
     {
       "bypass": true, 
-      "params": {
-        "Mparlevel": 1.0, 
-        "Mparcachesize": 16
-      }, 
       "name": "timecube", 
+      "params": {
+        "Mparcachesize": 16, 
+        "Mparlevel": 1.0
+      }, 
       "path": "/_/master/timecube"
     }, 
     {
-      "params": {
-        "Mparsaturation": 0.0, 
-        "Mparcontrast": 0.753012, 
-        "Mparinvert": false, 
-        "Mparhue": 0.5, 
-        "Mparbrightness": 0.5
-      }, 
+      "bypass": true, 
       "name": "coloradj2", 
+      "params": {
+        "Mparbrightness": 0.5, 
+        "Mparcontrast": 0.60241, 
+        "Mparhue": 0.5, 
+        "Mparinvert": false, 
+        "Mparsaturation": 0.0
+      }, 
       "path": "/_/master/coloradj2"
     }, 
     {
       "bypass": true, 
-      "params": {
-        "Mparlevel": 1.0, 
-        "Mparbgcolorg": 0.646341, 
-        "Mparbgmode": "constant", 
-        "Mparbgcolorr": 0.634146, 
-        "Mparbgcolorb": 0.743902, 
-        "Mparbgcolora": 1.0
-      }, 
       "name": "background", 
+      "params": {
+        "Mparbgcolora": 1.0, 
+        "Mparbgcolorb": 0.743902, 
+        "Mparbgcolorg": 0.646341, 
+        "Mparbgcolorr": 0.634146, 
+        "Mparbgmode": "constant", 
+        "Mparlevel": 1.0
+      }, 
       "path": "/_/master/background"
     }, 
     {
       "bypass": true, 
-      "params": {
-        "Mpartx": 0.145455, 
-        "Mparty": 0.121951, 
-        "Mparlevel": 1.0, 
-        "Mparsy": 0.756098, 
-        "Mparsx": 1.18182, 
-        "Mparrotate": 303.614, 
-        "Mparextend": "mirror", 
-        "Mparscale": 1.33735, 
-        "Mparorder": "trs"
-      }, 
       "name": "transform2", 
+      "params": {
+        "Mparextend": "mirror", 
+        "Mparlevel": 1.0, 
+        "Mparorder": "trs", 
+        "Mparrotate": 303.614, 
+        "Mparscale": 1.33735, 
+        "Mparsx": 1.18182, 
+        "Mparsy": 0.756098, 
+        "Mpartx": 0.145455, 
+        "Mparty": 0.121951
+      }, 
       "path": "/_/master/transform2"
     }, 
     {
@@ -442,122 +463,121 @@
       "path": "/_/generators"
     }, 
     {
+      "name": "gridgen1", 
       "params": {
-        "Mparptcolora": 1.0, 
-        "Mparptscale": 17.5904, 
-        "Mparratey": -0.243902, 
-        "Mparcols": 16, 
-        "Mparbgcolorr": 0.0, 
-        "Mparptcolorg": 1.0, 
-        "Mparlncolorr": 1.0, 
-        "Mparratex": 0.181818, 
-        "Mparbgcolorg": 0.0, 
-        "Mparlnwidth": 0.903614, 
-        "Mparptcolorb": 1.0, 
         "Mparbgcolora": 1.0, 
         "Mparbgcolorb": 0.0, 
-        "Mparrows": 2, 
-        "Mparlncolorb": 1.0, 
+        "Mparbgcolorg": 0.0, 
+        "Mparbgcolorr": 0.0, 
+        "Mparcols": 16, 
         "Mparlncolora": 1.0, 
+        "Mparlncolorb": 1.0, 
         "Mparlncolorg": 1.0, 
-        "Mparptcolorr": 1.0
+        "Mparlncolorr": 1.0, 
+        "Mparlnwidth": 0.903614, 
+        "Mparptcolora": 1.0, 
+        "Mparptcolorb": 1.0, 
+        "Mparptcolorg": 1.0, 
+        "Mparptcolorr": 1.0, 
+        "Mparptscale": 17.5904, 
+        "Mparratex": 0.181818, 
+        "Mparratey": -0.243902, 
+        "Mparrows": 2
       }, 
-      "name": "gridgen1", 
       "path": "/_/generators/gridgen1"
     }, 
     {
+      "name": "rampgen1", 
       "params": {
         "Mparendcolora": 1.0, 
+        "Mparendcolorb": 0.0, 
+        "Mparendcolorg": 0.0, 
+        "Mparendcolorr": 0.0, 
+        "Mparextendleft": "repeat", 
+        "Mparextendright": "repeat", 
+        "Mparinterp": "linear", 
+        "Mparkeymode": "midbar", 
         "Mparmidcolora": 1.0, 
         "Mparmidcolorb": 1.0, 
-        "Mparextendleft": "repeat", 
-        "Mparendcolorg": 0.0, 
         "Mparmidcolorg": 1.0, 
-        "Mparmidfadewidth": 0.053, 
-        "Mparkeymode": "midbar", 
-        "Mparphaselfoon": true, 
-        "Mparmidowncolor": true, 
         "Mparmidcolorr": 1.0, 
-        "Mparendcolorr": 0.0, 
-        "Mparphase": 0.0, 
-        "Mparramptype": "horizontal", 
-        "Mparextendright": "repeat", 
-        "Mparstartcolorr": 0.0, 
-        "Mparphaselfowavetype": "ramp", 
-        "Mparphaselfofreq": 0.289157, 
+        "Mparmidcolorratio": 0.5, 
+        "Mparmidfadewidth": 0.053, 
+        "Mparmidowncolor": true, 
+        "Mparmidpos": 0.5, 
+        "Mparmidwidth": 0.34939759969711304, 
         "Mparperiod": 1.0, 
+        "Mparphase": 0.0, 
+        "Mparphaselfofreq": 0.1807228922843933, 
+        "Mparphaselfoon": true, 
+        "Mparphaselfowavetype": "ramp", 
+        "Mparramptype": "horizontal", 
         "Mparstartcolora": 1.0, 
         "Mparstartcolorb": 0.0, 
-        "Mparmidwidth": 0.120482, 
-        "Mparmidcolorratio": 0.5, 
         "Mparstartcolorg": 0.0, 
-        "Mparinterp": "linear", 
-        "Mparmidpos": 0.5, 
-        "Mparendcolorb": 0.0
+        "Mparstartcolorr": 0.0
       }, 
-      "name": "rampgen1", 
       "path": "/_/generators/rampgen1"
     }, 
     {
-      "params": {
-        "Mparcolorr": 0.719512, 
-        "Mparcolora": 0.740964, 
-        "Mparcolorg": 0.353659, 
-        "Mparcolorb": 0.414634
-      }, 
       "name": "constant1", 
+      "params": {
+        "Mparcolora": 0.740964, 
+        "Mparcolorb": 0.414634, 
+        "Mparcolorg": 0.353659, 
+        "Mparcolorr": 0.719512
+      }, 
       "path": "/_/generators/constant1"
     }, 
     {
+      "name": "noisegen1", 
       "params": {
         "Mparalphamode": "random", 
-        "Mparratez": -0.379518, 
-        "Mparratey": 0.0, 
-        "Mparratex": 0.0, 
+        "Mparexponent": 0.496988, 
         "Mpargain": 0.698795, 
-        "Mparexponent": 0.939759, 
-        "Mparnoisetype": "simplex4d", 
         "Mparmono": false, 
-        "Mparperiod": 2.93976
+        "Mparnoisetype": "simplex4d", 
+        "Mparperiod": 0.8192771077156067, 
+        "Mparratex": 0.0, 
+        "Mparratey": 0.0, 
+        "Mparratez": 0.289157
       }, 
-      "name": "noisegen1", 
       "path": "/_/generators/noisegen1"
     }, 
     {
+      "name": "noisegen2", 
       "params": {
         "Mparalphamode": "random", 
-        "Mparratez": 0.0903614, 
-        "Mparratey": 0.0, 
-        "Mparratex": 0.0, 
-        "Mpargain": 1.15663, 
         "Mparexponent": 0.506024, 
-        "Mparnoisetype": "simplex4d", 
+        "Mpargain": 1.15663, 
         "Mparmono": false, 
-        "Mparperiod": 3.75904
+        "Mparnoisetype": "simplex4d", 
+        "Mparperiod": 3.75904, 
+        "Mparratex": 0.0, 
+        "Mparratey": 0.0, 
+        "Mparratez": 0.0903614
       }, 
-      "name": "noisegen2", 
       "path": "/_/generators/noisegen2"
     }, 
     {
+      "name": "rampgen1x", 
       "params": {
-        "Mparcolor2a": 1.0, 
-        "Mparextendright": "sameasleft", 
-        "Mparcolor2b": 1.0, 
-        "Mparextendleft": "mirror", 
-        "Mparcolor2g": 1.0, 
         "Mparcolor1a": 1.0, 
         "Mparcolor1b": 0.0, 
         "Mparcolor1g": 0.0, 
-        "Mparperiod": 1.0, 
-        "Mparcolor2r": 1.0, 
-        "Mparphase": 0.0, 
-        "Mparinterp": "linear", 
         "Mparcolor1r": 0.0, 
+        "Mparcolor2a": 1.0, 
+        "Mparcolor2b": 1.0, 
+        "Mparcolor2g": 1.0, 
+        "Mparcolor2r": 1.0, 
+        "Mparextendleft": "mirror", 
+        "Mparextendright": "sameasleft", 
+        "Mparinterp": "linear", 
+        "Mparperiod": 1.0, 
+        "Mparphase": 0.0, 
         "Mparramptype": "horizontal"
       }, 
-      "name": "rampgen1x", 
       "path": "/_/generators/rampgen1x"
     }
-  ], 
-  "meta": {}
+  ]
 }
