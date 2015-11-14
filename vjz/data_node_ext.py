@@ -9,6 +9,12 @@ setParValues = util.setParValues
 setParExprs = util.setParExprs
 overrideRows = util.overrideRows
 
+# def setParentModuleHighlight(comp, highlight):
+# 	m = comp.ext.vjzmod if comp and 'vjzmod' in comp.ext else None
+# 	if not m or 'Modhighlight' not in m.par:
+# 		return
+# 	m.par.Modhighlight = highlight
+
 class DataNode:
 	def __init__(self, comp):
 		self.comp = comp
