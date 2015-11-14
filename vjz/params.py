@@ -89,9 +89,6 @@ class VjzParam:
 		                 w='op("rootpanel").par.w / 3',
 		                 h='op("rootpanel").par.h',
 		                 display='not parent().par.Parhidelabel')
-		# TODO: remove this
-		if hasattr(self._comp.par, 'Parchan'):
-			self._comp.par.Parchan.destroy()
 
 		mapping = self._comp.op('midi_mapping')
 		if mapping:
