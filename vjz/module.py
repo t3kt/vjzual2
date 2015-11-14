@@ -265,7 +265,9 @@ class ModuleShell:
 		             Pctlhidebtn=True)
 		setParExprs(shell.op('par_ui_mode_menu'),
 		            display='parent().par.Showparuimode')
-		setexpr(shell.op('presets').par.Presetmodule, "ext.vjzmod")
+		presets = shell.op('presets')
+		if presets is not None:
+			setexpr(presets.par.Presetmodule, "ext.vjzmod")
 		shell.parent().par.crop = 'on'
 		for init in shell.ops('*/init'):
 			init.run()
