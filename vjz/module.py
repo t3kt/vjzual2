@@ -113,6 +113,14 @@ class VjzModule:
 	def PresetsTable(self):
 		return self._comp.op('local/preset_values')
 
+	@property
+	def PresetsDict(self):
+		return self._comp.fetch('presets', {}, search=False, storeDefault=True)
+
+	@PresetsDict.setter
+	def PresetsDict(self, presets):
+		self._comp.store('presets', presets)
+
 	def GetValuesForPreset(self):
 		return {p.name: p.eval() for p in self._comp.pars('Mpar*')}
 
@@ -120,47 +128,20 @@ class VjzModule:
 		util.setPars(self._comp, **values)
 
 	def LoadPreset(self, index):
-		values = {}
-		presets = self.PresetsTable
-		for name in presets.col(0):
-			values[name.val] = str(presets[name, index])
-		if not presets or not values or index >= presets.numCols:
-			print('LoadPreset', index, 'index out of range')
+		values = self.PresetsDict.get(str(index), None)
+		if not values:
+			print('LoadPreset', index, 'preset not found')
 			return
 		print('LoadPreset', index, 'values:', values)
 		self.SetValuesFromPreset(values)
 
 	def SavePreset(self, index):
 		values = self.GetValuesForPreset()
-		presets = self.PresetsTable
-		if not presets or not values:
-			return
-		if index >= presets.numCols:
-			presets.setSize(presets.numRows, index + 1)
-		existingNames = {x.val for x in presets.col(0) if x.val}
-		valueNames = set(values.keys())
-		print('SavePreset', index, 'existing:', existingNames, 'values:', valueNames)
-		allNames = existingNames.union(valueNames)
-		for name in allNames:
-			if not name:
-				continue
-			if not presets.row(name):
-				presets.appendRow([name])
-			if name in values:
-				presets[name, index] = values[name]
-			else:
-				presets[name, index] = ''
-		if presets[0, 0] == '':
-			presets.deleteRow(0)
+		print('SavePreset', index, 'values:', values)
+		self.PresetsDict[str(index)] = values
 
 	def DoesPresetExist(self, index):
-		presets = self.PresetsTable
-		if not presets or presets.numRows == 0 or index >= presets.numCols:
-			return False
-		for row in range(presets.numRows):
-			if presets[row, index] != '':
-				return True
-		return False
+		return str(index) in self.PresetsDict
 
 	# def GetSelectors(self):
 	# 	m = self._comp
@@ -185,6 +166,9 @@ class VjzModule:
 		params = self.GetValuesForPreset()
 		if params:
 			state['params'] = params
+		presets = self.PresetsDict
+		if presets:
+			state['presets'] = presets
 		return state
 
 	def LoadStateDict(self, state):
@@ -194,6 +178,9 @@ class VjzModule:
 		params = state.get('params', None)
 		if params:
 			self.SetValuesFromPreset(params)
+		presets = state.get('presets', None)
+		if presets:
+			self.PresetsDict = presets
 
 class ModuleShell:
 	def __init__(self, shell):
@@ -282,3 +269,14 @@ class ModuleShell:
 		shell.parent().par.crop = 'on'
 		for init in shell.ops('*/init'):
 			init.run()
+
+
+def copyPresets(m):
+	table = m.op('local/preset_values')
+	if table.numRows < 2:
+		return
+	keys = [x.val for x in table.row(0)]
+	presets = {}
+	for i in range(1, table.numRows):
+		presets[str(i)] = {key: table[i, key] for key in keys}
+	m.PresetsDict = presets
