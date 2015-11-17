@@ -32,7 +32,9 @@ class FloatParam(VjzParam):
 		util.setParExprs(slider,
 		                 w='op("rootpanel").par.w - (0 if parent().par.Parhidelabel else op("label").par.w)',
 		                 h='op("rootpanel").par.h')
-		self.ApplyMappingProxyExprs(comp.op('midi_mapping'))
+		mapping = comp.op('midi_mapping')
+		if mapping is not None:
+			self.ApplyMappingProxyExprs(mapping)
 
 	@property
 	def TargetPar(self):
