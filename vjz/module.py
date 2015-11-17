@@ -182,31 +182,6 @@ class VjzModule:
 		if presets:
 			self.PresetsDict = presets
 
-class ModuleShell:
-	def __init__(self, shell):
-		self.shell = shell
-
-	def Initialize(self):
-		shell = self.shell
-		page = shell.appendCustomPage('Module Shell')
-		setattrs(page.appendToggle('Showcollapsebtn', label='Show Collapse Button')[0],
-		         default=True)
-		setattrs(page.appendToggle('Showsolobtn', label='Show Solo Button')[0],
-		         default=True)
-		setattrs(page.appendToggle('Showbypassbtn', label='Show Bypass Button')[0],
-		         default=True)
-		setattrs(page.appendToggle('Showpresetsbtn', label='Show Presets Button')[0],
-		         default=True)
-		setattrs(page.appendToggle('Showadvancedbtn', label='Show Advanced Button')[0],
-		         default=True)
-		setattrs(page.appendToggle('Showviewersbtn', label='Show Viewers Button')[0],
-		         default=True)
-		setattrs(page.appendToggle('Showparuimode', label='Show Par UI Mode Menu')[0],
-		         default=True)
-		shell.parent().par.crop = 'on'
-		for init in shell.ops('*/init'):
-			init.run()
-
 
 def copyPresets(m):
 	table = m.op('local/preset_values')
