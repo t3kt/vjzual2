@@ -23,7 +23,7 @@ def _DBGLOG_basic(msg):
 	formatted = '%r\t%s\n' % (time.time(), msg)
 	print(formatted)
 
-if os.environ['VJZDEBUG'] == '1':
+if os.environ.get('VJZDEBUG', None) == '1':
 	_dbglog = open('DEBUGLOG.txt', 'w')
 	_dbglog.write('----BEGIN DEBUG LOG [%r]----\n' % time.time())
 	DBGLOG = _DBGLOG_full

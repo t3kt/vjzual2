@@ -123,12 +123,12 @@ class VjzParam:
 
 	def ApplyBaseProxyExprs(self, ctrlComp):
 		util.ApplyPythonProxyExprs(ctrlComp, 'parent().par.',
-		                     Pctlop='Parop',
 		                     Pctlpar='Parpar',
 		                     Pctllabel='Parlabel',
 		                     Pctlchan='Parid',
 		                     Pctlhelptext='Parhelptext',
 		                     Pctlfontsize='Parfontsize')
+		util.setexpr(ctrlComp.par.Pctlop, 'parent().par.Parop if parent().par.Parop else ""')
 
 	def GetValue(self):
 		raise NotImplementedError()
