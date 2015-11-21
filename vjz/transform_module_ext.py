@@ -47,6 +47,11 @@ class TransformModule(VjzModule):
 		         menuLabels=xordOpts.col('label')[1:],
 		         default='srt')
 
+		setattrs(page.appendMenu('Mparscalemode', label='Scale Mode')[0],
+		         menuNames=['linked', 'separate'],
+		         menuLabels=['Linked', 'Separate X/Y'],
+		         default='linked')
+
 		m.par.Modhasadvanced = True
 		m.par.Modhasviewers = False
 
