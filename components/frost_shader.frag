@@ -96,6 +96,7 @@ void main()
 	vec4 result = spline(n,C00,C01,C02,C10,C11,C12,C20,C21,C22);
 	tc = result.rgb;  
 
-	fragColor = vec4(tc, 1.0);
+	//fragColor = vec4(tc, 1.0);
+	fragColor = vec4(tc, color.a);
 }
 	
