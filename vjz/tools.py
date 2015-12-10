@@ -8,6 +8,15 @@ def getTargetPane():
 		if pane.type == PaneType.NETWORKEDITOR:
 			return pane
 
+def goTo(path):
+	pane = getTargetPane()
+	if not pane:
+		return
+	target = op(path)
+	if not target:
+		return
+	pane.owner = target
+
 def getSelected():
 	pane = getTargetPane()
 	if not pane:
