@@ -107,7 +107,7 @@ class VjzModule:
 		else:
 			nodeId = m.op(m.var('masteroutnode')).par.Nodeid.eval()
 		print('updating master output to node id: ' + nodeId)
-		m.op(m.var('mainoutselector')).SetSelectedNode(nodeId)
+		m.op(m.var('mainoutselector')).par.Selnodeid = nodeId
 
 	@property
 	def PresetsTable(self):
