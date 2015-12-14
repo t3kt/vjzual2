@@ -1,4 +1,5 @@
 from numpy import interp
+import json
 
 def getTargetPane():
 	pane = ui.panes.current
@@ -217,24 +218,60 @@ def distribute(axis):
 		val = interp(float(i), [0, n-1], [minVal, maxVal])
 		setattr(selected[i], attr, round(val))
 
+def _setParValsUnlessExported(p, **parVals):
+	for parName in parVals:
+		par = getattr(p.par, parName, None)
+		if par is None or par.mode == ParMode.EXPORT:
+			return
+		par.expr = ''
+		par.val = parVals[parName]
+
 def updateParSettings():
 	params = getSelected()
 	for p in params:
-		if not p.isCOMP or not hasattr(p.par, 'Parnormrange1'):
+		if not p.isCOMP:
 			continue
-		par = p.TargetPar
+		clone = p.par.clone.eval()
+		if clone is None:
+			continue
+		ptype = clone.path.replace('/_/components/', '')
+		print('updating settings for par ', p.path, ' ptype=', ptype)
+		if ptype in ['par_toggle_button', 'par_float_slider', 'par_drop_menu', 'bool_param', 'float_param', 'menu_param']:
+			par = p.TargetPar
+		elif ptype in ['par_toggle_button_2', 'par_float_slider_2', 'par_drop_menu_2']:
+			targetOp = p.par.Pctlop.eval()
+			parName = p.par.Pctlpar.eval()
+			par = getattr(targetOp.par, parName, None) if targetOp else None
+		elif ptype in ['bool_param_2', 'float_param_2', 'menu_param_2']:
+			targetOp = p.par.Parop.eval()
+			parName = p.par.Parpar.eval()
+			par = getattr(targetOp.par, parName, None) if targetOp else None
+		else:
+			par = None
 		if par is None:
 			print('unable to get target par for path', p.path)
 			continue
-		p.par.Parnormrange1.expr = ''
-		p.par.Parnormrange1.val = par.normMin
-		p.par.Parnormrange2.expr = ''
-		p.par.Parnormrange2.val = par.normMax
-		p.par.Parrange1.expr = ''
-		p.par.Parrange1.val = par.min
-		p.par.Parrange2.expr = ''
-		p.par.Parrange2.val = par.max
-		p.par.Parclampmin.expr = ''
-		p.par.Parclampmin.val = par.clampMin
-		p.par.Parclampmax.expr = ''
-		p.par.Parclampmax.val = par.clampMax
+		if ptype in ['par_float_slider', 'par_float_slider_2']:
+			_setParValsUnlessExported(p,
+				Pctlnormrange1= par.normMin,
+				Pctlnormrange2= par.normMax,
+				Pctlrange1= par.min,
+				Pctlrange2= par.max,
+				Pctlclampmin= par.clampMin,
+				Pctlclampmax= par.clampMax)
+		elif ptype in ['float_param', 'float_param_2']:
+			_setParValsUnlessExported(p,
+				Parnormrange1= par.normMin,
+				Parnormrange2= par.normMax,
+				Parrange1= par.min,
+				Parrange2= par.max,
+				Parclampmin= par.clampMin,
+				Parclampmax= par.clampMax)
+		elif ptype == 'par_drop_menu_2':
+			_setParValsUnlessExported(p,
+				Pctlmenunames=json.dumps(par.menuNames),
+				Pctlmenulabels=json.dumps(par.menuLabels))
+		elif ptype == 'menu_param_2':
+			_setParValsUnlessExported(p,
+				Parmenunames=json.dumps(par.menuNames),
+				Parmenulabels=json.dumps(par.menuLabels))
