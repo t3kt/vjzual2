@@ -46,19 +46,6 @@ class VjzModule:
 		page.appendToggle('Modhidden', label='Hide Module')
 		page.appendToggle('Modhighlight', label='Highlight Module')
 		self.UpdateHeight()
-		outnode = m.op('out_node')
-		if outnode is not None:
-			setParExprs(outnode,
-			            Nodeid="ext.vjzmod.par.Modname + ':wet'",
-			            Nodelabel="ext.vjzmod.par.Moduilabel + ' (wet)'",
-			            Nodehidden="ext.vjzmod.path.startswith('/_/components/')")
-			setattrs(outnode.par,
-			         Nodehasaudio=m.op('wet_audio') is not None,
-			         Nodehasvideo=m.op('wet_video') is not None,
-			         Nodehasctrl=False)
-			setattrs(outnode.par,
-			         Nodevideo='wet_video' if m.op('wet_video') else '',
-			         Nodeaudio='wet_audio' if m.op('wet_audio') else '')
 
 	@property
 	def HeaderHeight(self):
