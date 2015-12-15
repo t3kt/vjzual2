@@ -12,31 +12,35 @@
         "Mparcontrast": 0.0, 
         "Mparhue": 0.0, 
         "Mparinvert": false, 
-        "Mparsaturation": 0.0
+        "Mparsaturation": 0.0, 
+        "Mparsrc": "video3"
       }, 
       "path": "/_/layer1"
     }, 
     {
+      "bypass": true, 
       "name": "edge1", 
       "params": {
         "Mparcompinput": false, 
-        "Mparlevel": 1.0, 
-        "Mparmaskon": true, 
-        "Mparoffset1": 1.0, 
-        "Mparoffset2": 1.0, 
+        "Mparlevel": 0.931217, 
+        "Mparmaskon": false, 
+        "Mparmasksrc": "rampgen1:wet", 
+        "Mparoffset1": 1.01064, 
+        "Mparoffset2": 3.7766, 
         "Mparoperand": "maximum", 
         "Mparselect": "luminance", 
-        "Mparstrength": 10.0
+        "Mparstrength": 0.10582
       }, 
       "path": "/_/layer1/edge1"
     }, 
     {
+      "bypass": true, 
       "name": "flip1", 
       "params": {
         "Mparflipx": true, 
         "Mparflipy": false, 
         "Mparlevel": 0.921687, 
-        "Mparoperand": "difference"
+        "Mparoperand": "maximum"
       }, 
       "path": "/_/layer1/flip1"
     }, 
@@ -52,11 +56,13 @@
       "path": "/_/layer1/tiles"
     }, 
     {
+      "bypass": true, 
       "name": "tima1", 
       "params": {
-        "Mparblackoffset": 0.174603, 
+        "Mparblackoffset": 0.44973546266555786, 
         "Mparcachesize": 32, 
         "Mparlevel": 1.0, 
+        "Mparsrc": "noisegen2:wet", 
         "Mparwhiteoffset": 0.0
       }, 
       "path": "/_/layer1/tima1"
@@ -65,16 +71,16 @@
       "bypass": true, 
       "name": "redux1", 
       "params": {
-        "Mparlevel": 0.861446, 
+        "Mparlevel": 0.487952, 
         "Mparmasksoften": 0.089, 
         "Mparmaskthreshold": 0.306878, 
         "Mparpasscompop": "maximum", 
         "Mparresfilter": "nearest", 
         "Mparreson": true, 
-        "Mparresredux1": 0.52381, 
-        "Mparresredux2": 0.645503, 
-        "Mparrotate1": -3.33333, 
-        "Mparrotate2": -27.1429
+        "Mparresredux1": 0.671958, 
+        "Mparresredux2": 0.195767, 
+        "Mparrotate1": -30.0, 
+        "Mparrotate2": 15.7143
       }, 
       "path": "/_/layer1/redux1"
     }, 
@@ -89,11 +95,11 @@
     {
       "name": "coloradj1", 
       "params": {
-        "Mparbrightness": 0.542169, 
-        "Mparcontrast": 0.801205, 
+        "Mparbrightness": 0.746032, 
+        "Mparcontrast": 0.603175, 
         "Mparhue": 0.5, 
         "Mparinvert": false, 
-        "Mparsaturation": 0.0
+        "Mparsaturation": 0.5
       }, 
       "path": "/_/layer1/coloradj1", 
       "presets": {
@@ -116,17 +122,19 @@
     {
       "name": "feedback", 
       "params": {
-        "Mpardelaylen": 0.179894, 
-        "Mpardelaymix": 0.347594, 
+        "Mpardelaylen": 0.0, 
+        "Mpardelaymix": 0.428571, 
         "Mpardelayon": false, 
-        "Mpardisplaceamount": 0.30687829852104187, 
+        "Mpardisplaceamount": 0.095238097012043, 
         "Mpardisplacelevel": 1.0, 
-        "Mparlevel": 0.714286, 
-        "Mparmaskmix": 0.322751, 
+        "Mpardispsrc": "noisegen2:wet", 
+        "Mparlevel": 0.915344, 
+        "Mparmaskmix": 0.0, 
         "Mparmaskon": false, 
+        "Mparmasksrc": "rampgen2:wet", 
         "Mparrotate": 0.0, 
         "Mparrotatecompop": "maximum", 
-        "Mparrotatereverse": true, 
+        "Mparrotatereverse": false, 
         "Mparscale": 1.0, 
         "Mparsx": 0.0, 
         "Mparsy": 0.0, 
@@ -140,96 +148,48 @@
       "name": "transform1", 
       "params": {
         "Mparextend": "mirror", 
-        "Mparlevel": 1.0, 
+        "Mparlevel": 0.746032, 
         "Mparorder": "trs", 
-        "Mparrotate": -151.807, 
-        "Mparscale": 0.542169, 
-        "Mparsx": 1.4727299999999999, 
-        "Mparsy": 1.0, 
+        "Mparrotate": 127.619, 
+        "Mparscale": 1.24339, 
+        "Mparscalemode": "linked", 
+        "Mparsx": 1.24339, 
+        "Mparsy": 1.24339, 
         "Mpartx": 0.0, 
         "Mparty": 0.0
       }, 
       "path": "/_/layer1/transform1"
     }, 
     {
-      "bypass": true, 
-      "name": "multidelay1", 
-      "params": {
-        "Mparalphamode": "linear", 
-        "Mparalpharange1": 0.7, 
-        "Mparalpharange2": 1.0, 
-        "Mparcachesize": 128, 
-        "Mparlength": 0.708995, 
-        "Mparlengthmode": "linear", 
-        "Mparlengthrange1": 0.0, 
-        "Mparlengthrange2": 1.0, 
-        "Mparlevel": 0.37037, 
-        "Mparoperand": "maximum", 
-        "Mpartap1active": true, 
-        "Mpartap1alpha": 1.0, 
-        "Mpartap1filterhue": 0.445, 
-        "Mpartap1filteron": false, 
-        "Mpartap1filtersat": 0.202, 
-        "Mpartap1length": 0.759, 
-        "Mpartap2active": true, 
-        "Mpartap2alpha": 0.798, 
-        "Mpartap2filterhue": 0.375, 
-        "Mpartap2filteron": false, 
-        "Mpartap2filtersat": 1.0, 
-        "Mpartap2length": 0.554, 
-        "Mpartap3active": true, 
-        "Mpartap3alpha": 0.0, 
-        "Mpartap3filterhue": 0.217, 
-        "Mpartap3filteron": false, 
-        "Mpartap3filtersat": 1.0, 
-        "Mpartap3length": 0.0, 
-        "Mpartap4active": true, 
-        "Mpartap4alpha": 0.0, 
-        "Mpartap4filterhue": 0.0, 
-        "Mpartap4filteron": false, 
-        "Mpartap4filtersat": 0.0, 
-        "Mpartap4length": 0.0, 
-        "Mpartap5active": true, 
-        "Mpartap5alpha": 0.0, 
-        "Mpartap5filterhue": 0.0, 
-        "Mpartap5filteron": false, 
-        "Mpartap5filtersat": 0.0, 
-        "Mpartap5length": 0.0, 
-        "Mpartap6active": true, 
-        "Mpartap6alpha": 1.0, 
-        "Mpartap6filterhue": 0.0, 
-        "Mpartap6filteron": false, 
-        "Mpartap6filtersat": 0.0, 
-        "Mpartap6length": 0.0, 
-        "Mpartap7active": false, 
-        "Mpartap7alpha": 0.0, 
-        "Mpartap7filterhue": 0.0, 
-        "Mpartap7filteron": false, 
-        "Mpartap7filtersat": 0.0, 
-        "Mpartap7length": 0.0, 
-        "Mpartap8active": true, 
-        "Mpartap8alpha": 0.0, 
-        "Mpartap8filterhue": 1.0, 
-        "Mpartap8filteron": false, 
-        "Mpartap8filtersat": 1.0, 
-        "Mpartap8length": 0.645
-      }, 
-      "path": "/_/layer1/multidelay1"
-    }, 
-    {
       "name": "layer2", 
+      "params": {
+        "Mparsrc": "video2"
+      }, 
       "path": "/_/layer2"
     }, 
     {
       "bypass": true, 
+      "name": "blend1", 
+      "params": {
+        "Mparcross": -0.325301, 
+        "Mparmodinput": true, 
+        "Mparoperand": "multiply", 
+        "Mparshowinput": false, 
+        "Mparsrc1": "rampgen2:wet", 
+        "Mparsrc2": "rampgen2:wet", 
+        "Mparswap": false
+      }, 
+      "path": "/_/layer2/blend"
+    }, 
+    {
       "name": "tint1", 
       "params": {
         "Mparbrightness": 1.0, 
-        "Mparhue": 0.144578, 
+        "Mparhue": 0.560847, 
         "Mparinvert": false, 
-        "Mparlevel": 0.39759, 
-        "Mparmonorgb": "luminance", 
-        "Mparsaturation": 0.656627
+        "Mparlevel": 0.925926, 
+        "Mparmonorgb": "blue", 
+        "Mparsaturation": 0.506024
       }, 
       "path": "/_/layer2/tint1"
     }, 
@@ -254,60 +214,59 @@
       "bypass": true, 
       "name": "iterate1", 
       "params": {
-        "Mparalpha": 0.554217, 
+        "Mparalpha": 0.544974, 
         "Mparcachesize": 32, 
-        "Mparcount": 27, 
-        "Mparendalpha": 0.325301, 
-        "Mparendrx": 48.29268264770508, 
-        "Mparendry": 105.366, 
-        "Mparendrz": -61.46341323852539, 
-        "Mparendscale": 4.81928, 
-        "Mparendsx": 1.16364, 
-        "Mparendsy": 1.0, 
+        "Mparcount": 11, 
+        "Mparendalpha": 0.846774, 
+        "Mparendrx": -21.9512, 
+        "Mparendry": 8.78049, 
+        "Mparendrz": -26.3415, 
+        "Mparendscale": 1.0, 
+        "Mparendsx": 4.0, 
+        "Mparendsy": 2.3871, 
         "Mparendsz": 1.0, 
-        "Mparendtimeoffset": 1.0, 
-        "Mparendtx": 4.4878, 
-        "Mparendty": -2.34146, 
-        "Mparendtz": -5.65854, 
+        "Mparendtimeoffset": 0.0, 
+        "Mparendtx": -2.92683, 
+        "Mparendty": 0.0, 
+        "Mparendtz": -6.82927, 
         "Mparlevel": 1.0, 
         "Mparrx": 0.0, 
         "Mparry": 0.0, 
         "Mparrz": 0.0, 
         "Mparstartalpha": 1.0, 
-        "Mparstartrx": -26.3415, 
-        "Mparstartry": -48.2927, 
-        "Mparstartrz": 79.0244, 
-        "Mparstartscale": 3.19277, 
-        "Mparstartsx": 1.01818, 
-        "Mparstartsy": 1.07317, 
+        "Mparstartrx": 0.0, 
+        "Mparstartry": -13.1707, 
+        "Mparstartrz": 4.39024, 
+        "Mparstartscale": 3.54839, 
+        "Mparstartsx": 1.0, 
+        "Mparstartsy": 1.0, 
         "Mparstartsz": 1.0, 
-        "Mparstarttimeoffset": 0.0, 
-        "Mparstarttx": -1.56098, 
+        "Mparstarttimeoffset": 1.0, 
+        "Mparstarttx": 0.0, 
         "Mparstartty": 0.0, 
-        "Mparstarttz": -2.34146, 
+        "Mparstarttz": -0.97561, 
         "Mpartimeoffset": 1.0, 
         "Mpartimeoffseton": true, 
-        "Mparvertigo": 0.704819
+        "Mparvertigo": 0.513228
       }, 
       "path": "/_/layer2/iterate1"
     }, 
     {
-      "bypass": true, 
       "name": "coloradj3", 
       "params": {
-        "Mparbrightness": 0.5, 
-        "Mparcontrast": 0.566265, 
+        "Mparbrightness": 0.3132530152797699, 
+        "Mparcontrast": 0.7710843086242676, 
         "Mparhue": 0.5, 
-        "Mparinvert": false, 
-        "Mparsaturation": 0.552
+        "Mparinvert": true, 
+        "Mparsaturation": 0.5
       }, 
       "path": "/_/layer2/coloradj3"
     }, 
     {
-      "bypass": true, 
       "name": "feedback2", 
       "params": {
-        "Mparlevel": 0.8554216623306274
+        "Mparlevel": 0.7195767164230347, 
+        "Mpartransformxfade": 0.0
       }, 
       "path": "/_/layer2/feedback2"
     }, 
@@ -316,7 +275,7 @@
       "name": "feedback2_delay", 
       "params": {
         "Mparcachesize": 32, 
-        "Mparlength": 0.359477, 
+        "Mparlength": 0.0, 
         "Mparlevel": 1.0
       }, 
       "path": "/_/layer2/feedback2/delay"
@@ -326,29 +285,67 @@
       "params": {
         "Mparextend": "mirror", 
         "Mparlevel": 1.0, 
-        "Mparorder": "srt", 
-        "Mparrotate": 49.411766052246094, 
-        "Mparscale": 1.1437908411026, 
-        "Mparsx": 1.0, 
-        "Mparsy": 0.813333, 
+        "Mparorder": "trs", 
+        "Mparrotate": -19.171598434448242, 
+        "Mparscale": 0.4674556255340576, 
+        "Mparscalemode": "linked", 
+        "Mparsx": 0.4674556255340576, 
+        "Mparsy": 0.4674556255340576, 
         "Mpartx": 0.0, 
         "Mparty": 0.0
       }, 
       "path": "/_/layer2/feedback2/transform"
     }, 
     {
-      "name": "master", 
-      "path": "/_/master"
+      "name": "feedback2_transform1", 
+      "params": {
+        "Mparextend": "mirror", 
+        "Mparlevel": 1.0, 
+        "Mparorder": "rts", 
+        "Mparrotate": -223.66864013671875, 
+        "Mparscale": 0.5857987999916077, 
+        "Mparscalemode": "linked", 
+        "Mparsx": 0.5857987999916077, 
+        "Mparsy": 0.5857987999916077, 
+        "Mpartx": 0.0, 
+        "Mparty": 0.0
+      }, 
+      "path": "/_/layer2/feedback2/transform1"
     }, 
     {
       "bypass": true, 
+      "name": "transform2", 
+      "params": {
+        "Mparextend": "mirror", 
+        "Mparlevel": 1.0, 
+        "Mparorder": "trs", 
+        "Mparrotate": 0.0, 
+        "Mparscale": 1.07407, 
+        "Mparscalemode": "linked", 
+        "Mparsx": 1.07407, 
+        "Mparsy": 1.07407, 
+        "Mpartx": -0.106383, 
+        "Mparty": -0.276596
+      }, 
+      "path": "/_/layer2/transform2"
+    }, 
+    {
+      "name": "master", 
+      "params": {
+        "Mparsrc": "layer1:wet"
+      }, 
+      "path": "/_/master"
+    }, 
+    {
       "name": "masterblend", 
       "params": {
         "Mparcross": -1.0, 
-        "Mparmodinput": true, 
-        "Mparoperand": "maximum", 
-        "Mparshowinput": true, 
-        "Mparswap": true
+        "Mparmodinput": false, 
+        "Mparoperand": "luminancedifference", 
+        "Mparshowinput": false, 
+        "Mparsrc1": "layer1:wet", 
+        "Mparsrc2": "layer2:wet", 
+        "Mparswap": false
       }, 
       "path": "/_/master/blend"
     }, 
@@ -370,7 +367,7 @@
         "Mparextend": "hold", 
         "Mparinneralpha": 0.462, 
         "Mparinnersize": 8, 
-        "Mparlevel": 1.0, 
+        "Mparlevel": 0.963855, 
         "Mparmethod": "horzandvert", 
         "Mparouteralpha": 0.077, 
         "Mparoutersize": 10, 
@@ -387,9 +384,9 @@
         "Mparlevel": 1.0, 
         "Mparmulti": false, 
         "Mparoperand": "maximum", 
-        "Mparpostoffset": 0.0, 
-        "Mparpreoffset": 0.4337349534034729, 
-        "Mparsegments": 3.963855504989624, 
+        "Mparpostoffset": -1.63855, 
+        "Mparpreoffset": 0.524096, 
+        "Mparsegments": 2.81928, 
         "Mpartx": 0.0, 
         "Mparty": 0.0
       }, 
@@ -400,10 +397,10 @@
       "name": "stutter1", 
       "params": {
         "Mparcachesize": 64, 
-        "Mparlength": 0.343374, 
-        "Mparlevel": 0.716867, 
-        "Mparplayback": false, 
-        "Mparplayrate": 0.807229, 
+        "Mparlength": 0.548193, 
+        "Mparlevel": 0.271084, 
+        "Mparplayback": true, 
+        "Mparplayrate": -0.385542, 
         "Mparrecord": true
       }, 
       "path": "/_/master/stutter1"
@@ -418,14 +415,13 @@
       "path": "/_/master/timecube"
     }, 
     {
-      "bypass": true, 
       "name": "coloradj2", 
       "params": {
-        "Mparbrightness": 0.5, 
-        "Mparcontrast": 0.60241, 
+        "Mparbrightness": 0.43915343284606934, 
+        "Mparcontrast": 0.6984127163887024, 
         "Mparhue": 0.5, 
-        "Mparinvert": false, 
-        "Mparsaturation": 0.0
+        "Mparinvert": true, 
+        "Mparsaturation": 1.0
       }, 
       "path": "/_/master/coloradj2"
     }, 
@@ -434,10 +430,11 @@
       "name": "background", 
       "params": {
         "Mparbgcolora": 1.0, 
-        "Mparbgcolorb": 0.743902, 
-        "Mparbgcolorg": 0.646341, 
-        "Mparbgcolorr": 0.634146, 
+        "Mparbgcolorb": 0.52439, 
+        "Mparbgcolorg": 0.5, 
+        "Mparbgcolorr": 0.5, 
         "Mparbgmode": "constant", 
+        "Mparbgsrc": "", 
         "Mparlevel": 1.0
       }, 
       "path": "/_/master/background"
@@ -447,14 +444,15 @@
       "name": "transform2", 
       "params": {
         "Mparextend": "mirror", 
-        "Mparlevel": 1.0, 
-        "Mparorder": "trs", 
-        "Mparrotate": 303.614, 
-        "Mparscale": 1.33735, 
-        "Mparsx": 1.18182, 
-        "Mparsy": 0.756098, 
-        "Mpartx": 0.145455, 
-        "Mparty": 0.121951
+        "Mparlevel": 0.486772, 
+        "Mparorder": "rts", 
+        "Mparrotate": 0.0, 
+        "Mparscale": 1.0, 
+        "Mparscalemode": "linked", 
+        "Mparsx": 1.0, 
+        "Mparsy": 1.0, 
+        "Mpartx": 0.0, 
+        "Mparty": 0.0
       }, 
       "path": "/_/master/transform2"
     }, 
@@ -493,10 +491,10 @@
         "Mparendcolorb": 0.0, 
         "Mparendcolorg": 0.0, 
         "Mparendcolorr": 0.0, 
-        "Mparextendleft": "repeat", 
-        "Mparextendright": "repeat", 
+        "Mparextendleft": "hold", 
+        "Mparextendright": "sameasleft", 
         "Mparinterp": "linear", 
-        "Mparkeymode": "midbar", 
+        "Mparkeymode": "midpoint", 
         "Mparmidcolora": 1.0, 
         "Mparmidcolorb": 1.0, 
         "Mparmidcolorg": 1.0, 
@@ -504,11 +502,11 @@
         "Mparmidcolorratio": 0.5, 
         "Mparmidfadewidth": 0.053, 
         "Mparmidowncolor": true, 
-        "Mparmidpos": 0.5, 
-        "Mparmidwidth": 0.34939759969711304, 
+        "Mparmidpos": 0.331325, 
+        "Mparmidwidth": 0.207831, 
         "Mparperiod": 1.0, 
         "Mparphase": 0.0, 
-        "Mparphaselfofreq": 0.1807228922843933, 
+        "Mparphaselfofreq": 0.542169, 
         "Mparphaselfoon": true, 
         "Mparphaselfowavetype": "ramp", 
         "Mparramptype": "horizontal", 
@@ -520,64 +518,113 @@
       "path": "/_/generators/rampgen1"
     }, 
     {
+      "name": "rampgen2", 
+      "params": {
+        "Mparendcolora": 0.0, 
+        "Mparendcolorb": 0.0, 
+        "Mparendcolorg": 0.0, 
+        "Mparendcolorr": 0.0, 
+        "Mparextendleft": "repeat", 
+        "Mparextendright": "zero", 
+        "Mparinterp": "linear", 
+        "Mparkeymode": "simple", 
+        "Mparmidcolora": 0.7, 
+        "Mparmidcolorb": 0.7, 
+        "Mparmidcolorg": 0.7, 
+        "Mparmidcolorr": 0.7, 
+        "Mparmidcolorratio": 0.615, 
+        "Mparmidfadewidth": 0.053, 
+        "Mparmidowncolor": true, 
+        "Mparmidpos": 0.518072, 
+        "Mparmidwidth": 0.207831, 
+        "Mparperiod": 1.0, 
+        "Mparphase": -0.120482, 
+        "Mparphaselfofreq": 0.2, 
+        "Mparphaselfoon": false, 
+        "Mparphaselfowavetype": "ramp", 
+        "Mparramptype": "circular", 
+        "Mparstartcolora": 2.0, 
+        "Mparstartcolorb": 1.0, 
+        "Mparstartcolorg": 1.0, 
+        "Mparstartcolorr": 1.0
+      }, 
+      "path": "/_/generators/rampgen2"
+    }, 
+    {
       "name": "constant1", 
       "params": {
         "Mparcolora": 0.740964, 
         "Mparcolorb": 0.414634, 
         "Mparcolorg": 0.353659, 
-        "Mparcolorr": 0.719512
+        "Mparcolorr": 0.329268
       }, 
       "path": "/_/generators/constant1"
     }, 
     {
       "name": "noisegen1", 
       "params": {
-        "Mparalphamode": "random", 
-        "Mparexponent": 0.496988, 
-        "Mpargain": 0.698795, 
+        "Mparalphamode": "zero", 
+        "Mparexponent": 0.27108433842658997, 
+        "Mpargain": 1.24096, 
         "Mparmono": false, 
-        "Mparnoisetype": "simplex4d", 
-        "Mparperiod": 0.8192771077156067, 
+        "Mparnoisetype": "perlin3d", 
+        "Mparperiod": 2.26506, 
         "Mparratex": 0.0, 
         "Mparratey": 0.0, 
-        "Mparratez": 0.289157
+        "Mparratez": -0.46988
       }, 
       "path": "/_/generators/noisegen1"
     }, 
     {
       "name": "noisegen2", 
       "params": {
-        "Mparalphamode": "random", 
-        "Mparexponent": 0.506024, 
-        "Mpargain": 1.15663, 
+        "Mparalphamode": "zero", 
+        "Mparexponent": 0.5602409839630127, 
+        "Mpargain": 1.42169, 
         "Mparmono": false, 
-        "Mparnoisetype": "simplex4d", 
-        "Mparperiod": 3.75904, 
+        "Mparnoisetype": "perlin3d", 
+        "Mparperiod": 1.3012000000000001, 
         "Mparratex": 0.0, 
         "Mparratey": 0.0, 
-        "Mparratez": 0.0903614
+        "Mparratez": 0.126506
       }, 
       "path": "/_/generators/noisegen2"
     }, 
     {
-      "name": "rampgen1x", 
+      "name": "noisegen3", 
       "params": {
-        "Mparcolor1a": 1.0, 
-        "Mparcolor1b": 0.0, 
-        "Mparcolor1g": 0.0, 
-        "Mparcolor1r": 0.0, 
-        "Mparcolor2a": 1.0, 
-        "Mparcolor2b": 1.0, 
-        "Mparcolor2g": 1.0, 
-        "Mparcolor2r": 1.0, 
-        "Mparextendleft": "mirror", 
-        "Mparextendright": "sameasleft", 
-        "Mparinterp": "linear", 
-        "Mparperiod": 1.0, 
-        "Mparphase": 0.0, 
-        "Mparramptype": "horizontal"
+        "Mparamplitude": 0.708995, 
+        "Mparblend": 0.5, 
+        "Mparclamp1": 0.329787, 
+        "Mparclamp2": -0.526596, 
+        "Mparderivative": false, 
+        "Mpardimness": 1.0, 
+        "Mpargradient": 0.5, 
+        "Mparlevel": 0.0, 
+        "Mparnoisetype": "cubist3d", 
+        "Mparnormalization": 1.0, 
+        "Mparoffset": 0.428571, 
+        "Mparprobability": 0.0, 
+        "Mparradius1": 0.3, 
+        "Mparradius2": 0.9, 
+        "Mpars1": 1.0, 
+        "Mpars2": 1.0, 
+        "Mpars3": 1.0, 
+        "Mpars4": 1.0, 
+        "Mparscale": 0.0677249, 
+        "Mpart1": 0.0, 
+        "Mpart2": 0.0, 
+        "Mpart3": 0.5, 
+        "Mpart4": 0.5, 
+        "Mpartrate1": 0.0, 
+        "Mpartrate2": 0.0, 
+        "Mpartrate3": 0.586957, 
+        "Mpartrate4": 0.0, 
+        "Mpartratemult": 1.7354500000000002, 
+        "Mpartrateon": true, 
+        "Mparvalue": 1.0
       }, 
-      "path": "/_/generators/rampgen1x"
+      "path": "/_/generators/noisegen3"
     }
   ]
 }
