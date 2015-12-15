@@ -13,7 +13,7 @@
         "Mparhue": 0.0, 
         "Mparinvert": false, 
         "Mparsaturation": 0.0, 
-        "Mparsrc": "video3"
+        "Mparsrc": "video2"
       }, 
       "path": "/_/layer1"
     }, 
@@ -21,7 +21,7 @@
       "bypass": true, 
       "name": "edge1", 
       "params": {
-        "Mparcompinput": false, 
+        "Mparcompinput": true, 
         "Mparlevel": 0.931217, 
         "Mparmaskon": false, 
         "Mparmasksrc": "rampgen1:wet", 
@@ -56,13 +56,12 @@
       "path": "/_/layer1/tiles"
     }, 
     {
-      "bypass": true, 
       "name": "tima1", 
       "params": {
-        "Mparblackoffset": 0.44973546266555786, 
+        "Mparblackoffset": 0.46560847759246826, 
         "Mparcachesize": 32, 
         "Mparlevel": 1.0, 
-        "Mparsrc": "noisegen2:wet", 
+        "Mparsrc": "noisegen1:wet", 
         "Mparwhiteoffset": 0.0
       }, 
       "path": "/_/layer1/tima1"
@@ -93,6 +92,7 @@
       "path": "/_/layer1/remap1"
     }, 
     {
+      "bypass": true, 
       "name": "coloradj1", 
       "params": {
         "Mparbrightness": 0.746032, 
@@ -125,16 +125,16 @@
         "Mpardelaylen": 0.0, 
         "Mpardelaymix": 0.428571, 
         "Mpardelayon": false, 
-        "Mpardisplaceamount": 0.095238097012043, 
+        "Mpardisplaceamount": 0.21164020895957947, 
         "Mpardisplacelevel": 1.0, 
         "Mpardispsrc": "noisegen2:wet", 
-        "Mparlevel": 0.915344, 
+        "Mparlevel": 0.9259259104728699, 
         "Mparmaskmix": 0.0, 
         "Mparmaskon": false, 
         "Mparmasksrc": "rampgen2:wet", 
         "Mparrotate": 0.0, 
         "Mparrotatecompop": "maximum", 
-        "Mparrotatereverse": false, 
+        "Mparrotatereverse": true, 
         "Mparscale": 1.0, 
         "Mparsx": 0.0, 
         "Mparsy": 0.0, 
@@ -150,11 +150,11 @@
         "Mparextend": "mirror", 
         "Mparlevel": 0.746032, 
         "Mparorder": "trs", 
-        "Mparrotate": 127.619, 
-        "Mparscale": 1.24339, 
+        "Mparrotate": 0.0, 
+        "Mparscale": 1.0, 
         "Mparscalemode": "linked", 
-        "Mparsx": 1.24339, 
-        "Mparsy": 1.24339, 
+        "Mparsx": 1.0, 
+        "Mparsy": 1.0, 
         "Mpartx": 0.0, 
         "Mparty": 0.0
       }, 
@@ -163,7 +163,7 @@
     {
       "name": "layer2", 
       "params": {
-        "Mparsrc": "video2"
+        "Mparsrc": "video3"
       }, 
       "path": "/_/layer2"
     }, 
@@ -182,6 +182,7 @@
       "path": "/_/layer2/blend"
     }, 
     {
+      "bypass": true, 
       "name": "tint1", 
       "params": {
         "Mparbrightness": 1.0, 
@@ -254,18 +255,18 @@
     {
       "name": "coloradj3", 
       "params": {
-        "Mparbrightness": 0.3132530152797699, 
-        "Mparcontrast": 0.7710843086242676, 
+        "Mparbrightness": 0.5608465671539307, 
+        "Mparcontrast": 0.4920634925365448, 
         "Mparhue": 0.5, 
-        "Mparinvert": true, 
-        "Mparsaturation": 0.5
+        "Mparinvert": false, 
+        "Mparsaturation": 0.523809552192688
       }, 
       "path": "/_/layer2/coloradj3"
     }, 
     {
       "name": "feedback2", 
       "params": {
-        "Mparlevel": 0.7195767164230347, 
+        "Mparlevel": 0.8624338507652283, 
         "Mpartransformxfade": 0.0
       }, 
       "path": "/_/layer2/feedback2"
@@ -286,13 +287,13 @@
         "Mparextend": "mirror", 
         "Mparlevel": 1.0, 
         "Mparorder": "trs", 
-        "Mparrotate": -19.171598434448242, 
-        "Mparscale": 0.4674556255340576, 
+        "Mparrotate": 14.911242485046387, 
+        "Mparscale": 0.5857987999916077, 
         "Mparscalemode": "linked", 
-        "Mparsx": 0.4674556255340576, 
-        "Mparsy": 0.4674556255340576, 
-        "Mpartx": 0.0, 
-        "Mparty": 0.0
+        "Mparsx": 0.5857987999916077, 
+        "Mparsy": 0.5857987999916077, 
+        "Mpartx": -0.190476194024086, 
+        "Mparty": -0.0476190485060215
       }, 
       "path": "/_/layer2/feedback2/transform"
     }, 
@@ -320,12 +321,12 @@
         "Mparlevel": 1.0, 
         "Mparorder": "trs", 
         "Mparrotate": 0.0, 
-        "Mparscale": 1.07407, 
+        "Mparscale": 0.820105791091919, 
         "Mparscalemode": "linked", 
-        "Mparsx": 1.07407, 
-        "Mparsy": 1.07407, 
-        "Mpartx": -0.106383, 
-        "Mparty": -0.276596
+        "Mparsx": 0.820105791091919, 
+        "Mparsy": 0.820105791091919, 
+        "Mpartx": -0.1489361673593521, 
+        "Mparty": -0.3191489279270172
       }, 
       "path": "/_/layer2/transform2"
     }, 
@@ -339,9 +340,9 @@
     {
       "name": "masterblend", 
       "params": {
-        "Mparcross": -1.0, 
+        "Mparcross": 0.1111111119389534, 
         "Mparmodinput": false, 
-        "Mparoperand": "luminancedifference", 
+        "Mparoperand": "difference", 
         "Mparshowinput": false, 
         "Mparsrc1": "layer1:wet", 
         "Mparsrc2": "layer2:wet", 
@@ -417,11 +418,11 @@
     {
       "name": "coloradj2", 
       "params": {
-        "Mparbrightness": 0.43915343284606934, 
-        "Mparcontrast": 0.6984127163887024, 
+        "Mparbrightness": 0.5132275223731995, 
+        "Mparcontrast": 0.5608465671539307, 
         "Mparhue": 0.5, 
-        "Mparinvert": true, 
-        "Mparsaturation": 1.0
+        "Mparinvert": false, 
+        "Mparsaturation": 0.7777777910232544
       }, 
       "path": "/_/master/coloradj2"
     }, 
@@ -441,20 +442,20 @@
     }, 
     {
       "bypass": true, 
-      "name": "transform2", 
+      "name": "transform3", 
       "params": {
         "Mparextend": "mirror", 
-        "Mparlevel": 0.486772, 
+        "Mparlevel": 1.0, 
         "Mparorder": "rts", 
-        "Mparrotate": 0.0, 
+        "Mparrotate": 36.19047546386719, 
         "Mparscale": 1.0, 
         "Mparscalemode": "linked", 
         "Mparsx": 1.0, 
         "Mparsy": 1.0, 
         "Mpartx": 0.0, 
-        "Mparty": 0.0
+        "Mparty": -0.38297873735427856
       }, 
-      "path": "/_/master/transform2"
+      "path": "/_/master/transform3"
     }, 
     {
       "name": "generators", 
@@ -564,14 +565,14 @@
       "name": "noisegen1", 
       "params": {
         "Mparalphamode": "zero", 
-        "Mparexponent": 0.27108433842658997, 
-        "Mpargain": 1.24096, 
+        "Mparexponent": 0.8650793433189392, 
+        "Mpargain": 1.0, 
         "Mparmono": false, 
         "Mparnoisetype": "perlin3d", 
-        "Mparperiod": 2.26506, 
+        "Mparperiod": 6.179893970489502, 
         "Mparratex": 0.0, 
         "Mparratey": 0.0, 
-        "Mparratez": -0.46988
+        "Mparratez": 0.507937
       }, 
       "path": "/_/generators/noisegen1"
     }, 
@@ -579,31 +580,31 @@
       "name": "noisegen2", 
       "params": {
         "Mparalphamode": "zero", 
-        "Mparexponent": 0.5602409839630127, 
+        "Mparexponent": 0.579365074634552, 
         "Mpargain": 1.42169, 
         "Mparmono": false, 
         "Mparnoisetype": "perlin3d", 
-        "Mparperiod": 1.3012000000000001, 
+        "Mparperiod": 1.9047619104385376, 
         "Mparratex": 0.0, 
         "Mparratey": 0.0, 
-        "Mparratez": 0.126506
+        "Mparratez": 0.230158731341362
       }, 
       "path": "/_/generators/noisegen2"
     }, 
     {
       "name": "noisegen3", 
       "params": {
-        "Mparamplitude": 0.708995, 
+        "Mparamplitude": 1.4708994626998901, 
         "Mparblend": 0.5, 
-        "Mparclamp1": 0.329787, 
-        "Mparclamp2": -0.526596, 
+        "Mparclamp1": -1.7553191184997559, 
+        "Mparclamp2": 0.664893627166748, 
         "Mparderivative": false, 
         "Mpardimness": 1.0, 
         "Mpargradient": 0.5, 
         "Mparlevel": 0.0, 
         "Mparnoisetype": "cubist3d", 
         "Mparnormalization": 1.0, 
-        "Mparoffset": 0.428571, 
+        "Mparoffset": 0.6349206566810608, 
         "Mparprobability": 0.0, 
         "Mparradius1": 0.3, 
         "Mparradius2": 0.9, 
@@ -611,7 +612,7 @@
         "Mpars2": 1.0, 
         "Mpars3": 1.0, 
         "Mpars4": 1.0, 
-        "Mparscale": 0.0677249, 
+        "Mparscale": 0.010582010261714458, 
         "Mpart1": 0.0, 
         "Mpart2": 0.0, 
         "Mpart3": 0.5, 
@@ -620,7 +621,7 @@
         "Mpartrate2": 0.0, 
         "Mpartrate3": 0.586957, 
         "Mpartrate4": 0.0, 
-        "Mpartratemult": 1.7354500000000002, 
+        "Mpartratemult": 0.48677247762680054, 
         "Mpartrateon": true, 
         "Mparvalue": 1.0
       }, 
