@@ -85,16 +85,20 @@ class VjzModule:
 	def UpdateSolo(self):
 		m = self._comp
 		solo = m.par.Modsolo.eval()
-		if solo and m.op('./out_node'):
+		mainout = m.op(m.var('mainoutselector'))
+		outnode = m.op('./out_node')
+		if solo and outnode:
 			for mpath in m.op(m.var('moduletbl')).col('path')[1:]:
 				othermod = m.op(mpath)
 				if othermod is not m:
 					othermod.par.Modsolo = False
-			nodeId = m.op('./out_node').par.Nodeid.eval()
-		else:
+			nodeId = outnode.par.Nodeid.eval()
+		elif mainout.par.Selnodeid == outnode.par.Nodeid:
 			nodeId = m.op(m.var('masteroutnode')).par.Nodeid.eval()
+		else:
+			return
 		print('updating master output to node id: ' + nodeId)
-		m.op(m.var('mainoutselector')).par.Selnodeid = nodeId
+		mainout.par.Selnodeid = nodeId
 
 	@property
 	def PresetsTable(self):
