@@ -208,3 +208,11 @@ def GetClonedAncestor(op):
 			return op
 		op = op.parent()
 	return None
+
+def GetActiveEditor():
+	pane = ui.panes.current
+	if pane.type == PaneType.NETWORKEDITOR:
+		return pane
+	for pane in ui.panes:
+		if pane.type == PaneType.NETWORKEDITOR:
+			return pane

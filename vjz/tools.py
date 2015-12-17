@@ -2,12 +2,7 @@ from numpy import interp
 import json
 
 def getTargetPane():
-	pane = ui.panes.current
-	if pane.type == PaneType.NETWORKEDITOR:
-		return pane
-	for pane in ui.panes:
-		if pane.type == PaneType.NETWORKEDITOR:
-			return pane
+	return mod.vjz_util.GetActiveEditor()
 
 def goTo(path):
 	pane = getTargetPane()
