@@ -216,3 +216,17 @@ def GetActiveEditor():
 	for pane in ui.panes:
 		if pane.type == PaneType.NETWORKEDITOR:
 			return pane
+
+def ProcessClones(master, action, filter=None):
+	master = argToOp(master)
+	if not master or not hasattr(master, 'clones'):
+		return
+	for c in master.clones:
+		if filter is not None and not filter(c):
+			continue
+		action(c)
+
+def DumpClones(master, filter=None):
+	master = argToOp(master)
+	print('Clones of ' + master.path)
+	ProcessClones(master, lambda c: print('  ' + c.path), filter=filter)
