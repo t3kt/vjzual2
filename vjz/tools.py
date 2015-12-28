@@ -98,8 +98,9 @@ def setAlignOrderBy(sortAttrName, reverseDir):
 	                  key=lambda o: getattr(o, sortAttrName),
 	                  reverse=reverseDir)
 	for i in range(n):
-		val = interp(float(i), [0, n-1], [0.0, 1.0])
-		selected[i].par.order = val
+		if hasattr(selected[i].par, 'order'):
+			val = interp(float(i), [0, n-1], [0.0, 1.0])
+			selected[i].par.order = val
 
 def setAlignOrderByX():
 	setAlignOrderBy('nodeX', False)
