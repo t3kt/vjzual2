@@ -51,8 +51,8 @@ class VjzModule:
 	def HeaderHeight(self):
 		m = self._comp
 		if m.par.Modcollapsed:
-			return 20
-		return 40
+			return 24
+		return 44
 
 	@property
 	def BodyHeight(self):
