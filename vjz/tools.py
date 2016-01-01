@@ -214,6 +214,26 @@ def distribute(axis):
 		val = interp(float(i), [0, n-1], [minVal, maxVal])
 		setattr(selected[i], attr, round(val))
 
+def sortByName(axis):
+	if axis == 'x':
+		attr = 'nodeX'
+		reverse = False
+	else:
+		attr = 'nodeY'
+		reverse = True
+	selected = getSelected()
+	n = len(selected)
+	if n < 2:
+		return
+	vals = [getattr(o, attr) for o in selected]
+	minVal, maxVal = min(vals), max(vals)
+	selected = sorted(selected,
+	                  key=lambda o: o.name,
+	                  reverse=reverse)
+	for i in range(n):
+		val = interp(float(i), [0, n-1], [minVal, maxVal])
+		setattr(selected[i], attr, round(val))
+
 def _setParValsUnlessExported(p, **parVals):
 	for parName in parVals:
 		par = getattr(p.par, parName, None)
