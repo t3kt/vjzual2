@@ -7,6 +7,7 @@ uniform float iGlobalTime;
 uniform int numPoints = 4;
 uniform float segments = 3.;
 uniform float uvWeight = 1.0;
+uniform vec2 center = vec2(0.5, 0.5);
 
 float rand( vec2 n ) {	return fract(sin(dot(n.xy, vec2(12.9898, 78.233)))* 43758.5453); }
 
@@ -38,7 +39,7 @@ void main()
 	vec2 uv = gl_FragCoord.xy / min(res.x,res.y);
 	vec2 kaleidoscopePoint = noise2(vec2(iGlobalTime*0.5,-iGlobalTime*0.3))*
 		max(res.x,res.y)/min(res.x,res.y);
-	vec2 curPos = uv-kaleidoscopePoint;
+	vec2 curPos = uv-kaleidoscopePoint + center;
 	
 	float angle=atan(curPos.y, curPos.x);
 	float dist =length(curPos);
@@ -58,6 +59,7 @@ void main()
 		}
 	}
 
+	curPos -= center;
 	curPos = mix(vUV.xy, curPos, uvWeight);
 	
 	fragColor.rgb = texture( sTD2DInputs[0], curPos.xy ).xyz;	
