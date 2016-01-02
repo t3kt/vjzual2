@@ -6,6 +6,7 @@ layout (location = 0) out vec4 fragColor;
 uniform float iGlobalTime;
 uniform int numPoints = 4;
 uniform float segments = 3.;
+uniform float uvWeight = 1.0;
 
 float rand( vec2 n ) {	return fract(sin(dot(n.xy, vec2(12.9898, 78.233)))* 43758.5453); }
 
@@ -56,6 +57,8 @@ void main()
 			curPos -= ray.direction*offset*2.0;
 		}
 	}
+
+	curPos = mix(vUV.xy, curPos, uvWeight);
 	
 	fragColor.rgb = texture( sTD2DInputs[0], curPos.xy ).xyz;	
 	fragColor.a = 1.0;		
