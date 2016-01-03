@@ -65,6 +65,14 @@ class VjzModule:
 		return VjzModule.GetVisibleCOMPsHeight(
 			[c.owner for c in bodypanel.outputCOMPConnectors[0].connections])
 
+	@property
+	def MappingsHeight(self):
+		m = self._comp
+		if m.par.Modcollapsed:
+			return 0
+		mappings = m.op('midi_mappings')
+		return mappings.par.h.eval() if mappings else 60
+
 	@staticmethod
 	def GetVisibleCOMPsHeight(ops):
 		h = 0
@@ -78,8 +86,11 @@ class VjzModule:
 		m = self._comp
 		if not m.par.Modautoheight:
 			return
-		bodyheight = self.BodyHeight
-		m.op('bodypanel').par.h = bodyheight
+		if m.par.Modparuimode == 'midiedit':
+			bodyheight = self.MappingsHeight
+		else:
+			bodyheight = self.BodyHeight
+			m.op('bodypanel').par.h = bodyheight
 		m.par.h = self.HeaderHeight + bodyheight
 
 	def UpdateSolo(self):
