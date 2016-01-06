@@ -8,6 +8,7 @@ uniform int numPoints = 4;
 uniform float segments = 3.;
 uniform float uvWeight = 1.0;
 uniform vec2 center = vec2(0.5, 0.5);
+uniform bool outputUV = false;
 
 float rand( vec2 n ) {	return fract(sin(dot(n.xy, vec2(12.9898, 78.233)))* 43758.5453); }
 
@@ -62,6 +63,9 @@ void main()
 	curPos -= center;
 	curPos = mix(vUV.xy, curPos, uvWeight);
 	
-	fragColor.rgb = texture( sTD2DInputs[0], curPos.xy ).xyz;	
-	fragColor.a = 1.0;		
+	if (outputUV) {
+		fragColor.rgb = vec3(curPos, 0);
+	} else {
+		fragColor.rgb = texture( sTD2DInputs[0], curPos ).xyz;
+	}	
 }

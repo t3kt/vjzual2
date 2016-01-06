@@ -6,6 +6,7 @@ layout (location = 0) out vec4 fragColor;
 uniform float iGlobalTime;
 uniform int numPoints =4;
 uniform bool showFolds = false;
+uniform bool outputUV = false;
 uniform float uvWeight = 1.0;
 uniform vec2 center = vec2(0.5, 0.5);
 
@@ -86,6 +87,9 @@ void main()
 	curPos -= center;
 	curPos = mix(vUV.xy, curPos, uvWeight);
 	
-	fragColor.rgb = texture( sTD2DInputs[0], curPos.xy ).xyz;	
-	fragColor.a = 1.0;		
+	if (outputUV) {
+		fragColor.rgb = vec3(curPos, 0);
+	} else {
+		fragColor.rgb = texture( sTD2DInputs[0], curPos ).xyz;
+	}
 }
