@@ -9,8 +9,6 @@ else:
 
 setattrs = util.setattrs
 setexpr = util.setexpr
-setParExprs = util.setParExprs
-setParValues = util.setParValues
 
 class VjzModule:
 	def __init__(self, comp):
@@ -127,7 +125,12 @@ class VjzModule:
 		return {p.name: p.eval() for p in self._comp.pars('Mpar*')}
 
 	def SetValuesFromPreset(self, values):
-		util.setPars(self._comp, **values)
+		for name in values:
+			p = getattr(self._comp.par, name, None)
+			if p is not None:
+				util.setParValue(p, values[name])
+			else:
+				print(self._comp.par.Modname + ': skipping missing param ' + name)
 
 	def LoadPreset(self, index):
 		values = self.PresetsDict.get(str(index), None)
@@ -145,22 +148,11 @@ class VjzModule:
 	def DoesPresetExist(self, index):
 		return str(index) in self.PresetsDict
 
-	# def GetSelectors(self):
-	# 	m = self._comp
-	# 	return [s for s in m.ops('*_selector') if hasattr(s.par, 'Selnodeid')]
-	#
-	# def GetSelectorValues(self):
-	# 	vals = {}
-	# 	for s in self.GetSelectors():
-	# 		vals[s.name] = s.par.Selnodeid.eval()
-
-	# def SetSelectorValues(self, values):
-	# 	for selecto
-
 	def GetStateDict(self):
 		m = self._comp
 		state = {
 			'name': m.par.Modname.eval(),
+			'label': m.par.Modlabel.eval(),
 			'path': m.path,
 		}
 		if m.par.Modbypass.eval():
