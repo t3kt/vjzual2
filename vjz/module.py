@@ -60,8 +60,7 @@ class VjzModule:
 		bodypanel = m.op('bodypanel')
 		if not bodypanel:
 			return 60
-		return VjzModule.GetVisibleCOMPsHeight(
-			[c.owner for c in bodypanel.outputCOMPConnectors[0].connections])
+		return util.GetVisibleChildCOMPsHeight(bodypanel)
 
 	@property
 	def MappingsHeight(self):

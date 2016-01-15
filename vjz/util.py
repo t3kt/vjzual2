@@ -234,6 +234,9 @@ def DumpClones(master, predicate=None):
 def GetVisibleCOMPsHeight(ops):
 	return sum([o.par.h for o in ops if o.isPanel and o.par.display])
 
+def GetVisibleChildCOMPsHeight(parentOp):
+	return GetVisibleCOMPsHeight([c.owner for c in parentOp.outputCOMPConnectors[0].connections])
+
 def _logDeprecatedCall(methodName, args, kwargs):
 	DBGLOG('deprecated method "%s" called with args: %s, %s' % (methodName, args, kwargs))
 
