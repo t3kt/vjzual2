@@ -217,16 +217,28 @@ def GetActiveEditor():
 		if pane.type == PaneType.NETWORKEDITOR:
 			return pane
 
-def ProcessClones(master, action, filter=None):
+def ProcessClones(master, action, predicate=None):
 	master = argToOp(master)
 	if not master or not hasattr(master, 'clones'):
 		return
 	for c in master.clones:
-		if filter is not None and not filter(c):
+		if predicate is not None and not predicate(c):
 			continue
 		action(c)
 
-def DumpClones(master, filter=None):
+def DumpClones(master, predicate=None):
 	master = argToOp(master)
 	print('Clones of ' + master.path)
-	ProcessClones(master, lambda c: print('  ' + c.path), filter=filter)
+	ProcessClones(master, lambda c: print('  ' + c.path), predicate=predicate)
+
+def GetVisibleCOMPsHeight(ops):
+	return sum([o.par.h for o in ops if o.isPanel and o.par.display])
+
+def _logDeprecatedCall(methodName, args, kwargs):
+	DBGLOG('deprecated method "%s" called with args: %s, %s' % (methodName, args, kwargs))
+
+def deprecatedMethod(origFn):
+	def newFn(*args, **kwargs):
+		_logDeprecatedCall(origFn.__name__, args, kwargs)
+		return origFn(*args, **kwargs)
+	return newFn

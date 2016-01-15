@@ -72,13 +72,9 @@ class VjzModule:
 		return mappings.par.h.eval() if mappings else 60
 
 	@staticmethod
+	@util.deprecatedMethod
 	def GetVisibleCOMPsHeight(ops):
-		h = 0
-		for o in ops:
-			if not o.isPanel or not o.par.display:
-				continue
-			h += o.par.h
-		return h
+		return util.GetVisibleCOMPsHeight(ops)
 
 	def UpdateHeight(self):
 		m = self._comp
