@@ -147,7 +147,7 @@ class VjzModule:
 		m = self._comp
 		state = {
 			'name': m.par.Modname.eval(),
-			'label': m.par.Modlabel.eval(),
+			'label': m.par.Moduilabel.eval(),
 			'path': m.path,
 		}
 		if m.par.Modbypass.eval():
