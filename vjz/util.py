@@ -30,7 +30,7 @@ if os.environ.get('VJZDEBUG', None) == '1':
 else:
 	DBGLOG = _DBGLOG_basic
 
-def dumpObject(obj, underscores=False, methods=False):
+def dumpobj(obj, underscores=False, methods=False):
 	print('Dump ' + repr(obj) + ' type:' + repr(type(obj)))
 	for key in dir(obj):
 		if key.startswith('_') and not underscores:
@@ -245,3 +245,15 @@ def deprecatedMethod(origFn):
 		_logDeprecatedCall(origFn.__name__, args, kwargs)
 		return origFn(*args, **kwargs)
 	return newFn
+
+EXPORTS = {
+	'dbglog': DBGLOG,
+	'dumpobj': dumpobj,
+	'setattrs': setattrs,
+	'GetParamDict': GetParamDict,
+	'GetClonedAncsestor': GetClonedAncestor,
+	'isinclone': lambda x: GetClonedAncestor(x) is not None,
+	'GetActiveEditor': GetActiveEditor,
+	'ProcessClones': ProcessClones,
+	'DumpClones': DumpClones,
+}
