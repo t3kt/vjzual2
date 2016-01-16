@@ -158,6 +158,14 @@ class VjzModule:
 		presets = self.PresetsDict
 		if presets:
 			state['presets'] = presets
+		mappings = m.fetch('midiMappings', {}, search=False)
+		mappings = {
+			parName: mapping for (parName, mapping) in mappings.items() if mapping.get('midictl')
+		}
+		if mappings and '' in mappings:
+			del mappings['']
+		if mappings:
+			state['mappings'] = mappings
 		return state
 
 	def LoadStateDict(self, state):
@@ -170,6 +178,9 @@ class VjzModule:
 		presets = state.get('presets', None)
 		if presets:
 			self.PresetsDict = presets
+		mappings = state.get('mappings', None)
+		if mappings:
+			m.store('midiMappings', mappings)
 
 
 def copyPresets(m):
