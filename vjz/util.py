@@ -32,13 +32,21 @@ else:
 
 def dumpobj(obj, underscores=False, methods=False):
 	print('Dump ' + repr(obj) + ' type:' + repr(type(obj)))
-	for key in dir(obj):
-		if key.startswith('_') and not underscores:
-			continue
-		val = getattr(obj, key)
-		if callable(val) and not methods:
-			continue
-		print('  ' + key + ': ' + repr(val))
+	if isinstance(obj, (list, tuple)):
+		for i in range(len(obj)):
+			print('  [' + str(i) + ']: ' + repr(obj[i]))
+	else:
+		for key in dir(obj):
+			if key.startswith('_') and not underscores:
+				continue
+			try:
+				val = getattr(obj, key)
+			except Exception as e:
+				print('  ' + key + ': [ERROR]', e)
+				continue
+			if callable(val) and not methods:
+				continue
+			print('  ' + key + ': ' + repr(val))
 
 def dumpMethodHelps(obj, underscores=False):
 	print('Methods of ' + repr(obj) + ' type:' + repr(type(obj)))
@@ -246,6 +254,10 @@ def deprecatedMethod(origFn):
 		return origFn(*args, **kwargs)
 	return newFn
 
+def copyParMenu(toPar, fromPar):
+	toPar.menuNames = fromPar.menuNames
+	toPar.menuLabels = fromPar.menuLabels
+
 EXPORTS = {
 	'dbglog': DBGLOG,
 	'dumpobj': dumpobj,
@@ -256,4 +268,5 @@ EXPORTS = {
 	'GetActiveEditor': GetActiveEditor,
 	'ProcessClones': ProcessClones,
 	'DumpClones': DumpClones,
+	'copyParMenu': copyParMenu,
 }
