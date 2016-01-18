@@ -117,7 +117,7 @@ class VjzModule:
 		self._comp.store('presets', presets)
 
 	def GetValuesForPreset(self):
-		return {p.name: p.eval() for p in self._comp.pars('Mpar*')}
+		return {p.name: p.eval() for p in self._comp.pars('Mpar*') if p.mode == ParMode.CONSTANT and not p.isOP}
 
 	def SetValuesFromPreset(self, values):
 		for name in values:
