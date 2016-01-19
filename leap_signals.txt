@@ -1,7 +1,13 @@
-name	source	min	max	tracking	gate	thresh
-lrx	handl0/palm:rx	-45	55	handl0:tracking	handl0:grab	0.4
-lry	handl0/palm:ry	-35	35	handl0:tracking	handl0:grab	0.4
-lrz	handl0/palm:rz	-110	160	handl0:tracking	handl0:grab	0.4
-rrx	handr0/palm:rx	-45	55	handr0:tracking	handr0:grab	0.4
-rry	handr0/palm:ry	-35	35	handr0:tracking	handr0:grab	0.4
-rrz	handr0/palm:rz	-110	160	handr0:tracking	handr0:grab	0.4
+id	type	source	min	max	tracking	gate	thresh
+leap:lrx	leap	handl0/palm:rx	-45	55	handl0:tracking	handl0:grab	0.4
+leap:lry	leap	handl0/palm:ry	-35	35	handl0:tracking	handl0:grab	0.4
+leap:lrz	leap	handl0/palm:rz	-110	160	handl0:tracking	handl0:grab	0.4
+leap:rrx	leap	handr0/palm:rx	-45	55	handr0:tracking	handr0:grab	0.4
+leap:rry	leap	handr0/palm:ry	-35	35	handr0:tracking	handr0:grab	0.4
+leap:rrz	leap	handr0/palm:rz	-110	160	handr0:tracking	handr0:grab	0.4
+leap:ltx	leap	handl0/palm:tx	-0.18	-0.15	handl0:tracking	handl0:grab	0.4
+leap:lty	leap	handl0/palm:ty	0.05	0.5	handl0:tracking	handl0:grab	0.4
+leap:ltz	leap	handl0/palm:tz	-0.28	0.26	handl0:tracking	handl0:grab	0.4
+leap:rtx	leap	handr0/palm:tx	-0.18	-0.15	handr0:tracking	handr0:grab	0.4
+leap:rty	leap	handr0/palm:ty	0.05	0.5	handr0:tracking	handr0:grab	0.4
+leap:rtz	leap	handr0/palm:tz	-0.19	0.25	handr0:tracking	handr0:grab	0.4
