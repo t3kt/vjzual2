@@ -1,0 +1,7 @@
+name	source	min	max	tracking	gate	thresh
+lrx	handl0/palm:rx	-45	55	handl0:tracking	handl0:grab	0.4
+lry	handl0/palm:ry	-35	35	handl0:tracking	handl0:grab	0.4
+lrz	handl0/palm:rz	-110	160	handl0:tracking	handl0:grab	0.4
+rrx	handr0/palm:rx	-45	55	handr0:tracking	handr0:grab	0.4
+rry	handr0/palm:ry	-35	35	handr0:tracking	handr0:grab	0.4
+rrz	handr0/palm:rz	-110	160	handr0:tracking	handr0:grab	0.4
