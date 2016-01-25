@@ -4,6 +4,7 @@ from numpy import interp
 
 import time
 import os
+import json
 
 print('util.py initializing')
 
@@ -258,6 +259,12 @@ def copyParMenu(toPar, fromPar):
 	toPar.menuNames = fromPar.menuNames
 	toPar.menuLabels = fromPar.menuLabels
 
+def parseJsonList(val):
+	return json.loads(val) if val else []
+
+def toJson(val):
+	return json.dumps(val)
+
 EXPORTS = {
 	'dbglog': DBGLOG,
 	'dumpobj': dumpobj,
@@ -269,4 +276,6 @@ EXPORTS = {
 	'ProcessClones': ProcessClones,
 	'DumpClones': DumpClones,
 	'copyParMenu': copyParMenu,
+	'parseJsonList': parseJsonList,
+	'toJson': toJson,
 }

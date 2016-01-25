@@ -38,9 +38,8 @@ class VjzModule:
 		         default=True)
 		page.appendToggle('Modhasadvanced', label='Has Advanced Params')
 		page.appendToggle('Modhasviewers', label='Has Viewers')
-		util.setattrs(page.appendMenu('Modparuimode', label='Parameter UI Mode')[0],
-		              menuNames=['ctrl', 'midiedit'],
-		              menuLabels=['Controls', 'Edit MIDI'])
+		util.setattrs(page.appendStr('Moduimode', label='UI Mode'),
+					default='ctrl')
 		page.appendToggle('Modhidden', label='Hide Module')
 		page.appendToggle('Modhighlight', label='Highlight Module')
 		self.UpdateHeight()
@@ -79,7 +78,7 @@ class VjzModule:
 		m = self._comp
 		if not m.par.Modautoheight:
 			return
-		if m.par.Modparuimode == 'midiedit':
+		if m.par.Moduimode == 'midiedit':
 			bodyheight = self.MappingsHeight
 		else:
 			bodyheight = self.BodyHeight
