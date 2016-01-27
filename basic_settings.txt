@@ -1,0 +1,2 @@
+renderw	1080
+renderh	1920
