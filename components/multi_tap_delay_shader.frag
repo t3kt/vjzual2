@@ -5,6 +5,8 @@ uniform int[4] tapActiveB;
 uniform vec4 tapLengthB;
 uniform vec4 tapAlphaB;
 uniform int stepCompMode;
+uniform int outputSelect;
+uniform int tapCount;
 
 #define COMP_ADD 0
 #define COMP_ATOP 1
@@ -33,21 +35,62 @@ struct TapResults {
 
 TapResults getTaps() {
     vec4[8] colors;
-    int count;
+    //int count;
 
+//    for (int i = 0; i < 4; i++) {
+////        if (tapActiveA[i] > 0) {
+//            colors[count] = getTap(tapLengthA[i], tapAlphaA[i]);
+//            count++;
+////        }
+//    }
+//    for (int i = 0; i < 4; i++) {
+////        if (tapActiveB[i] > 0) {
+//            colors[count] = getTap(tapLengthB[i], tapAlphaB[i]);
+//            count++;
+////        }
+//    }
+    //count = tapCount;
+//    if (tapCount >= 0) {
+//        colors[0] = getTap(tapLengthA[0], tapAlphaA[0]);
+//    } else {
+//        colors[0] = vec4(0.0);
+//    }
+//    if (tapCount >= 1) {
+//        colors[1] = getTap(tapLengthA[1], tapAlphaA[1]);
+//    }
+//    if (tapCount >= 2) {
+//        colors[2] = getTap(tapLengthA[2], tapAlphaA[2]);
+//    }
+//    if (tapCount >= 3) {
+//        colors[3] = getTap(tapLengthA[3], tapAlphaA[3]);
+//    }
+//    if (tapCount >= 4) {
+//        colors[4] = getTap(tapLengthB[0], tapAlphaB[0]);
+//    }
+//    if (tapCount >= 5) {
+//        colors[5] = getTap(tapLengthB[1], tapAlphaB[1]);
+//    }
+//    if (tapCount >= 6) {
+//        colors[6] = getTap(tapLengthB[2], tapAlphaB[2]);
+//    }
+//    if (tapCount >= 7) {
+//        colors[7] = getTap(tapLengthB[3], tapAlphaB[3]);
+//    }
     for (int i = 0; i < 4; i++) {
-        if (tapActiveA[i] > 0) {
-            colors[count] = getTap(tapLengthA[i], tapAlphaA[i]);
-            count++;
+        if (tapCount >= i) {
+            colors[i] = getTap(tapLengthA[i], tapAlphaA[i]);
+        } else {
+            colors[i] = vec4(0.0);
         }
     }
     for (int i = 0; i < 4; i++) {
-        if (tapActiveB[i] > 0) {
-            colors[count] = getTap(tapLengthB[i], tapAlphaB[i]);
-            count++;
+        if (tapCount >= (i + 4)) {
+            colors[i + 4] = getTap(tapLengthB[i], tapAlphaB[i]);
+        } else {
+            colors[i + 4] = vec4(0.0);
         }
     }
-    return TapResults(colors, count);
+    return TapResults(colors, tapCount);
 }
 
 vec4 compositeTaps_add(vec4[8] colors, int count) {
@@ -194,19 +237,5 @@ out vec4 fragColor;
 void main()
 {
     TapResults taps = getTaps();
-	vec4 color = vec4(0.0);
-	if (tapActiveA[0] > 0.0) {
-		color += getTap(tapLengthA.x, tapAlphaA.x);
-	}
-	if (tapActiveA[1] > 0.0) {
-		color += getTap(tapLengthA.y, tapAlphaA.y);
-	}
-	if (tapActiveA[2] > 0.0) {
-		color += getTap(tapLengthA.z, tapAlphaA.z);
-	}
-	if (tapActiveA[3] > 0.0) {
-		color += getTap(tapLengthA.w, tapAlphaA.w);
-	}
-	fragColor = color;
+    fragColor = compositeTaps(taps.colors, taps.count);
 }
-	
