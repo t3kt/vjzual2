@@ -2,6 +2,8 @@ __author__ = 'tekt'
 
 print('module.py initializing')
 
+import json
+
 if False:
 	import vjz.util as util
 else:
@@ -69,6 +71,14 @@ class VjzModule:
 		mappings = m.op('midi_mappings')
 		return mappings.par.h.eval() if mappings else 60
 
+	@property
+	def PresetsHeight(self):
+		m = self._comp
+		if m.par.Modcollapsed:
+			return 0
+		presetspanel = m.op('presets')
+		return presetspanel.par.h.eval() if presetspanel else 60
+
 	@staticmethod
 	@util.deprecatedMethod
 	def GetVisibleCOMPsHeight(ops):
@@ -80,6 +90,8 @@ class VjzModule:
 			return
 		if m.par.Moduimode == 'midiedit':
 			bodyheight = self.MappingsHeight
+		elif m.par.Moduimode == 'presets':
+			bodyheight = self.PresetsHeight
 		else:
 			bodyheight = self.BodyHeight
 			m.op('bodypanel').par.h = bodyheight
@@ -103,18 +115,6 @@ class VjzModule:
 		print('updating master output to node id: ' + nodeId)
 		mainout.par.Selnodeid = nodeId
 
-	@property
-	def PresetsTable(self):
-		return self._comp.op('local/preset_values')
-
-	@property
-	def PresetsDict(self):
-		return self._comp.fetch('presets', {}, search=False, storeDefault=True)
-
-	@PresetsDict.setter
-	def PresetsDict(self, presets):
-		self._comp.store('presets', presets)
-
 	def GetValuesForPreset(self):
 		return {p.name: p.eval() for p in self._comp.pars('Mpar*') if p.mode == ParMode.CONSTANT and not p.isOP}
 
@@ -126,21 +126,37 @@ class VjzModule:
 			else:
 				print(self._comp.par.Modname + ': skipping missing param ' + name)
 
-	def LoadPreset(self, index):
-		values = self.PresetsDict.get(str(index), None)
-		if not values:
-			print('LoadPreset', index, 'preset not found')
-			return
-		print('LoadPreset', index, 'values:', values)
-		self.SetValuesFromPreset(values)
+	def _GetPresetNameAndDataPars(self, i):
+		name = getattr(self._comp.par, 'Preset%dname' % i, None)
+		data = getattr(self._comp.par, 'Preset%ddata' % i, None)
+		return name, data
 
-	def SavePreset(self, index):
-		values = self.GetValuesForPreset()
-		print('SavePreset', index, 'values:', values)
-		self.PresetsDict[str(index)] = values
+	def _GetPresetsDict(self):
+		presets = {}
+		for i in range(1, 9):
+			namePar, dataPar = self._GetPresetNameAndDataPars(i)
+			if namePar is None or dataPar is None:
+				continue
+			name = namePar.eval()
+			data = dataPar.eval()
+			if not name or not data:
+				continue
+			presets[i] = {
+				'name': name,
+				'values': json.loads(data)
+			}
+		return presets
 
-	def DoesPresetExist(self, index):
-		return str(index) in self.PresetsDict
+	def _LoadPresetsDict(self, presets):
+		for i in range(1, 9):
+			namePar, dataPar = self._GetPresetNameAndDataPars(i)
+			preset = presets.get(i, {})
+			# convert old-style preset dicts
+			if preset and 'name' not in preset:
+				preset = {'values': preset}
+			namePar.val = preset.get('name', '')
+			vals = preset.get('values')
+			dataPar.val = json.dumps(vals) if vals else ''
 
 	def GetStateDict(self):
 		m = self._comp
@@ -154,7 +170,7 @@ class VjzModule:
 		params = self.GetValuesForPreset()
 		if params:
 			state['params'] = params
-		presets = self.PresetsDict
+		presets = self._GetPresetsDict()
 		if presets:
 			state['presets'] = presets
 		mappings = m.fetch('midiMappings', {}, search=False)
@@ -176,7 +192,7 @@ class VjzModule:
 			self.SetValuesFromPreset(params)
 		presets = state.get('presets', None)
 		if presets:
-			self.PresetsDict = presets
+			self._LoadPresetsDict(presets)
 		mappings = state.get('mappings', None)
 		if mappings:
 			m.store('midiMappings', mappings)
