@@ -265,6 +265,20 @@ def parseJsonList(val):
 def toJson(val):
 	return json.dumps(val)
 
+class TableColMenuSource:
+	def __init__(self, dat, nameCol='name', labelCol='label'):
+		self.dat = dat
+		self.nameCol = nameCol
+		self.labelCol = labelCol
+
+	@property
+	def menuNames(self):
+		return [x.val for x in self.dat.col(self.nameCol)[1:]]
+
+	@property
+	def menuLabels(self):
+		return [x.val for x in self.dat.col(self.labelCol)[1:]]
+
 EXPORTS = {
 	'dbglog': DBGLOG,
 	'dumpobj': dumpobj,
