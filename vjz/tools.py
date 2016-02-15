@@ -114,12 +114,18 @@ def reloadPython():
 
 def destroyPars(parnames):
 	selected = getSelected()
-	print('destroyPars', parnames, selected)
-	for o in selected:
-		oPars = o.pars(*parnames)
-		for p in oPars:
-			if p.isCustom:
-				p.destroy()
+	if len(parnames) == 1 and parnames[0] == '*':
+		print('destroy all pars', selected)
+		for o in selected:
+			while len(o.customPages) > 0:
+				o.customPages.pop().destroy()
+	else:
+		print('destroyPars', parnames, selected)
+		for o in selected:
+			oPars = o.pars(*parnames)
+			for p in oPars:
+				if p.isCustom:
+					p.destroy()
 
 def addTags(tags):
 	tags = set(tags)
