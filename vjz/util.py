@@ -25,10 +25,12 @@ def _DBGLOG_basic(msg):
 	print(formatted)
 
 if os.environ.get('VJZDEBUG', None) == '1':
-	_dbglog = open('DEBUGLOG.txt', 'w')
+	print('using DEBUGLOG.txt for DBGLOG')
+	_dbglog = open('DEBUGLOG.txt', 'a')
 	_dbglog.write('----BEGIN DEBUG LOG [%r]----\n' % time.time())
 	DBGLOG = _DBGLOG_full
 else:
+	print('using console for DBGLOG')
 	DBGLOG = _DBGLOG_basic
 
 def dumpobj(obj, underscores=False, methods=False):
@@ -98,16 +100,24 @@ def setParExprs(obj, **exprs):
 		for o in obj:
 			setParExprs(o, **exprs)
 	else:
-		for key in exprs:
-			setexpr(getattr(obj.par, key), exprs[key])
+		try:
+			for key in exprs:
+				setexpr(getattr(obj.par, key), exprs[key])
+		except BaseException as e:
+			DBGLOG('ERROR in setParExprs ' + obj.path + ' ' + repr(e))
+			raise e
 
 def setParValues(obj, **values):
 	if isinstance(obj, (tuple, list)):
 		for o in obj:
 			setParValues(o, **values)
 	else:
-		for key in values:
-			setParValue(getattr(obj.par, key), values[key])
+		try:
+			for key in values:
+				setParValue(getattr(obj.par, key), values[key])
+		except BaseException as e:
+			DBGLOG('ERROR in setParValues ' + obj.path + ' ' + repr(e))
+			raise e
 
 def coerceBool(val):
 	return val is True or val == 1 or val == '1' or val == 'True'
@@ -136,8 +146,12 @@ def setPars(op, **parValues):
 		for o in op:
 			setPars(o, **parValues)
 	else:
-		for name in parValues:
-			setParValue(getattr(op.par, name), parValues[name])
+		try:
+			for name in parValues:
+				setParValue(getattr(op.par, name), parValues[name])
+		except BaseException as e:
+			DBGLOG('ERROR in setPars() ' + op.path + ' ' + repr(e))
+			raise e
 
 def evalPars(pars):
 	return [p.eval() for p in pars]
@@ -221,20 +235,32 @@ def fillParamMenuOptionsTable(tbl, p):
 		tbl.appendRow([p.menuNames[i], p.menuLabels[i]])
 
 def ApplyPythonProxyExprs(targetComp, exprPrefix, **mappings):
-	cpar = targetComp.par
-	for destName in mappings.keys():
-		setexpr(getattr(cpar, destName),
-		        exprPrefix + mappings[destName])
+	try:
+		cpar = targetComp.par
+		for destName in mappings.keys():
+			setexpr(getattr(cpar, destName),
+			        exprPrefix + mappings[destName])
+	except BaseException as e:
+		DBGLOG('ERROR in ApplyPythonProxyExprs ' + targetComp.path + ' ' + repr(e))
+		raise e
 
 def GetParamDict(op, *paramNames):
-	return {pname: getattr(op.par, pname).eval() for pname in paramNames}
+	try:
+		return {pname: getattr(op.par, pname).eval() for pname in paramNames}
+	except BaseException as e:
+		DBGLOG('ERROR in GetParamDict ' + op.path + ' ' + repr(paramNames) + ' ' + repr(e))
+		raise e
 
 def GetClonedAncestor(op):
-	while op:
-		if hasattr(op.par, 'clone') and op.par.clone.eval():
-			return op
-		op = op.parent()
-	return None
+	try:
+		while op:
+			if hasattr(op.par, 'clone') and op.par.clone.eval():
+				return op
+			op = op.parent()
+		return None
+	except BaseException as e:
+		DBGLOG('ERROR in GetClonedAncestor ' + op.path + ' ' + repr(e))
+		raise e
 
 def GetActiveEditor():
 	pane = ui.panes.current
@@ -259,7 +285,11 @@ def DumpClones(master, predicate=None):
 	ProcessClones(master, lambda c: print('  ' + c.path), predicate=predicate)
 
 def GetVisibleCOMPsHeight(ops):
-	return sum([o.par.h for o in ops if o.isPanel and o.par.display])
+	try:
+		return sum([o.par.h for o in ops if o.isPanel and o.par.display])
+	except BaseException as e:
+		DBGLOG('ERROR in GetVisibleCOMPsHeight ' + repr(ops) + ' ' + repr(e))
+		raise e
 
 def GetVisibleChildCOMPsHeight(parentOp):
 	return GetVisibleCOMPsHeight([c.owner for c in parentOp.outputCOMPConnectors[0].connections])
