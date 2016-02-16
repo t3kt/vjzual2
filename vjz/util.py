@@ -177,6 +177,24 @@ def updateTableRow(tbl, rowKey, vals, addMissing=False, ignoreMissingCols=False)
 			continue
 		tbl[rowKey, colKey] = v if v is not None else ''
 
+def TableRowToDict(dat, i):
+	return {col.val: dat[i, col].val for col in dat.row(0)}
+
+def TableColToDict(dat, i):
+	return {row.val: dat[i, row].val for row in dat.col(0)}
+
+def TableRowsToDict(dat):
+	return {row[0].val: row[1].val for row in dat.rows()}
+
+def TableColsToDict(dat):
+	return {col[0].val: col[1].val for col in dat.cols()}
+
+def TableColValsToStrings(dat, name):
+	return [c.val for c in dat.col(name)[1:]]
+
+def TableRowValsToStrings(dat, name):
+	return [c.val for c in dat.row(name)[1:]]
+
 def fillParamsTable(tbl, pars, find=None, replace=None):
 	tbl = argToOp(tbl)
 	tbl.clear()
@@ -262,6 +280,9 @@ def copyParMenu(toPar, fromPar):
 def parseJsonList(val):
 	return json.loads(val) if val else []
 
+def parseJsonObject(val):
+	return json.loads(val) if val else dict()
+
 def toJson(val):
 	return json.dumps(val)
 
@@ -291,5 +312,6 @@ EXPORTS = {
 	'DumpClones': DumpClones,
 	'copyParMenu': copyParMenu,
 	'parseJsonList': parseJsonList,
+	'parseJsonObject': parseJsonObject,
 	'toJson': toJson,
 }
