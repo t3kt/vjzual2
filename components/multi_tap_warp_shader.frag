@@ -23,22 +23,27 @@ float getSourceVal(vec4 sourceColor, int sourceType) {
     return 0.0;
 }
 
+float getOffsetVal(vec4 sourceColor, int sourceType, float weight) {
+    float sourceVal;
+    if (sourceType >= SOURCE_RED && sourceType <= SOURCE_ALPHA) {
+        sourceVal = sourceColor[sourceType - SOURCE_RED];
+    } else if (sourceType == SOURCE_LUMINANCE) {
+        sourceVal = czm_luminance(sourceColor.rgb);
+    } else {
+        return 0.0;
+    }
+    return map(sourceVal, 0.0, 1.0, -weight, weight);
+}
+
 vec2 getTapOffset(vec2 displaceWeight) {
     vec4 sourceColor = texture(sTD2DInputs[1], vUV.st);
-    vec2 offset = vec2(0.0);
-    if (horzSource > SOURCE_NONE && horzSource <= SOURCE_LUMINANCE) {
-        offset.x = map(getSourceVal(sourceColor, horzSource), 0.0, 1.0, -displaceWeight.x, displaceWeight.x);
-    }
-    if (vertSource > SOURCE_NONE && vertSource <= SOURCE_LUMINANCE) {
-        offset.y = map(getSourceVal(sourceColor, vertSource), 0.0, 1.0, -displaceWeight.y, displaceWeight.y);
-    }
-    return offset;
+    return vec2(
+        getOffsetVal(sourceColor, horzSource, displaceWeight.x),
+        getOffsetVal(sourceColor, vertSource, displaceWeight.y));
 }
 
 vec4 getWarpTap(vec2 displaceWeight) {
-    vec2 offset = getTapOffset(displaceWeight);
-    vec2 uv = vUV.xy + offset;
-    return texture(sTD2DInputs[0], uv);
+    return texture(sTD2DInputs[0], vUV.st + getTapOffset(displaceWeight));
 }
 
 vec4 getTapA(int i) {
