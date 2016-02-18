@@ -245,7 +245,7 @@ vec4[8] getTaps(bool[8] states) {
     int[4] filtersB = int[4](tapFilter4, tapFilter5, tapFilter6, tapFilter7);
     for (int i = 0; i < 4; i++) {
         if (tapCount >= i && states[i]) {
-            colors[i] = applyFilter(getTapA(i), filtersA[i]);
+            colors[i] = applyFilter(getTapA(i) * vec4(1.0, 1.0, 1.0, tapAlphaA[i]), filtersA[i]);
         } else {
             colors[i] = vec4(0.0);
         }
@@ -253,7 +253,7 @@ vec4[8] getTaps(bool[8] states) {
     for (int i = 4; i < 8; i++) {
         if (tapCount >= i && states[i]) {
             int j = i - 4;
-            colors[i] = applyFilter(getTapB(j), filtersB[j]);
+            colors[i] = applyFilter(getTapB(j) * vec4(1.0, 1.0, 1.0, tapAlphaB[j]), filtersB[j]);
         } else {
             colors[i] = vec4(0.0);
         }
