@@ -41,22 +41,18 @@ vec4 applyFilter(vec4 color, int mode) {
     if (mode <= 0) {
         return color;
     }
-    if (mode == FILT_RED) {
+    switch (mode) {
+    case FILT_RED:
         return color * vec4(1.0, 0.0, 0.0, 1.0);
-    }
-    if (mode == FILT_GREEN) {
+    case FILT_GREEN:
         return color * vec4(0.0, 1.0, 0.0, 1.0);
-    }
-    if (mode == FILT_BLUE) {
+    case FILT_BLUE:
         return color * vec4(0.0, 0.0, 1.0, 1.0);
+    case FILT_LUMAALPHA:
+        return vec4(color.rgb, czm_luminance(color.rgb));
     }
-    if (mode <= FILT_BLUEALPHA) {
-        color.a = color[mode - FILT_REDALPHA];
-        return color;
-    }
-    if (mode == FILT_LUMAALPHA) {
-        color.a = czm_luminance(color.rgb);
-        return color;
+    if (mode >= FILT_REDALPHA && mode <= FILT_BLUEALPHA) {
+        return vec4(color.rgb, color[mode - FILT_REDALPHA]);
     }
     return color;
 }
@@ -152,7 +148,7 @@ vec4 compositeTaps_outside(vec4[8] colors, bool[8] states) {
 }
 
 vec4 compositeTaps_over(vec4[8] colors, bool[8] states) {
-    vec4 color = vec4(0.0, 0.0, 0.0, 0.0);
+    vec4 color = vec4(0.0);
     for (int i = 0; i < tapCount; i++) {
         if (states[i]) {
             color = (colors[i] * (1.0 - color.a)) + color;
@@ -193,43 +189,32 @@ vec4 compositeTaps_under(vec4[8] colors, bool[8] states) {
 
 vec4 compositeTaps(vec4[8] colors, bool[8] states) {
 	vec4 color = vec4(0.0);
-	if (stepCompMode == COMP_ADD) {
+	switch (stepCompMode) {
+	case COMP_ADD:
 	    return compositeTaps_add(colors, states);
-	}
-	if (stepCompMode == COMP_ATOP) {
+    case COMP_ATOP:
 	    return compositeTaps_atop(colors, states);
-	}
-	if (stepCompMode == COMP_AVERAGE) {
+    case COMP_AVERAGE:
 	    return compositeTaps_add(colors, states) / tapCount;
-	}
-	if (stepCompMode == COMP_DIFFERENCE) {
+    case COMP_DIFFERENCE:
 	    return compositeTaps_difference(colors, states);
-	}
-	if (stepCompMode == COMP_INSIDE) {
+    case COMP_INSIDE:
 	    return compositeTaps_inside(colors, states);
-	}
-	if (stepCompMode == COMP_MAXIMUM) {
+    case COMP_MAXIMUM:
 	    return compositeTaps_maximum(colors, states);
-	}
-	if (stepCompMode == COMP_MINIMUM) {
+    case COMP_MINIMUM:
 	    return compositeTaps_minimum(colors, states);
-	}
-	if (stepCompMode == COMP_MULTIPLY) {
+    case COMP_MULTIPLY:
 	    return compositeTaps_multiply(colors, states);
-	}
-	if (stepCompMode == COMP_OUTSIDE) {
+    case COMP_OUTSIDE:
 	    return compositeTaps_outside(colors, states);
-	}
-	if (stepCompMode == COMP_OVER) {
+    case COMP_OVER:
 	    return compositeTaps_over(colors, states);
-	}
-	if (stepCompMode == COMP_SCREEN) {
+    case COMP_SCREEN:
 	    return compositeTaps_screen(colors, states);
-	}
-	if (stepCompMode == COMP_SUBTRACT) {
+    case COMP_SUBTRACT:
 	    return compositeTaps_subtract(colors, states);
-	}
-	if (stepCompMode == COMP_UNDER) {
+    case COMP_UNDER:
 	    return compositeTaps_under(colors, states);
 	}
     return color;
