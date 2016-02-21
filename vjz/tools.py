@@ -63,15 +63,6 @@ def deletePars(o, *parNames):
 	for p in pars:
 		p.destroy()
 
-def setModParamEditModeExprs():
-	params = getSelected()
-	for p in params:
-		if not hasattr(p.par, 'Paruimode'):
-			print('setModParamEditModeExprs skipping', p)
-			continue
-		p.par.Paruimode.mode = ParMode.EXPRESSION
-		p.par.Paruimode.expr = 'ext.vjzmod.par.Modparuimode'
-
 # def _createRangeValGetter(startVal, endVal):
 # 	return lambda i, n: interp(float(i), [0.0, float(n)-1.0], [startVal, endVal])
 #
@@ -91,26 +82,39 @@ def setModParamEditModeExprs():
 # 		val = calcVal(i, n)
 # 		setAttr(obj, val)
 
-def setAlignOrderBy(sortAttrName, reverseDir):
+orderAxes = {
+	'x': {'attr': 'nodeX', 'reverse': False},
+	'y': {'attr': 'nodeY', 'reverse': True},
+}
+
+def _setAlignOrderBy(sortAttrName, reverseDir):
 	selected = getSelected()
 	n = len(selected)
-	selected = sorted(selected,
-	                  key=lambda o: getattr(o, sortAttrName),
-	                  reverse=reverseDir)
+	selected = sorted(
+		selected,
+		key=lambda o: getattr(o, sortAttrName),
+		reverse=reverseDir)
 	for i in range(n):
 		if hasattr(selected[i].par, 'order'):
 			val = interp(float(i), [0, n-1], [0.0, 1.0])
 			selected[i].par.order = val
 
 def setAlignOrderByX():
-	setAlignOrderBy('nodeX', False)
+	_setAlignOrderBy('nodeX', False)
 
 def setAlignOrderByY():
-	setAlignOrderBy('nodeY', True)
+	_setAlignOrderBy('nodeY', True)
 
-def reloadPython():
-	for name in ['vjz_util', 'vjz_params', 'vjz_module', 'vjz', 'vjz_core']:
-		op('/local/modules/' + name).par.reload.pulse(1)
+def setAlignOrderBy(axis):
+	_setAlignOrderBy(orderAxes[axis]['attr'], orderAxes[axis]['reverse'])
+
+def reloadDATs(patterns):
+	for dat in ops(*patterns):
+		if not dat.isDAT or not hasattr(dat.par, 'reload'):
+			print('Cannot reload unsupported OP: ' + dat.path)
+		else:
+			print('Reloading DAT: ' + dat.path)
+			dat.par.reload.pulse(1)
 
 def destroyPars(parnames):
 	selected = getSelected()
@@ -189,11 +193,11 @@ class DerivedNodeEdge(NodeEdge):
 
 nodeEdges = {
 	'left': NodeEdge('nodeX', min),
-    'top': NodeEdge('nodeY', max),
-    'center': NodeEdge('nodeCenterX', _getMiddle),
-    'middle': NodeEdge('nodeCenterY', _getMiddle),
-    'right': DerivedNodeEdge('nodeX', 'nodeWidth', max),
-    'bottom': DerivedNodeEdge('nodeY', 'nodeHeight', min)
+	'top': NodeEdge('nodeY', max),
+	'center': NodeEdge('nodeCenterX', _getMiddle),
+	'middle': NodeEdge('nodeCenterY', _getMiddle),
+	'right': DerivedNodeEdge('nodeX', 'nodeWidth', max),
+	'bottom': DerivedNodeEdge('nodeY', 'nodeHeight', min)
 }
 
 def align(dirName):
@@ -214,28 +218,26 @@ def distribute(axis):
 		return
 	vals = [getattr(o, attr) for o in selected]
 	minVal, maxVal = min(vals), max(vals)
-	selected = sorted(selected,
-	                  key=lambda o: getattr(o, attr))
+	selected = sorted(
+		selected,
+		key=lambda o: getattr(o, attr))
 	for i in range(n):
-		val = interp(float(i), [0, n-1], [minVal, maxVal])
+		val = interp(float(i), [0, n - 1], [minVal, maxVal])
 		setattr(selected[i], attr, round(val))
 
 def sortByName(axis):
-	if axis == 'x':
-		attr = 'nodeX'
-		reverse = False
-	else:
-		attr = 'nodeY'
-		reverse = True
+	attr = orderAxes[axis]['attr']
+	reverse = orderAxes[axis]['reverse']
 	selected = getSelected()
 	n = len(selected)
 	if n < 2:
 		return
 	vals = [getattr(o, attr) for o in selected]
 	minVal, maxVal = min(vals), max(vals)
-	selected = sorted(selected,
-	                  key=lambda o: o.name,
-	                  reverse=reverse)
+	selected = sorted(
+		selected,
+		key=lambda o: o.name,
+		reverse=reverse)
 	for i in range(n):
-		val = interp(float(i), [0, n-1], [minVal, maxVal])
+		val = interp(float(i), [0, n - 1], [minVal, maxVal])
 		setattr(selected[i], attr, round(val))
