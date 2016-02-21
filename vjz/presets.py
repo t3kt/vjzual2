@@ -75,7 +75,7 @@ class PresetsPanel:
 		vals = {p.name: p.eval() for p in hostpars}
 		_getDataPar(host, i).val = json.dumps(vals)
 
-	def resetHostPars(self):
+	def ResetHostPars(self):
 		host, hostpars = self._GetHostAndPars()
 		# if not host:
 		# 	return
