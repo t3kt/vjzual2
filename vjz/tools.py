@@ -189,11 +189,11 @@ class DerivedNodeEdge(NodeEdge):
 
 nodeEdges = {
 	'left': NodeEdge('nodeX', min),
-    'top': NodeEdge('nodeY', min),
+    'top': NodeEdge('nodeY', max),
     'center': NodeEdge('nodeCenterX', _getMiddle),
     'middle': NodeEdge('nodeCenterY', _getMiddle),
     'right': DerivedNodeEdge('nodeX', 'nodeWidth', max),
-    'bottom': DerivedNodeEdge('nodeY', 'nodeHeight', max)
+    'bottom': DerivedNodeEdge('nodeY', 'nodeHeight', min)
 }
 
 def align(dirName):
