@@ -331,6 +331,22 @@ class TableColMenuSource:
 	def menuLabels(self):
 		return [x.val for x in self.dat.col(self.labelCol)[1:]]
 
+def durationToSeconds(durstr):
+	if not durstr:
+		return 0
+	if ':' in durstr:
+		parts = durstr.split(':')
+		if len(parts) != 2:
+			raise Exception('Unsupported duration string: ' + durstr)
+		mins = int(parts[0])
+		secs = float(parts[1])
+		return (mins * 60) + secs
+	else:
+		try:
+			return float(durstr)
+		except ValueError:
+			raise Exception('Unsupported duration string: ' + durstr)
+
 def filePathToName(filepath):
 	if not filepath:
 		return None
