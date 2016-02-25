@@ -4,6 +4,7 @@ from numpy import interp
 
 import time
 import os
+import os.path
 import json
 
 print('util.py initializing')
@@ -330,6 +331,23 @@ class TableColMenuSource:
 	def menuLabels(self):
 		return [x.val for x in self.dat.col(self.labelCol)[1:]]
 
+def filePathToName(filepath):
+	if not filepath:
+		return None
+	parts = os.path.split(filepath)
+	return os.path.splitext(parts[1])[0]
+
+def safeGetFloat(d, key, defval):
+	if not d or not key or key not in d:
+		return defval
+	rawval = d.get(key)
+	if rawval is None:
+		return defval
+	try:
+		return float(rawval)
+	except ValueError:
+		return defval
+
 EXPORTS = {
 	'dbglog': DBGLOG,
 	'dumpobj': dumpobj,
@@ -344,4 +362,6 @@ EXPORTS = {
 	'parseJsonList': parseJsonList,
 	'parseJsonObject': parseJsonObject,
 	'toJson': toJson,
+	'durationToSeconds': durationToSeconds,
+	'safeGetFloat': safeGetFloat,
 }
