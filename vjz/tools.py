@@ -1,6 +1,16 @@
 from numpy import interp
 import json
 
+if False:
+	# trick pycharm
+	mod = object()
+	mod.vjz_util = object()
+	ui = object()
+	def __dummy_op():
+		return object()
+	op = ops = __dummy_op
+	pass
+
 def getTargetPane():
 	return mod.vjz_util.GetActiveEditor()
 
@@ -163,6 +173,10 @@ def _saveTox(comp):
 
 def saveToxSelectedOrContext():
 	_doOnSelectedOrContext(_saveTox)
+
+def copySelectedPaths():
+	sel = getSelected()
+	ui.clipboard = ' '.join([o.path for o in sel])
 
 def _getMiddle(vals):
 	low, high = min(vals), max(vals)
