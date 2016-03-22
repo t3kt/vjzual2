@@ -263,6 +263,14 @@ def GetClonedAncestor(op):
 		DBGLOG('ERROR in GetClonedAncestor ' + op.path + ' ' + repr(e))
 		raise e
 
+def GetActiveEditor():
+	pane = ui.panes.current
+	if pane.type == PaneType.NETWORKEDITOR:
+		return pane
+	for pane in ui.panes:
+		if pane.type == PaneType.NETWORKEDITOR:
+			return pane
+
 def ProcessClones(master, action, predicate=None):
 	master = argToOp(master)
 	if not master or not hasattr(master, 'clones'):
