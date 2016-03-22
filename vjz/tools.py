@@ -4,15 +4,22 @@ import json
 if False:
 	# trick pycharm
 	mod = object()
-	mod.vjz_util = object()
 	ui = object()
 	def __dummy_op():
 		return object()
 	op = ops = __dummy_op
 	pass
 
+def getActiveEditor():
+	pane = ui.panes.current
+	if pane.type == PaneType.NETWORKEDITOR:
+		return pane
+	for pane in ui.panes:
+		if pane.type == PaneType.NETWORKEDITOR:
+			return pane
+
 def getTargetPane():
-	return mod.vjz_util.GetActiveEditor()
+	return getActiveEditor()
 
 def goTo(path):
 	pane = getTargetPane()
@@ -45,7 +52,6 @@ def _tryInit(o):
 		return False
 	try:
 		ui.status = 'running initializer ' + init.path
-		mod.vjz_util.DBGLOG('%s\tRUNNING INITIALIZER' % init.path)
 		init.run()
 	except Exception as e:
 		print('INIT error [' + init.path + ']: ' + str(e))
