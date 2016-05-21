@@ -323,13 +323,19 @@ class TableColMenuSource:
 		self.nameCol = nameCol
 		self.labelCol = labelCol
 
+	def _GetCol(self, name):
+		if not self.dat:
+			return []
+		cells = self.dat.col(name)
+		return [x.val for x in cells[1:]] if cells else []
+
 	@property
 	def menuNames(self):
-		return [x.val for x in self.dat.col(self.nameCol)[1:]]
+		return self._GetCol(self.nameCol)
 
 	@property
 	def menuLabels(self):
-		return [x.val for x in self.dat.col(self.labelCol)[1:]]
+		return self._GetCol(self.labelCol)
 
 def durationToSeconds(durstr):
 	if not durstr:
