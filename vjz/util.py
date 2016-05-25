@@ -2,6 +2,13 @@ __author__ = 'tekt'
 
 from numpy import interp
 
+if False:
+	from _stubs import *
+try:
+	import common_util
+except ImportError:
+	import common.lib.util as common_util
+
 import time
 import os
 import os.path
@@ -34,23 +41,7 @@ else:
 	print('using console for DBGLOG')
 	DBGLOG = _DBGLOG_basic
 
-def dumpobj(obj, underscores=False, methods=False):
-	print('Dump ' + repr(obj) + ' type:' + repr(type(obj)))
-	if isinstance(obj, (list, tuple)):
-		for i in range(len(obj)):
-			print('  [' + str(i) + ']: ' + repr(obj[i]))
-	else:
-		for key in dir(obj):
-			if key.startswith('_') and not underscores:
-				continue
-			try:
-				val = getattr(obj, key)
-			except Exception as e:
-				print('  ' + key + ': [ERROR]', e)
-				continue
-			if callable(val) and not methods:
-				continue
-			print('  ' + key + ': ' + repr(val))
+dumpobj = common_util.dumpobj
 
 def dumpMethodHelps(obj, underscores=False):
 	print('Methods of ' + repr(obj) + ' type:' + repr(type(obj)))
@@ -80,13 +71,7 @@ def argToPath(arg):
 		return arg.path
 	return arg
 
-def setattrs(obj, **attrs):
-	if isinstance(obj, (tuple,list)):
-		for o in obj:
-			setattrs(o, **attrs)
-	else:
-		for key in attrs:
-			setattr(obj, key, attrs[key])
+setattrs = common_util.setattrs
 
 def setexpr(par, expr):
 	if isinstance(par, (tuple, list)):
@@ -162,9 +147,10 @@ def interpLists(ratio, start, end):
 	inrange = [0, 1]
 	for i in range(len(start)):
 		result.append(
-			interp(ratio,
-			       inrange,
-			       [start[i], end[i]]))
+			interp(
+				ratio,
+				inrange,
+				[start[i], end[i]]))
 	return result
 
 def clamp(val, low, high):
@@ -239,8 +225,9 @@ def ApplyPythonProxyExprs(targetComp, exprPrefix, **mappings):
 	try:
 		cpar = targetComp.par
 		for destName in mappings.keys():
-			setexpr(getattr(cpar, destName),
-			        exprPrefix + mappings[destName])
+			setexpr(
+				getattr(cpar, destName),
+				exprPrefix + mappings[destName])
 	except BaseException as e:
 		DBGLOG('ERROR in ApplyPythonProxyExprs ' + targetComp.path + ' ' + repr(e))
 		raise e
@@ -317,25 +304,7 @@ def parseJsonObject(val):
 def toJson(val):
 	return json.dumps(val)
 
-class TableColMenuSource:
-	def __init__(self, dat, nameCol='name', labelCol='label'):
-		self.dat = dat
-		self.nameCol = nameCol
-		self.labelCol = labelCol
-
-	def _GetCol(self, name):
-		if not self.dat:
-			return []
-		cells = self.dat.col(name)
-		return [x.val for x in cells[1:]] if cells else []
-
-	@property
-	def menuNames(self):
-		return self._GetCol(self.nameCol)
-
-	@property
-	def menuLabels(self):
-		return self._GetCol(self.labelCol)
+TableColMenuSource = common_util.TableMenuSource
 
 def durationToSeconds(durstr):
 	if not durstr:
@@ -382,7 +351,4 @@ EXPORTS = {
 	'copyParMenu': copyParMenu,
 	'parseJsonList': parseJsonList,
 	'parseJsonObject': parseJsonObject,
-	'toJson': toJson,
-	'durationToSeconds': durationToSeconds,
-	'safeGetFloat': safeGetFloat,
 }
